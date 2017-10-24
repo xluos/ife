@@ -1,0 +1,51 @@
+/* 全局设置 */
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: #E2E2E2;
+}
+/* 头部导航条 */
+header{
+    position: relative;
+    background-color: #008CFF;
+    height: 60px;
+}
+header img{
+    position:absolute;
+    padding: 5px;
+    left: 0;
+    height: 50px;
+}
+header ul{
+    position:absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+header ul a li{
+    display: inline-block;
+    padding: 0px 20px;
+    /* height: 60px; */
+    text-align: center;
+}
+header ul a{
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+}
+header ul li:hover{
+    background-color: #57B3FF; 
+    border-bottom: 2px solid #EBD300;
+}
+/* 主体部分 */
+
+article{
+    margin: 20px;
+    padding: 10px;
+    background-color: white;
+}
+img {
+    width: 30%;
+}
