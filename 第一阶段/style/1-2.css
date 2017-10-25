@@ -171,3 +171,13 @@ table{
 .button:hover{
     background-color: #0077FF
 }
+footer{
+    background-color: #213235;
+    height: 50px;
+}
+footer span{
+    display: block;
+    color: white;
+    text-align:center;
+    line-height: 50px;
+}
