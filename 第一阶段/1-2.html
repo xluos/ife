@@ -12,10 +12,10 @@
         <a href="http://www.xluos.com" target="_blank"><img src="image/logo.png" alt="logo"></a>
         <nav>
             <ul>
-                <a href=""><li>导航一</li></a>
-                <a href=""><li>导航二</li></a>
-                <a href=""><li>导航三</li></a>
-                <a href=""><li>导航四</li></a>
+                <li><a href="">导航一</a></li>
+                <li><a href="">导航二</a></li>
+                <li><a href="">导航三</a></li>
+                <li><a href="">导航四</a></li>
             </ul>
         </nav>
     </header>
@@ -63,23 +63,23 @@
     <code>for(int i=0;i&lt;n;i++) </code>
     <h2>大块儿代码</h2>
     <pre>
-        //二分查找
-        static int binarySearch(int []a, int x, int n)
-        {
-            int left = 0,right = n-1;
-            int middle;
-            while (left <= right)
-            {
-                middle = (left+right)/2;
-                if (x == a[middle]) return middle;
-                if (x > a[middle]) left = middle + 1;
-                else right = middle - 1;
-            }
-            return -1;
-        }
+//二分查找
+static int binarySearch(int []a, int x, int n)
+{
+    int left = 0,right = n-1;
+    int middle;
+    while (left <= right)
+    {
+        middle = (left+right)/2;
+        if (x == a[middle]) return middle;
+        if (x > a[middle]) left = middle + 1;
+        else right = middle - 1;
+    }
+    return -1;
+}
     </pre>
     </article>
-    <atricle></atricle>
+    <article>
     <h2>一个无序列表</h2>
     <ul>
         <li>论德</li>
@@ -114,9 +114,9 @@
             <td>没课</td><td>没课</td><td>没课</td><td>没课</td><td>没课</td><td>没课</td><td>没课</td>
         </tr>    
     </table>
-    </atricle>
-    <a href="http://www.xluos.com" title="My blog" target="_blank"><button>点我传送</button></a>
-    <atricle>
+    </article>
+    <a href="http://www.xluos.com" title="My blog" target="_blank"><button class="button">点我传送</button></a>
+    <article>
         <dl>
             <dt><img src="image/dahuangfeng.jpg"></dt><dd>大黄蜂</dd>
         </dl>  
@@ -129,21 +129,21 @@
         <dl>
             <dt><img src="image/dahuangfeng.jpg"></dt><dd>大黄蜂</dd>
         </dl> 
-    </atricle>
+    </article>
     <aside>  <!--这个标签用于定义与主体不相关的内容 -->
     <form action="save.php">
-        <h2>调查表将会用侧栏表示</h2>
+        <h2 class="celan">调查表将会用侧栏表示</h2>
         <div>
-            <label for="email">邮箱：</label><input type="text" name=“email” id="email" /> <br />
-            <label for="pass">密码：</label><input type="password" name="pass" id="pass" /> <br />
+            <label class="label" for="email">邮箱：</label><input type="text" name=“email” id="email" /> <br />
+            <label class="label" for="pass">密码：</label><input type="password" name="pass" id="pass" /> <br />
         </div>
         <div>
-            <label>性别：</label>
+            <label class="label" >性别：</label>
             <label for="man">男</label><input type="radio" name="man" id="man" />
             <label for="woman">女</label><input type="radio" name="woman" id="woman" />
         </div>
         <div>
-            <label for="year">入学年份</label>
+            <label class="label" for="year">入学年份：</label>
             <select name="year" id="year">
                 <option value="2015">2015年</option>
                 <option value="2016">2016年</option>
@@ -152,21 +152,24 @@
             </select>
         </div>
         <div>
-            <label for="">爱好：</label> <br />
+            <label class="label" for="">爱好：</label>
             <label for="lunhua">轮滑</label><input type="checkbox" name="lunhua" id="lunhua" />
-            <br />
             <label for="jsj">计算机</label><input type="checkbox" name="jsj" id="jsj" />
-            <br />
             <label for="hua">绘画</label><input type="checkbox" name="hua" id="hua">
         </div>
         <div>
-            <label for="shuo">随便说说：</label>
-            <br />
-            <textarea name="shuo" id="shuo" cols="30" rows="10">在这儿随便说点儿话</textarea>
+            <label class="label" for="shuo">随便说说：</label>
+            <textarea name="shuo" id="shuo" cols="30" rows="5">在这儿随便说点儿话</textarea>
         </div>
         <div>
-            <input type="submit" value="确定" />
-            <input type="reset" value="重置" />
+            <table>
+            <tbody>
+                <tr><td>
+                    <input class="button_input" type="submit" value="确定" />
+                    <input class="button_input" type="reset" value="重置" />  
+                </td></tr>
+            </tbody>
+            </table>
         </div>
     </form>
     </aside>
