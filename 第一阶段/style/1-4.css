@@ -3,11 +3,6 @@
     margin: 0;
 }
 
-body{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
 #block{
     position: absolute;
     top: 50%;
