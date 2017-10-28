@@ -1,0 +1,119 @@
+*{
+    padding: 0; margin: 0;
+}
+body{
+    padding: 0px 40px;
+    margin: 0 auto;
+    width: 900px;
+    height: 1386px;
+    overflow: scroll;
+}
+/* 设置头部和底部 */
+header{
+    position: relative;
+    width: 892px;
+    height: 61px;
+    border-bottom: 2px solid #938E8C;
+}
+
+.header-left{
+    width: 110px;
+    height: 61px;
+    background-color: #d45d5c;
+    float: left;
+}
+.header-left-text{
+    position: absolute;
+    bottom: 0;
+    font-size: 12px;
+    color: #fff;
+    font-family: '黑体','SimHei';
+    margin-left: 5px; 
+}
+.header-right-text{
+    position: absolute;
+    bottom: 0;  
+    right: 0;
+    font-size: 12px;
+    color: #d45d5c;
+    font-family: '黑体','SimHei';  
+}
+footer{
+    position: relative;
+    top: 100xp;
+    width: 892px;
+    height: 59px;
+    border-top: 1px solid #938E8C;
+}
+.footer-text{
+    position: absolute;
+    top: 0;  
+    right: 0;
+    font-size: 12px;
+    color: #d45d5c;
+    font-family: '黑体','SimHei';
+}
+/* 主体上面部分 */
+.main-top{
+    margin-top:  34px; 
+    /* overflow: auto; */
+}
+.main-top-left{
+    float: left;
+    width: 641px;
+    height: 301px;
+    overflow: hidden;
+}
+.main-top-left img{
+    float: left;
+}
+.main-top-left-green{
+    float: left;
+    margin-left: -100%;
+    width: 191px;
+    height: 301px;
+    background-color : rgba(0, 209, 70, 0.53) ;
+}
+.main-top-left-rad{
+    float: left;
+    margin-left: -191px; 
+    width: 191px;
+    height: 301px;
+    background-color : rgba(255, 2, 57, 0.5) ;
+}
+.main-top-right{
+    width: 203px;
+    height: 299px;
+    float: right;
+    border-top: 2px solid #cc8091;
+}
+.main-top-right .head{
+    color: #000;
+    font-size: 24px;
+    font-family: '微软雅黑','Microsoft YaHei';
+    font-variant: small-caps;
+    text-decoration:underline;
+}
+.main-top-right .text{
+    color: #676767;
+    font-size: 12px;
+    font-family: '楷体','KaiTi';
+}
+.main-top-right .num{
+    color: #75b86b;
+    font-size: 116px;
+    font-family: '微软雅黑','Microsoft YaHei';
+    /* font-style: oblique; */
+    font-weight:bold;
+    line-height: 150px;
+}
+.main-top-right .down-num{
+
+}
+.main-top-right .down-num .left-num{
+    color: #cc8091;
+    font-size: 55px;
+    font-family: '微软雅黑','Microsoft YaHei';
+    /* font-style: oblique; */
+    line-height: 1em;
+}
