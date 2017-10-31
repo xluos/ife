@@ -133,6 +133,7 @@ footer{
     /* float: left; */
     font-size: 10px;
     color: #676767;
+
 }
 .clear{
     clear:both;
@@ -179,9 +180,10 @@ footer{
 }
 /* 下面部分 */
 .main-down{
-    margin: 70px 0px;
+    margin: 70px 0px 40px 0px;
 }
 .main-down-left{
+    float: left;
     width: 415px;
 }
 .main-down-left h2{
@@ -232,4 +234,121 @@ footer{
     float: right;
     margin: 10px 0px 10px 10px;
 }
+.main-down-right {
+    position: relative;
+    float: right;
+}
+.main-down-right .image{
+    position: relative;
+}
+.main-down-right img{
+    display: block;
+    /* 要不然会会出现空隙 */
+}
+.main-down-right .up-textbg{
+    position: absolute;
+    bottom: 0;
+    width: 458px;
+    height: 61px;
+    background-color: #000;
+    opacity: 0.4;
 
+}
+.main-down-right .text{
+    position: absolute;
+    bottom: 0;
+    margin: 5px 38px;
+    padding-left: 10px;
+    border-left: 3px solid #72b16a;
+    color: #fff;
+    font-size: 26px;
+    line-height: 44px;
+    font-family: '微软雅黑','Microsoft YaHei','MSYH';
+}
+.main-down-right .text span{
+    margin-left: 10px;
+    color: #72b16a;
+    font-size: 12px;
+    font-style: italic ;
+    font-family: 微软雅黑,'Microsoft YaHei','MSYH';
+}
+.main-down-right ul{
+    list-style-position : inside;
+    list-style-image : url(../image/1-6/litop.png);
+}
+.main-down-right .down-box{
+    position: relative;
+    margin-top: 30px;
+    width: 458px;
+    height: 360px;
+    background-color: #eeedd6;
+}
+.main-down-right .down-box ul{
+    padding: 24px 20px 56px 30px;
+}
+.main-down-right .down-box li{
+    color:#5a5b5b;
+    font:16px SimSun;
+    line-height:40px;
+}
+.down-box li span{
+    float: right;
+    font-style: italic;
+}
+.down-box .left-box{
+    float: left;
+    background-color: #d45d5c;
+    padding: 37px 0px;
+    width: 260px;
+    height: 86px;
+}
+.down-box .left-box .text-0{
+    float: left;
+    /* border-right: 2px solid #fff; */
+    padding: 0px 5px;
+    line-height: 86px;
+    font-size: 110px;
+    font-family: 微软雅黑,'Microsoft YaHei','MSYH';
+    color: #fff;
+}
+.down-box .left-box .hr{
+    float: left;
+    background-color: #fff;
+    width: 2px;
+    height: 86px;
+    margin: 0px 5px 0px 0px;
+}
+.down-box .left-box .text-1{
+    font-size: 20px;
+    font-style: italic;
+    color: #fff;
+}
+.down-box .left-box .text-2{
+    font-size: 12px;
+    font-style: italic;
+    color: #fff;
+}
+.down-box .right-box{
+    width: 158px;
+    padding: 0px 20px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #5a5b5b;
+    font-style: italic;
+    float: left;
+}
+.down-box .right-box span{
+    font-size: 72px;
+    color: #d45d5c;
+    font-family: '黑体','SimHei';
+    font-style: normal;
+}
+.down-box .right-box .mark1{
+    position: relative;
+    top:36px;left: -36px;
+    margin: 36px -36px -36px 0;
+}
+.down-box .right-box .mark2{
+    float: right;
+    margin: 28px -36px 0px 0px;
+}
