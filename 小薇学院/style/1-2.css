@@ -1,0 +1,183 @@
+/* 全局设置 */
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: #E2E2E2;
+}
+/* 头部导航条 */
+header{
+    position: relative;
+    background-color: #008CFF;
+    height: 60px;
+}
+header img{
+    padding: 5px;
+    height: 50px;
+    float: left;
+}
+header ul{
+    position: absolute;
+    right: 0px;
+}
+header ul li{
+    list-style:none;
+    float: left;
+}
+header ul li a{
+    display: block;
+    text-decoration: none;
+    padding: 0px 20px;
+    font-size: 18px;
+    color: white;
+    height: 60px;
+    line-height: 60px;
+}
+header ul a:hover{
+    background-color: #57B3FF; 
+    border-bottom: 2px solid #EBD300;
+}
+/* 主体部分 */
+
+article,aside{
+    margin: 20px;
+    padding: 10px;
+    background-color: white;
+    /* 设置立体效果 */
+    box-shadow:1px 1px 2px 1px #848484;
+}
+article h2{
+    padding: 5px 0px;
+}
+article h3{
+    font-size: 16px;
+    color: silver;
+    
+}
+article p{
+    text-indent: 2em;
+}
+q{
+    display: block;
+    padding: 5px 10px;
+    border-left: 3px solid #83FA21; 
+    margin: 5px;
+}
+blockquote{
+    display: block;
+    text-indent: 2em;
+    padding: 10px;
+    background-color: #D6D6D6;
+    color: #707070;
+}
+hr{
+    margin: 5px 0px;
+}
+code{
+    /* background-color: #CCCCCC; */
+    padding: 2px;
+    color: rgb(255, 52, 120);
+    font-weight: bold;
+    box-shadow: 1px 1px 1px 1px #F0ECEC;
+}
+pre{
+    background-color: #cccccc;
+    padding: 20px;
+    font-size: 16px;
+    line-height: 22px;
+}
+article ul,article,ol{
+    padding-left: 20px;
+}
+/* 设置表格样式 */
+article table{
+    width: 100%;
+    border-collapse: collapse;
+}
+article table caption{
+    font-size: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px; 
+}
+article table th{
+    background-color: teal;
+    color: white;
+    padding: 3px;
+}
+.button{
+    /* 背景颜色 */
+    background-color: #008CFF;
+    /* 大小 */
+    font-size: 18px;
+    /* 设置圆角 */
+    border-radius: 8px;
+    color: white;
+    width: 120px;
+    height: 40px;
+    display: inline-block;
+    border: none;
+}
+.button:hover{
+    background-color: #57B3FF
+}
+article dl{
+    width: 200px;
+    padding: 10px;
+    border: 1px solid #CCC;
+    margin: 20px;
+}
+article dl dt{
+    border: 1px solid #CCC;
+}
+article dl img{
+    width: 180px;
+}
+article dl dd{
+    text-align: center;
+}
+.celan{
+    display: block;
+    padding: 5px 10px;
+    border-left: 5px solid #03CDFF; 
+    color: #535353
+}
+.label{
+    float: left;
+    text-align: right;
+    width: 45%;
+    padding-right: 10px;
+}
+aside form div{
+    margin: 20px;
+}
+table{
+    margin: 0 auto;
+}
+.button_input{
+    margin: 0px 20px;
+    /* 背景颜色 */
+    background-color: #008CFF;
+    /* 大小 */
+    font-size: 18px;
+    /* 设置圆角 */
+    border-radius: 8px;
+    color: white;
+    width: 120px;
+    height: 40px;
+    display: inline-block;
+    border: none;
+}
+.button:hover{
+    background-color: #0077FF
+}
+footer{
+    background-color: #213235;
+    height: 50px;
+}
+footer span{
+    display: block;
+    color: white;
+    text-align:center;
+    line-height: 50px;
+}

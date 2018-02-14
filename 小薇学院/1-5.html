@@ -1,0 +1,205 @@
+<!DOCTYOE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>HTML任务|1-5</title>
+    <link rel="stylesheet" href="style/1-5.css" type="text/css" />
+</head>
+
+<body>
+    <header> <!-- h5 新标签  表示网页头 -->
+        <a href="http://www.xluos.com" target="_blank"><img src="image/logo.png" alt="logo"></a>
+        <nav>
+            <ul>
+                <li><a href="">导航一</a></li>
+                <li><a href="">导航二</a></li>
+                <li><a href="">导航三</a></li>
+                <li><a href="">导航四</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="main_boby">
+    <div class="left">
+    <article>  <!-- 用于规定独立的自包含内容，如：帖子、文章、评论等-->
+    <h1>一号标题</h1>
+    <h2>二号标题</h2>
+    <h3>三号标题</h3>
+    <h4>四号标题</h4>
+    <h5>五号标题</h5>
+    <h6>六号标题</h6>
+    </article>
+    <article>
+    <p>
+        <h2>第一段：</h2> <br />
+        <h3>论德</h3><br /> 上德不德，是以有德；下德不失德，是以无德。
+        <br /> 上德无为，而无以为也；上仁为之，而无以为也；上义为之，而有以为也。上礼为之，而莫之应也，则攘臂而乃之。
+        <br /> 故失道而后德，失德而后仁，失仁而后义，失义而后礼。夫礼者，忠信之泊也，而乱之首也。
+        <br /> 前识者，道之华也，而愚之首也。
+        <br /> 是以大丈夫居其厚，而不居其泊；居其实，而不居其华。故去皮取此。
+    </p>
+    </article>
+    <article>
+    <p>
+        <h2>第二段：</h2><br /> 
+        <h3>得一</h3><br /> 昔之得一者：天得一以清，地得一以宁，神得一以霝，浴得一以盈，侯王得一以为天下正。其至之也。
+        <br /> 谓天毋已清将恐裂，谓地毋已宁将恐发，谓神毋已灵将恐歇，谓浴毋已盈将恐竭，谓侯王毋已贵以高将恐蹶。
+        <br /> 故必贵而以贱为本，必高矣而以下为基。
+        <br /> 夫是以侯王自谓孤、寡、不 （谷）。此其贱之为本欤？非也！<br /> 故致数与无与，是故不欲禄禄若玉，硌硌若石。
+        <br />
+    </p>
+    </article>
+    <article>
+    <q>一个引用：上面的文字来自《德道经》</q><br />
+    <blockquote>
+        这是一大段引用： 上士闻道，堇能行之；中士闻道，若存若亡；下士闻道，大笑之。弗笑不足以为道。 是以建言有之曰：明道如费，进道如退，夷道如类；上德如浴，大白如辱，广德如不足，建德如输，质真如渝；大方无隅，大器晚成，大音希声；天象无刑，道隐无名。
+        夫唯道，善始且善成。
+    </blockquote>
+    </article>
+    <article>
+    <em>看我是不是斜了</em>
+    <strong>我变粗了</strong>
+    <span>我是一个独立样式</span> 一个分割线
+    <hr />
+    <h2>行内代码</h2>
+    <code>for(int i=0;i&lt;n;i++) </code>
+    <h2>大块儿代码</h2>
+    <pre>
+//二分查找
+static int binarySearch(int []a, int x, int n)
+{
+    int left = 0,right = n-1;
+    int middle;
+    while (left <= right)
+    {
+        middle = (left+right)/2;
+        if (x == a[middle]) return middle;
+        if (x > a[middle]) left = middle + 1;
+        else right = middle - 1;
+    }
+    return -1;
+}
+    </pre>
+    </article>
+    <article>
+    <h2>一个无序列表</h2>
+    <ul>
+        <li>论德</li>
+        <li>得一</li>
+        <li>闻道</li>
+        <li>反复</li>
+        <li>中和</li>
+    </ul>
+    <h2>一个有序列表</h2>
+    <ol>
+        <li>论德</li>
+        <li>得一</li>
+        <li>闻道</li>
+        <li>反复</li>
+        <li>中和</li>
+    </ol>
+    
+    <table style="border:solid 1px" border="10">
+        <tbody>
+            <caption>课程表</caption>
+            <tr>
+                <th>周一</th><th>周二</th><th>周三</th><th>周四</th><th>周五</th><th>周六</th><th>周日</th>
+            </tr>
+        </tbody>
+        <tr>
+            <td>没课</td><td>没课</td><td>没课</td><td>没课</td><td>没课</td><td>没课</td><td>没课</td>
+        </tr> 
+        <tr>
+            <td>没课</td><td>没课</td><td>没课</td><td>没课</td><td>没课</td><td>没课</td><td>没课</td>
+        </tr> 
+        <tr>
+            <td>没课</td><td>没课</td><td>没课</td><td>没课</td><td>没课</td><td>没课</td><td>没课</td>
+        </tr>    
+    </table>
+    </article>
+    <a href="http://www.xluos.com" title="My blog" target="_blank"><button class="button">点我传送</button></a>
+    <article>
+        <dl>
+            <dt><img src="image/dahuangfeng.jpg"></dt><dd>大黄蜂</dd>
+        </dl>  
+        <dl>
+            <dt><img src="image/dahuangfeng.jpg"></dt><dd>大黄蜂</dd>
+        </dl> 
+        <dl>
+            <dt><img src="image/dahuangfeng.jpg"></dt><dd>大黄蜂</dd>
+        </dl> 
+        <dl>
+            <dt><img src="image/dahuangfeng.jpg"></dt><dd>大黄蜂</dd>
+        </dl>
+        <dl>
+            <dt><img src="image/dahuangfeng.jpg"></dt><dd>大黄蜂</dd>
+        </dl>
+        <dl>
+            <dt><img src="image/dahuangfeng.jpg"></dt><dd>大黄蜂</dd>
+        </dl>
+        <dl>
+            <dt><img src="image/dahuangfeng.jpg"></dt><dd>大黄蜂</dd>
+        </dl>
+        <dl>
+            <dt><img src="image/dahuangfeng.jpg"></dt><dd>大黄蜂</dd>
+        </dl>
+        <dl>
+            <dt><img src="image/dahuangfeng.jpg"></dt><dd>大黄蜂</dd>
+        </dl>
+        <dl>
+            <dt><img src="image/dahuangfeng.jpg"></dt><dd>大黄蜂</dd>
+        </dl>
+    </article>
+    </div>
+    <div class="right">
+    <aside>  <!--这个标签用于定义与主体不相关的内容 -->
+    <form action="save.php">
+        <h2 class="celan">调查表将会用侧栏表示</h2>
+        <div>
+            <label class="label" for="email">邮箱：</label><input type="text" name=“email” id="email" /> <br />
+            <label class="label" for="pass">密码：</label><input type="password" name="pass" id="pass" /> <br />
+        </div>
+        <div>
+            <label class="label" >性别：</label>
+            <label for="man">男</label><input type="radio" name="man" id="man" />
+            <label for="woman">女</label><input type="radio" name="woman" id="woman" />
+        </div>
+        <div>
+            <label class="label" for="year">入学年份：</label>
+            <select name="year" id="year">
+                <option value="2015">2015年</option>
+                <option value="2016">2016年</option>
+                <option value="2017" selected="selected">2017年</option>
+                <option value="2018">2018年</option>
+            </select>
+        </div>
+        <div>
+            <label class="label" for="">爱好：</label>
+            <label for="lunhua">轮滑</label><input type="checkbox" name="lunhua" id="lunhua" />
+            <label for="jsj">计算机</label><input type="checkbox" name="jsj" id="jsj" />
+            <label for="hua">绘画</label><input type="checkbox" name="hua" id="hua">
+        </div>
+        <div>
+            <label class="label" for="shuo">随便说说：</label>
+            <textarea name="shuo" id="shuo" cols="30" rows="5">在这儿随便说点儿话</textarea>
+        </div>
+        <div>
+            <table>
+            <tbody>
+                <tr><td>
+                    <input class="button_input" type="submit" value="确定" />
+                    <input class="button_input" type="reset" value="重置" />  
+                </td></tr>
+            </tbody>
+            </table>
+        </div>
+    </form>
+    </aside>
+    </div>
+</div>
+    <footer>
+        <span>版权所属&copy;2017 CodeDeer</span>
+    </footer>
+</body>
+
+</html>

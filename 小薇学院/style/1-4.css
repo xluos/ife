@@ -1,0 +1,29 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+#block{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 200px;
+    /* 将定位中心从左上角挪到方块中心 */
+    margin: -100px 0px 0px -200px;
+    background-color: #ccc;
+}
+#round_l,#round_r{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: #fc0;
+}
+#round_l{
+    border-radius: 0px 0px 50px 0px;
+}
+#round_r{
+    bottom: 0;
+    right: 0;
+    border-radius: 50px 0px 0px 0px;
+}
