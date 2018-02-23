@@ -193,7 +193,7 @@ nav ul li:hover{
             height:100%;
             box-sizing:border-box;
             background:none;
-            border:1px solid #222;
+            /* border:1px solid #222; */
             outline:none;
             -webkit-appearance:none;
             padding:0 5px;
@@ -205,26 +205,28 @@ nav ul li:hover{
             z-index:3;
             }
             select option{
-            color:#222;
+                height: 36px !important;
+                background-color: #e3e3e4;
+                color:#a8aaaa;
             }
             select option:hover{
-            color:#fff;
+                background:#e74f4d !important;
+                color:#fff !important; 
             }
             select option:checked{
-            background:#535353;
-            color:#fff; 
+                background:#e74f4d;
+                color:#fff; 
             }
             /* 然后在外层div#selectStyle设置自定义样式 */
             #selectStyle{
             display:block;
             margin:0 auto;
             overflow:hidden;
-            height:30px;
-            width:240px;
+            height:36px;
+            width:236px;
             border-radius:0;
-            background:#fcbdbd url("箭头图片地址") right center no-repeat;
-            background-size:auto 80%;
-            color:#fff;
+            background:#fff;
+            color:#a8aaaa;
             line-height:2;
             /* 如果不想加图片，
             则可以设置一个自己的三角形样式，
@@ -233,8 +235,33 @@ nav ul li:hover{
             position:relative;
             z-index:1;
             }
+            #selectStyle:before {
+                position:absolute;
+                top: 9px;
+                right:7px;
+                display:block;
+                height: 18px;
+                width: 18px;
+                background: #e74f4d;
+                z-index: 1;
+                content:"";
+            }
+            #selectStyle:after {
+                position:absolute;
+                top: 10px;
+                right:11px;
+                display:block;
+                height: 8px;
+                width: 8px;
+                border: solid #fff;
+                border-right: 1px;
+                border-bottom: 1px;
+                transform: rotate(-135deg);
+                z-index: 1;
+                content:"";
+            }
             /* 代码1 */
-            #selectStyle:before{
+            /* #selectStyle:before{
             position:absolute;
             z-index:1;
             top:50%;
@@ -245,11 +272,11 @@ nav ul li:hover{
             height:0;
             border-style:solid;
             border-width:5px 5px 0 5px;
-            border-color:#fff transparent transparent transparent;
+            border-color:#f1f transparent transparent transparent;
             content:"";
-            }
+            } */
             /* 代码1 */
-            #selectStyle:after{
+            /* #selectStyle:after{
             position:absolute;
             z-index:1;
             top:50%;
@@ -262,4 +289,4 @@ nav ul li:hover{
             border-width:5px 5px 0 5px;
             border-color:#535353 transparent transparent transparent;
             content:"";
-            }
+            } */
