@@ -5,8 +5,6 @@
 html,body{
     width: 100%;
     height: 100%;
-    /* overflow: hidden; */
-    overflow-x: hidden;
     min-width: 1280px;
     min-height: 580px;
 }
@@ -80,7 +78,7 @@ nav ul li:hover{
     background-image: url(../image/1-7/div1.jpg);
     background-size:100% 100%; 
 }
-.div1:after{
+.div1::after{
     position: absolute;
     top: 0;
     left: 0;
@@ -174,119 +172,543 @@ nav ul li:hover{
     position: relative;
     height: 400px;
     background-image: url(../image/1-7/map.jpg);
-    background-size: 100%;
+    background-size: 100% 100%;
 }
-/* .div4:after{
+.div4:before {
     position: absolute;
     top: 0;
     left: 0;
-    background-color: rgba(170, 52, 50, 0.2);
-    /* z-index: 1; */
-    /*content: "";
+    display: block;
+    background: #e74f4d;
+    opacity: 0.1;
     width: 100%;
-    height: 100%;
-} */
-		/* 去掉默认样式，设置新的样式 */
-		select{
-            display:block;
-            width:100%;
-            height:100%;
-            box-sizing:border-box;
-            background:none;
-            /* border:1px solid #222; */
-            outline:none;
-            -webkit-appearance:none;
-            padding:0 5px;
-            line-height:inherit;
-            color:inherit;
-            cursor:default;
-            font-size:14px;
-            position:relative;
-            z-index:3;
-            }
-            select option{
-                height: 36px !important;
-                background-color: #e3e3e4;
-                color:#a8aaaa;
-            }
-            select option:hover{
-                background:#e74f4d !important;
-                color:#fff !important; 
-            }
-            select option:checked{
-                background:#e74f4d;
-                color:#fff; 
-            }
-            /* 然后在外层div#selectStyle设置自定义样式 */
-            #selectStyle{
-            display:block;
-            margin:0 auto;
-            overflow:hidden;
-            height:36px;
-            width:236px;
-            border-radius:0;
-            background:#fff;
-            color:#a8aaaa;
-            line-height:2;
-            /* 如果不想加图片，
-            则可以设置一个自己的三角形样式，
-            如下的自定义方式，
-            见代码1 */
-            position:relative;
-            z-index:1;
-            }
-            #selectStyle:before {
-                position:absolute;
-                top: 9px;
-                right:7px;
-                display:block;
-                height: 18px;
-                width: 18px;
-                background: #e74f4d;
-                z-index: 1;
-                content:"";
-            }
-            #selectStyle:after {
-                position:absolute;
-                top: 10px;
-                right:11px;
-                display:block;
-                height: 8px;
-                width: 8px;
-                border: solid #fff;
-                border-right: 1px;
-                border-bottom: 1px;
-                transform: rotate(-135deg);
-                z-index: 1;
-                content:"";
-            }
-            /* 代码1 */
-            /* #selectStyle:before{
-            position:absolute;
-            z-index:1;
-            top:50%;
-            right:10px;
-            margin-top:-2.5px;
-            display:block;
-            width:0;
-            height:0;
-            border-style:solid;
-            border-width:5px 5px 0 5px;
-            border-color:#f1f transparent transparent transparent;
-            content:"";
-            } */
-            /* 代码1 */
-            /* #selectStyle:after{
-            position:absolute;
-            z-index:1;
-            top:50%;
-            right:10px;
-            margin-top:-3.5px;
-            display:block;
-            width:0;
-            height:0;
-            border-style:solid;
-            border-width:5px 5px 0 5px;
-            border-color:#535353 transparent transparent transparent;
-            content:"";
-            } */
+    height: 400px;
+    content: "";
+}
+.form-map {
+    width: 1280px;
+    margin: 0 auto;
+}
+.div4-text1 {
+    position: relative;
+    color: #fff;
+    font-size: 21px;
+    padding-top: 53px;
+    text-align: center;
+    z-index: 1;
+}
+.div4-text1::after{
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    transform: translateX(-50%);
+    width: 31px;
+    height: 3px;
+    background: #fff;
+    content: "";
+    z-index: 1;
+}
+.div4-text2 {
+    position: relative;
+    margin: 32px 0 52px 0;
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+    z-index: 1;
+}
+/* 去掉默认样式，设置新的样式 */
+select{
+    display:inline-block;
+    width:100%;
+    height:100%;
+    box-sizing:border-box;
+    background:none;
+    /* border:1px solid #222; */
+    outline:none;
+    -webkit-appearance:none;
+    padding:0 5px;
+    color:inherit;
+    font-size:16px;
+    position:relative;
+    z-index:3;
+}
+select option{
+    line-height: 36px;
+    background-color: #e3e3e4;
+    color:#a8aaaa;
+}
+select option:checked{
+    background:#e74f4d;
+    color:#fff; 
+}
+.map-sub {
+    display:inline-block;
+    height:36px;
+    width:236px;
+    margin: 38px;
+    border: none;
+    font-size: 16px;
+    background: #e74f4d;
+    color:#fff;
+}
+.map-sub:focus {
+    outline: none;
+}
+/* 然后在外层div#selectStyle设置自定义样式 */
+#selectStyle{
+    display:inline-block;
+    margin: 38px;
+    height:36px;
+    width:236px;
+    border-radius:0;
+    background:#fff;
+    color:#a8aaaa;
+    line-height:2;
+    position:relative;
+    z-index:1;
+}
+/* 画向下箭头 */
+#selectStyle:before {
+    position:absolute;
+    top: 9px;
+    right:7px;
+    display:block;
+    height: 18px;
+    width: 18px;
+    background: #e74f4d;
+    z-index: 1;
+    content:"";
+}
+#selectStyle::after {
+    position:absolute;
+    top: 10px;
+    right:11px;
+    display:block;
+    height: 8px;
+    width: 8px;
+    border: solid #fff;
+    border-right: 1px;
+    border-bottom: 1px;
+    transform: rotate(-135deg);
+    z-index: 1;
+    content:"";
+}
+/* 第五部分 */
+.div5 {
+    position: relative;
+    height: 606px;
+    background: #f7f7f7;
+}
+.div5 .content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 391px;
+    width: 1016px;
+    transform: translate(-50%, -50%);
+}
+.content img {
+    width: 200px;
+    height: 310px;
+    padding: 8px;
+    background: #fff;
+    border: #ebebeb 1px solid;
+    margin: 0 18px;
+}
+.div5 .part {
+    float: left;
+}
+.content-text h3 {
+    text-align: center;
+    font-size: 14px;
+    margin: 5px 0;
+}
+.content-text .sh-text {
+    position: relative;
+    left: 22px;
+    letter-spacing: 40px;
+    font-size: 22px;
+}
+.content-text p {
+    text-align: center;
+    font-size: 14px;
+    color: #a8aaaa;
+    margin: 5px 0;
+}
+
+/* 第六部分 */
+.div6 .left {
+    float: left;
+    height: 566px;
+    width: 66.6%;
+    background: url(../image/1-7/6-1.jpg);
+    background-size: 100% 100%;
+}
+.left .text1 {
+    text-align: center;
+    font-family: MicrosoftYaHei;
+    font-size: 49px;
+    margin-top: 131px;
+	color: #ffffff;
+}
+.left .text2 {
+    text-align: center;
+	font-family: MicrosoftYaHei;
+    font-size: 157px;
+    margin: -40px 0 -20px 0;
+	color: #ffffff;
+}
+.left .text3 {
+    text-align: center;
+	font-family: MicrosoftYaHei;
+	font-size: 21px;
+	line-height: 43px;
+	color: #ffffff;
+}
+.div6 .right {
+    position: relative;
+    float: left;
+    height: 566px;
+    width: 33.4%;
+}
+.div6 .right .title {
+    text-align: center;
+    font-size: 22px;
+    padding-top: 157px;
+}
+.div6 .right .title span {
+    color: #e74f4d;
+}
+.div6 .right .text {
+    font-family: SimSun;
+	font-size: 12px;
+    line-height: 30px;
+    padding: 30px 72px;
+	color: #aaaaaa;
+}
+.div6 .right button {
+    display: block;
+    width: 107px;
+    height: 35px;
+    color: #e74f4d;
+    font-size: 12px;
+    line-height: 35px;
+    background: #fff;
+    border: #e74f4d 1px solid;
+    margin: 0 auto;
+}
+.div6 .right .tab {
+    width: 78px;
+    height: 12px;
+    margin: 25px auto;
+}
+.div6 .right .tab .but{
+    float: left;
+    margin: 6px;
+    width: 11px;
+    height: 11px;
+    border: #929292 1px solid;
+    border-radius: 50%;
+}
+.tab .current {
+    background: #929292;
+}
+/* 画三角 */
+.div6 .right::after {
+    position: absolute;
+    top: 50%;
+    left: -25px;
+    transform: translate(0,-50%);
+    display: block;
+    width: 0; 
+    height: 0; 
+    border-top: 15px solid transparent; 
+    border-right: 25px solid #fff; 
+    border-bottom: 15px solid transparent;
+    content: "";
+}
+.div7 {
+    width: 100%;
+    height: 520px;
+    overflow: auto;
+}
+.div7 .left {
+    float: left;
+    height: 520px;
+    width: 33.3%;
+    background: #e74f4d;
+    color: #fff;
+}
+.div7 .left p {
+    position: relative;
+    padding-top: 173px;
+    text-align: center;
+    font-family: SimHei;
+	font-size: 21px;
+	line-height: 30px;
+}
+
+.div7 .left p::after{
+    display: block;
+    position: absolute;
+    left: 50%;
+    bottom: -20px;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 2px;
+    background: #fff;
+    content: "";
+}
+.div7 .left button {
+    display: block;
+    width: 170px;
+    height: 44px;
+    color: #fff;
+    font-family: SimHei;
+	font-size: 21px;
+    line-height: 35px;
+    background: #e74f4d;
+    border: #fff 1px solid;
+    margin: 50px auto;
+}
+.div7 .middle {
+    position: relative;
+    float: left;
+    height: 520px;
+    width: 33.3%;
+}
+.div7 .middle p {
+    position: relative;
+    padding-top: 173px;
+    text-align: center;
+    font-family: SimHei;
+	font-size: 21px;
+	line-height: 30px;
+}
+
+.div7 .middle p::after{
+    display: block;
+    position: absolute;
+    left: 50%;
+    bottom: -20px;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 2px;
+    background: #aaaaaa;
+    content: "";
+}
+.div7 .middle button {
+    display: block;
+    width: 170px;
+    height: 44px;
+    color: #e74f4d;
+    font-family: SimHei;
+	font-size: 21px;
+    line-height: 35px;
+    background: #fff;
+    border: #e74f4d 1px solid;
+    margin: 50px auto;
+}
+/* 画三角 */
+.div7 .middle::after {
+    position: absolute;
+    top: 50%;
+    right: -25px;
+    transform: translate(0,-50%);
+    display: block;
+    width: 0; 
+    height: 0; 
+    border-top: 15px solid transparent; 
+    border-left: 25px solid #fff; 
+    border-bottom: 15px solid transparent;
+    content: "";
+}
+
+.div7 .right {
+    float: left;
+    height: 520px;
+    width: 33.3%;
+    background-image: url(../image/1-7/7-1.jpg);
+    background-size: 100% 100%;
+}
+
+/* 第八部分 */
+.div8 {
+    overflow: auto;
+    width: 100%;
+    height: 750px;
+}
+
+.div8 .title {
+    position: relative;
+    padding-top: 112px;
+    text-align: center;
+	font-family: SimHei;
+	font-size: 21px;
+	color: #323333;
+}
+.div8 .title::after {
+    display: block;
+    position: absolute;
+    left: 50%;
+    bottom: -20px;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 2px;
+    background: #e74f4d;
+    content: "";
+}
+
+.div8 .text {
+    width: 450px;
+    margin: 40px auto;
+    font-family: MicrosoftYaHei;
+    font-size: 12px;
+    color: #aaaaaa;
+}
+.div8-content {
+    overflow: auto;
+    width: 1043px;
+    margin: 0 auto;
+}
+.div8-content .terms {
+    float: left;
+    width: 288px;
+    padding-right: 65px;
+}
+
+.div8-content .terms h3 {
+    padding: 10px 0;
+	font-family: SimHei;
+	font-size: 16px;
+	line-height: 27px;
+	color: #231815;
+}
+
+.div8-content .terms p {
+    padding: 10px 0;
+	font-family: SimSun;
+	font-size: 14px;
+	line-height: 21px;
+	color: #787b83;
+}
+.div8-content .terms span {
+    position: relative;
+    float: right;
+    font-family: SimSun;
+	font-size: 12px;
+	color: #787b83;
+}
+.div8-content .terms span::after {
+    display: block;
+    position: absolute;
+    top: 3px;
+    left: -12px;
+    content: "";
+    width: 5px;
+    height: 5px;
+    border-left: #aaaaaa 1px solid;
+    border-bottom: #aaaaaa 1px solid;
+    transform: rotate(-45deg);
+}
+
+.div8-content .form-apply {
+    float: left;
+    width: 690px;
+}
+.form-apply input {
+    float: left;
+    width: 289px;
+    height: 41px;
+    border: none;
+    margin: 10px 9px;
+    padding: 0 11px;
+    font-family: SimSun;
+	font-size: 14px;
+	line-height: 41px;
+	color: #767777;
+    background: #ededee;
+}
+
+.form-apply textarea {
+    float: left;
+    width: 610px;
+    height: 120px;
+    border: none;
+    margin: 10px 9px;
+    padding: 15px;
+    font-family: SimSun;
+	font-size: 14px;
+	color: #767777;
+    background: #ededee;
+    overflow-y:auto;
+    resize:none;
+}
+.form-apply .sub {
+    width: 640px;
+}
+.outline-none:focus {
+    outline:none; 
+}
+
+/* 第九部分 */
+.div9 {
+    height: 360px;
+    background: #32353e;
+}
+.div9 h3 {
+    text-align: center;
+    padding-top: 70px;
+    font-family: SimHei;
+	font-size: 24px;
+	line-height: 48px;
+	color: #ffffff;
+}
+.div9 p {
+    width: 470px;
+    margin: 10px auto;
+    text-align: center;
+    font-family: SimSun;
+	font-size: 14px;
+	color: #ffffff;
+}
+.div9 form {
+    width: 516px;
+    margin: 30px auto;
+}
+.div9 input {
+    width: 400px;
+    height: 40px;
+    border: none;
+    padding: 0 15px;
+    font-family: MicrosoftYaHei;
+	font-size: 14px;
+	color: #aaaaaa;
+}
+.div9 .sub {
+    position: relative;
+    vertical-align:top;
+    right: 26px;
+    border: none;
+    background: #6f7178;
+    color: #fff;
+    font-size: 15px;
+    width: 81px;
+    height: 40px;
+}
+/* 页脚 */
+footer {
+    height: 60px;
+    background: #303039;
+}
+footer .text {
+    padding: 0 100px;
+    font-family: SimSun;
+	font-size: 14px;
+	line-height: 60px;
+	color: #ffffff;
+}
+footer .right {
+    float: right;
+}
