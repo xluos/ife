@@ -1,0 +1,62 @@
+/* 雪碧图样式 */
+.sprite-img{background:url(../image/1-9/Sprite.png)  no-repeat;}
+.share-icon{height:12px;width:11px;background-position:0 0;}
+.star-icon{height:11px;width:12px;background-position:-14px 0;}
+.folder-checked{height:12px;width:12px;background-position:-30px 0;}
+.folder-icon{height:12px;width:12px;background-position:-48px 0;}
+.collect-icon{height:12px;width:12px;background-position:-66px 0;}
+.file-icon{height:12px;width:12px;background-position:-84px 0;}
+.login-icon{height:16px;width:15px;background-position:-101px 0;}
+.search-icon{height:17px;width:17px;background-position:-124px 0;}
+.swap-icon{height:38px;width:28px;background-position:-82px -18px;}
+.calendar-icon{height:32px;width:32px;background-position:0 -18px;}
+.logo-icon{height:36px;width:36px;background-position:-37px -18px;}
+/* 清除浮动 */
+.clearfloat {
+    zoom: 1;
+}
+.clearfloat::after {
+    display: block;
+    clear: both;
+    content: "";
+    visibility: hidden;
+    height: 0;
+}
+i {
+    display: block;
+}
+header {
+    height: 56px;
+    background: #228abf;
+}
+.logo {
+    float: left;
+    margin: 10px 0 10px 50px;
+}
+.sidebar {
+    float: left;
+    width: 260px;
+    height: 100%;
+    background: #2a2e3d;
+}
+main {
+    margin-left: 260px;
+    height: 100%;
+}
+.breadcrumb {
+    height: 31px;
+    font-size: 12px;
+    font-weight: 550;
+    line-height: 31px;
+    padding-left: 30px;
+    color: #aaa;
+    background: #fff;
+}
+.breadcrumb span {
+    color: #6898c2;
+}
+.content {
+    width: 890px;
+    height: 100%;
+    margin: 0 auto;
+}
