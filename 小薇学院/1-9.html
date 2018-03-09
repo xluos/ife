@@ -11,12 +11,195 @@
 <body>
     <header>
         <div class="logo sprite-img logo-icon"></div>
+        <div class="login"><i class="sprite-img login-icon"></i>登录</div>
         <div class="search"><i class="sprite-img search-icon"></i></div>
     </header>
-    <div class="sidebar"></div>
+    <div class="sidebar">
+        <div class="personal-info">
+            <img src="./image/tx.jpg" alt="头像" class="personal-avatar">
+            <div class="personal-name">CodeDeer</div>
+            <div class="text1">110<br>收藏</div>
+            <div class="text2">313<br>粉丝</div>
+        </div>
+        <ul class="menu-list">
+            <li class="itom">
+                <i class="sprite-img file-icon"></i>个人报表
+                <ul class="block">
+                    <li class="secondary-itom"><i class="sprite-img folder-icon"></i>文件一</li>
+                    <li class="secondary-itom checked"><i class="sprite-img folder-checked"></i>文件二</li>
+                    <li class="secondary-itom tow-secondary"><i class="sprite-img folder-icon"></i>文档一</li>
+                    <li class="secondary-itom tow-secondary"><i class="sprite-img folder-icon"></i>文档二</li>
+                    <li class="secondary-itom"><i class="sprite-img folder-icon"></i>文件三</li>
+                </ul>
+            </li>
+            <li class="itom">
+                <i class="sprite-img star-icon"></i>
+                个人收藏
+                <ul class="block">
+                    <li class="secondary-itom"><i class="sprite-img star-icon"></i>文件一</li>
+                    <li class="secondary-itom"><i class="sprite-img star-icon"></i>文件二</li>
+                    <li class="secondary-itom"><i class="sprite-img star-icon"></i>文档一</li>
+                    <li class="secondary-itom"><i class="sprite-img star-icon"></i>文档二</li>
+                    <li class="secondary-itom"><i class="sprite-img star-icon"></i>文件三</li>
+                </ul>
+            </li>
+            <li class="itom">
+                <i class="sprite-img share-icon"></i>
+                我的分享
+                <ul class="block">
+                    <li class="secondary-itom"><i class="sprite-img star-icon"></i>文件一</li>
+                    <li class="secondary-itom"><i class="sprite-img star-icon"></i>文件二</li>
+                    <li class="secondary-itom"><i class="sprite-img star-icon"></i>文档一</li>
+                    <li class="secondary-itom"><i class="sprite-img star-icon"></i>文档二</li>
+                    <li class="secondary-itom"><i class="sprite-img star-icon"></i>文件三</li>
+                </ul>
+            </li>
+            <li class="itom">
+                <i class="sprite-img star-icon"></i>
+                图库
+                <ul class="block">
+                    <li class="secondary-itom"><i class="sprite-img star-icon"></i>文件一</li>
+                    <li class="secondary-itom"><i class="sprite-img star-icon"></i>文件二</li>
+                    <li class="secondary-itom"><i class="sprite-img star-icon"></i>文档一</li>
+                    <li class="secondary-itom"><i class="sprite-img star-icon"></i>文档二</li>
+                    <li class="secondary-itom"><i class="sprite-img star-icon"></i>文件三</li>
+                </ul>
+            </li>
+            <li class="itom">
+                <i class="sprite-img star-icon"></i>
+                成长记录
+                <ul class="block">
+                    <li class="secondary-itom"><i class="sprite-img star-icon"></i>文件一</li>
+                    <li class="secondary-itom"><i class="sprite-img star-icon"></i>文件二</li>
+                    <li class="secondary-itom"><i class="sprite-img star-icon"></i>文档一</li>
+                    <li class="secondary-itom"><i class="sprite-img star-icon"></i>文档二</li>
+                    <li class="secondary-itom"><i class="sprite-img star-icon"></i>文件三</li>
+                </ul>
+            </li>
+            <li class="itom">
+                <i class="sprite-img collect-icon"></i>
+                账户信息
+                <ul class="block">
+                    <li class="secondary-itom"><i class="sprite-img star-icon"></i>文件一</li>
+                    <li class="secondary-itom"><i class="sprite-img star-icon"></i>文件二</li>
+                    <li class="secondary-itom"><i class="sprite-img star-icon"></i>文档一</li>
+                    <li class="secondary-itom"><i class="sprite-img star-icon"></i>文档二</li>
+                    <li class="secondary-itom"><i class="sprite-img star-icon"></i>文件三</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
     <main>
         <div class="breadcrumb">C站  / 个人报表 / 文件一 / <span>文档一</span></div>
-        <div class="content"></div>
+        <div class="content">
+            <form action="#" method="post" class="clearfloat">
+                <label for="find">查询项</label>
+                <select name="xiang" id="find">
+                    <option value="1">第一项</option>
+                    <option value="1">第二项</option>
+                    <option value="1">第三项</option>
+                </select>
+                <label for="mai1">买方</label>
+                <select name="mai1" id="mai1">
+                    <option value="1">小A</option>
+                    <option value="1">小B</option>
+                    <option value="1">小C</option>
+                </select>
+                <label for="mai4">卖方</label>
+                <select name="mai4" id="mai4">
+                    <option value="1">小A</option>
+                    <option value="1">小B</option>
+                    <option value="1">小C</option>
+                </select>
+                <label for="riqi">日期</label>
+                <input type="date" name="" id="riqi">
+                <label for="hs">总耗时</label>
+                <select name="mai4" id="hs">
+                    <option value="1">8天</option>
+                    <option value="1">9天</option>
+                    <option value="1">10天</option>
+                </select>
+                <label for="count">人数</label>
+                <select name="mai4" id="count">
+                    <option value="1">10人</option>
+                    <option value="1">13人</option>
+                    <option value="1">15人</option>
+                </select>
+                <label for="cjx">成交项</label>
+                <select name="mai4" id="cjx">
+                    <option value="1"></option>
+                    <option value="1">小B</option>
+                    <option value="1">小C</option>
+                </select>
+            </form>
+            <div class="time-list clearfloat">
+                <div class="btn-left"></div>
+                <div class="time-itom">
+                    <p class="time"></p>
+                    <p class="price"></p>
+                </div>
+                <div class="time-itom">
+                    <p class="time"></p>
+                    <p class="price"></p>
+                </div>
+                <div class="time-itom">
+                    <p class="time"></p>
+                    <p class="price"></p>
+                </div>
+                <div class="time-itom">
+                    <p class="time"></p>
+                    <p class="price"></p>
+                </div>
+                <div class="time-itom">
+                    <p class="time"></p>
+                    <p class="price"></p>
+                </div>
+                <div class="time-itom">
+                    <p class="time"></p>
+                    <p class="price"></p>
+                </div>
+                <div class="btn right"></div>
+            </div>
+            <div class="statistics clearfloat">
+                <h3>2016年4月份统计</h3>
+                <div class="statistics-itom">
+                    <p class="text1">1234</p>
+                    <p class="text2">成交量</p>
+                    <div class="block"></div>
+                </div>
+                <div class="statistics-itom">
+                    <p class="text1">1234</p>
+                    <p class="text2">成交量</p>
+                    <div class="block"></div>
+                </div>
+                <div class="statistics-itom">
+                    <p class="text1">1234</p>
+                    <p class="text2">成交量</p>
+                    <div class="block"></div>
+                </div>
+                <div class="statistics-itom">
+                    <p class="text1">1234</p>
+                    <p class="text2">成交量</p>
+                    <div class="block"></div>
+                </div>
+            </div>
+        <article>
+            <header><h1>第一组项目</h1></header>
+            <section></section>
+        </article>
+        <article>
+            <header><h1>第一组项目</h1></header>
+            <section></section>
+        </article>
+        <article>
+            <header><h1>日历</h1></header>
+            <section></section>
+        </article>
+        <article>
+            <header><h1>汽车行业品牌榜</h1></header>
+            <section></section>
+        </article>
+        </div>
     </main>
 </body>
 </html>
