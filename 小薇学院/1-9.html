@@ -14,6 +14,7 @@
         <div class="login"><i class="sprite-img login-icon"></i>登录</div>
         <div class="search"><i class="sprite-img search-icon"></i></div>
     </header>
+    <div style="overflow: hidden"> 
     <div class="sidebar">
         <div class="personal-info">
             <img src="./image/tx.jpg" alt="头像" class="personal-avatar">
@@ -92,114 +93,136 @@
     <main>
         <div class="breadcrumb">C站  / 个人报表 / 文件一 / <span>文档一</span></div>
         <div class="content">
-            <form action="#" method="post" class="clearfloat">
-                <label for="find">查询项</label>
-                <select name="xiang" id="find">
-                    <option value="1">第一项</option>
-                    <option value="1">第二项</option>
-                    <option value="1">第三项</option>
-                </select>
-                <label for="mai1">买方</label>
-                <select name="mai1" id="mai1">
-                    <option value="1">小A</option>
-                    <option value="1">小B</option>
-                    <option value="1">小C</option>
-                </select>
-                <label for="mai4">卖方</label>
-                <select name="mai4" id="mai4">
-                    <option value="1">小A</option>
-                    <option value="1">小B</option>
-                    <option value="1">小C</option>
-                </select>
-                <label for="riqi">日期</label>
-                <input type="date" name="" id="riqi">
-                <label for="hs">总耗时</label>
-                <select name="mai4" id="hs">
-                    <option value="1">8天</option>
-                    <option value="1">9天</option>
-                    <option value="1">10天</option>
-                </select>
+            <form action="#" method="post">
+                <div class="box1">
+                    <label for="find">查询项</label>
+                    <div class="selectbox">
+                        <select name="xiang" id="find">
+                            <option value="1">第一项</option>
+                            <option value="1">第二项</option>
+                            <option value="1">第三项</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="box2 clearfloat">
+                    <label for="mai1">买方</label>
+                    <div class="selectbox">
+                        <select name="mai1" id="mai1">
+                            <option value="1">小A</option>
+                            <option value="1">小B</option>
+                            <option value="1">小C</option>
+                        </select>
+                    </div>
+                    <label for="mai4">卖方</label>
+                    <div class="selectbox">
+                        <select name="mai4" id="mai4">
+                            <option value="1">小A</option>
+                            <option value="1">小B</option>
+                            <option value="1">小C</option>
+                        </select>
+                    </div>
+                <div class="swap sprite-img swap-icon">换</div>
+                </div>
+                <div class="box3">
+                    <label for="riqi">日期</label>
+                    <input type="date" name="" id="riqi">
+                    <label for="hs">总耗时</label>
+                    <div class="selectbox">
+                    <select name="mai4" id="hs">
+                        <option value="1">8天</option>
+                        <option value="1">9天</option>
+                        <option value="1">10天</option>
+                    </select>
+                </div>
                 <label for="count">人数</label>
+                <div class="selectbox">
                 <select name="mai4" id="count">
                     <option value="1">10人</option>
                     <option value="1">13人</option>
                     <option value="1">15人</option>
                 </select>
+                </div>
                 <label for="cjx">成交项</label>
+                <div class="selectbox">
                 <select name="mai4" id="cjx">
-                    <option value="1"></option>
+                    <option value="1">小A</option>
                     <option value="1">小B</option>
                     <option value="1">小C</option>
                 </select>
+                </div>
+                </div>
+                <input type="submit" value="搜索" class="btn">
             </form>
             <div class="time-list clearfloat">
                 <div class="btn-left"></div>
-                <div class="time-itom">
-                    <p class="time"></p>
-                    <p class="price"></p>
+                <div class="time-itom activate">
+                    <p class="time">10:00 am</p>
+                    <p class="price">1200</p>
                 </div>
                 <div class="time-itom">
-                    <p class="time"></p>
-                    <p class="price"></p>
+                    <p class="time">11:00 am</p>
+                    <p class="price">1200</p>
                 </div>
                 <div class="time-itom">
-                    <p class="time"></p>
-                    <p class="price"></p>
+                    <p class="time">12:00 am</p>
+                    <p class="price">1200</p>
                 </div>
                 <div class="time-itom">
-                    <p class="time"></p>
-                    <p class="price"></p>
+                    <p class="time">13:00 am</p>
+                    <p class="price">1200</p>
                 </div>
                 <div class="time-itom">
-                    <p class="time"></p>
-                    <p class="price"></p>
+                    <p class="time">14:00 am</p>
+                    <p class="price">1200</p>
                 </div>
                 <div class="time-itom">
-                    <p class="time"></p>
-                    <p class="price"></p>
+                    <p class="time">15:00 am</p>
+                    <p class="price">1200</p>
                 </div>
-                <div class="btn right"></div>
+                <div class="btn-right"></div>
+                <div class="calendar"><i class="sprite-img calendar-icon"></i>历史查询</div>
             </div>
             <div class="statistics clearfloat">
                 <h3>2016年4月份统计</h3>
-                <div class="statistics-itom">
+                <div class="statistics-itom green">
                     <p class="text1">1234</p>
                     <p class="text2">成交量</p>
-                    <div class="block"></div>
+                    <div class="color-piece"></div>
                 </div>
-                <div class="statistics-itom">
+                <div class="statistics-itom blue">
                     <p class="text1">1234</p>
                     <p class="text2">成交量</p>
-                    <div class="block"></div>
+                    <div class="color-piece"></div>
                 </div>
-                <div class="statistics-itom">
+                <div class="statistics-itom red">
                     <p class="text1">1234</p>
                     <p class="text2">成交量</p>
-                    <div class="block"></div>
+                    <div class="color-piece"></div>
                 </div>
-                <div class="statistics-itom">
+                <div class="statistics-itom yellow">
                     <p class="text1">1234</p>
                     <p class="text2">成交量</p>
-                    <div class="block"></div>
+                    <div class="color-piece"></div>
                 </div>
             </div>
-        <article>
+        <article class="material-list">
             <header><h1>第一组项目</h1></header>
             <section></section>
         </article>
-        <article>
+        <article class="statement">
             <header><h1>第一组项目</h1></header>
             <section></section>
         </article>
-        <article>
+        <article class="calendar-list">
             <header><h1>日历</h1></header>
             <section></section>
         </article>
-        <article>
+        <article class="ranking">
             <header><h1>汽车行业品牌榜</h1></header>
             <section></section>
         </article>
         </div>
     </main>
+</div>
 </body>
 </html>
