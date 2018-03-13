@@ -22,6 +22,9 @@
     visibility: hidden;
     height: 0;
 }
+body {
+    min-width: 1200px;
+}
 i {
     display: block;
 }
@@ -668,37 +671,134 @@ article header h1 {
     background: #fff;
 }
 .calendar-list .date-all {
+    position: relative;
     border-collapse: separate;
     empty-cells: hide;
-    /* border-spacing: 1px; */
+    border-spacing: 3px;
+    text-align: center;
 }
 .calendar-list .date-all .week{
     margin-bottom: 10px;
-    height: 30px;
     border-top: 2px solid #228abf;
     border-bottom: 1px solid #cbcbcb;
+
 }
+.calendar-list .date-all::after {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 3px;
+    width: 303px;
+    height: 1px;
+    content: "";
+    background: #228abf;
+}
+.calendar-list .date-all::before {
+    display: block;
+    position: absolute;
+    top: 30px;
+    left: 3px;
+    width: 303px;
+    height: 1px;
+    content: "";
+    background: #cbcbcb;
+}
+
 .date-all .week td {
-    position: relative;
-    text-align: center;
+    height: 30px;
     width: 44px;
-    z-index: 2;
 }
 .date-all .day td {
     width: 39px;
     height: 39px;
-    border: 1px solid transparent;
-    text-align: center;
+    border: 1px solid #fff;
     margin: 1px;
+    cursor: pointer;
 }
-.date-all .day td:hover {
+.date-all .day td:hover, 
+.date-all .day .checked {
     border: 1px solid #f7d564;
 }
-.date-all .day td span {
-
+.day td:nth-child(6) p,.day td:nth-child(7) p{
+	color: #f00;
+}
+.date-all .day .jieri span {
+    color: #f00;
 }
 /* 排行榜 */
 .ranking {
     width: 529px;
     height: 355px;
+}
+.ranking table {
+    margin: 18px 40px;
+    width: 450px;
+    height: 270px;
+    border-collapse: collapse;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.ranking table td,.ranking table th {
+    border: 1px solid #cbcbcb;
+}
+.ranking table tr:hover {
+    background: #f4f5f6;
+}
+.ranking table .bar {
+    display: inline-block;
+    position: relative;
+    left: 20px;
+    width: 170px;
+    height: 4px;
+    background: #dcdcdc;
+}
+.ranking table .hot {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 4px;
+}
+/* 热度颜色 */
+.ranking table .hot-h {
+    background: #ec6d51;
+}
+.ranking table .hot-m {
+    background: #f19f4f;
+}
+.ranking table .hot-l {
+    background: #7fcbf0;
+}
+/* 热度等级 */
+.ranking table .hot-bar1{
+    width: 10%;
+}
+.ranking table .hot-bar2{
+    width: 20%;
+}
+.ranking table .hot-bar3{
+    width: 30%;
+}
+.ranking table .hot-bar4{
+    width: 40%;
+}
+.ranking table .hot-bar5{
+    width: 50%;
+}
+.ranking table .hot-bar6{
+    width: 60%;
+}
+.ranking table .hot-bar7{
+    width: 70%;
+}
+.ranking table .hot-bar8{
+    width: 80%;
+}
+.ranking table .hot-bar9{
+    width: 90%;
+}
+.ranking table .hot-bar10{
+    width: 100%;
 }
