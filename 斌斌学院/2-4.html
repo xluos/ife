@@ -5,8 +5,97 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>斌斌学院|2-4</title>
+    <style>
+        #box p{
+            user-select: none;
+            float: left;
+            margin: 5px;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            font-size: 20px;
+            color: #fff;
+            background: #FD0300
+        }
+    </style>
 </head>
 <body>
-    
+    <input type="number" id="number" >
+    <button onclick="randCreate()">随机生成序列</button>
+    <button onclick="getRand()">随机生成数</button>
+    <button onclick="in_left()">左侧入</button>
+    <button onclick="in_right()">右侧入</button>
+    <button onclick="out_left()">左侧出</button>
+    <button onclick="out_right()">右侧出</button>
+    <div id="box"></div>
+    <script>
+        var count = 0;
+        var input = document.getElementById('number');
+        var box = document.getElementById('box');
+        function randCreate() {
+            if(count >= 30) {
+                alert("太多啦!");
+                return;
+            }
+            count += 10;
+            for(let i=0;i<10;i++){
+                box.appendChild(createNode(Math.ceil(Math.random() * 90) + 10));
+            }
+        }
+        function getRand() {
+            input.value = Math.ceil(Math.random() * 90) + 10;
+        }
+        function createNode(data) {
+            let newNode = document.createElement('p');
+            newNode.innerText = data.toString();
+            return newNode;
+        }
+        function in_left() {
+            if(count >= 30) {
+                alert("太多啦!");
+                return;
+            }
+            if(!input.value) {
+                alert("不能为空!");
+                return;
+            }
+            count++;
+            box.insertBefore(createNode(input.value), box.childNodes[0]);
+        }
+        function in_right() {
+            if(count >= 30) {
+                alert("太多啦!");
+                return;
+            }
+            if(!input.value) {
+                alert("不能为空!");
+                return;
+            }
+            count++;
+            box.appendChild(createNode(input.value));
+        }
+        function out_left() {
+            if(count <= 0) alert("没有啦!");
+            count--;
+            alert(box.childNodes[0].innerText);
+            box.removeChild(box.childNodes[0]);
+        }
+        function out_right() {
+            if(count <= 0) alert("没有啦!");
+            count--;
+            let rm_node = box.childNodes;
+            alert(rm_node[rm_node.length-1].innerText);
+            box.removeChild(rm_node[rm_node.length-1]);
+        }
+        box.addEventListener('click', function (e) {
+            var event = e || window.event;
+            var target = event.target || event.srcElement;
+            if (target.matches('p')) {
+                box.removeChild(target);
+                count--;
+            }
+        })
+    </script>
 </body>
 </html>

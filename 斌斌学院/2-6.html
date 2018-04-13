@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title >斌斌学院|2-6</title>
+    <style>
+        p {
+            user-select: none;
+            float: left;
+            margin-left: 3px;
+            padding: 0 20px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            font-size: 16px;
+            color: #e00340;
+            border: #e00340 solid 1px;
+            border-radius: 5px;
+            /* background: #e00340; */
+        }
+        #text {
+            width: 200px;
+            height: 133px;
+            resize:none;
+        }
+        .activate {
+            color: #fff;
+            background: #e00340;
+        }
+    </style>
+</head>
+
+<body>
+    <textarea id="text" ></textarea>
+    <button onclick="insert()">插入</button>
+    <input type="text" id="myquery">
+    <button onclick="fmyquery()">查询</button>
+    <div id="box"></div>
+    <script>
+        const taxt = document.getElementById('text');
+        const box = document.getElementById('box');
+        const myquery = document.getElementById('myquery');
+        function clear() {
+            let list = box.childNodes;
+            for(let i=0;i<list.length;i++) {
+                if(list[i].classList.contains('activate')) {
+                    list[i].classList.remove('activate');
+                }
+            }
+        }
+        function getData() {
+            let val = text.value;
+            //按照指定分隔符分割字符串，并且把空的去掉
+            return val.split(/[\n\t\r,，、 　]/).filter(x=>x);
+        }
+        function createNode(data) {
+            let newNode = document.createElement('p');
+            newNode.innerText = data;
+            return newNode;
+        }
+        function insert() {
+            let data = getData();
+            for(let i=0;i<data.length;i++) {
+                box.appendChild(createNode(data[i]));
+            }
+            text.value = '';
+        }
+        function fmyquery() {
+            clear();
+            let list = box.childNodes;
+            // const re = new RegExp(myquery.value);
+            for(let i=0;i<list.length;i++) {
+                if(list[i].innerText.indexOf(myquery.value) !== -1) {
+                    list[i].classList.add('activate');
+                }
+            }
+        }
+        box.addEventListener('click', function (e) {
+            var event = e || window.event;
+            var target = event.target || event.srcElement;
+            if (target.matches('p')) {
+                box.removeChild(target);
+            }
+        })
+    </script>
+</body>
+
+</html>

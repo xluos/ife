@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>斌斌学院|2-5</title>
+    <style>
+        #box {
+            display: flex;
+            /* height: 150px; */
+            align-items: flex-end;
+        }
+
+        #box p {
+            user-select: none;
+            float: left;
+            margin-left: 1px;
+            width: 20px;
+            height: 50px;
+            text-align: center;
+            font-size: 10px;
+            color: #fff;
+            background: #e00340;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="number" id="number">
+    <button onclick="randCreate()">随机生成序列</button>
+    <button onclick="getRand()">随机生成数</button>
+    <button onclick="in_left()">左侧入</button>
+    <button onclick="in_right()">右侧入</button>
+    <button onclick="out_left()">左侧出</button>
+    <button onclick="out_right()">右侧出</button>
+    <button onclick="sort()">排序</button>
+    <button onclick="Clear()">清空</button>
+    <div id="box"></div>
+    <script>
+        var max = 160;
+        var ceiling = 200;
+        var lower = 10;
+        // var WIDTH = 10;
+        var count = 0;
+        var input = document.getElementById('number');
+        var box = document.getElementById('box');
+        function Clear() {
+            count = 0;
+            box.innerHTML = '';
+        }
+        function check(type) {
+            if (type = 'in') {
+                if (count >= max) {
+                    alert("太多啦!");
+                    return true;
+                }
+                if (!input.value) {
+                    alert("不能为空!");
+                    return true;
+                }
+                if (input.value < 10 || input.value > 100) {
+                    alert("数字只能在10-100之间");
+                    return true;
+                }
+            } else {
+                if (count < 0) {
+                    alert("没有啦!");
+                    return true;
+                }
+            }
+            return false;
+        }
+        function randCreate() {
+            if (count >= max) {
+                alert("太多啦!");
+                return true;
+            }
+            count += 10;
+            for (let i = 0; i < 10; i++) {
+                box.appendChild(createNode(Math.ceil(Math.random() * ceiling) + lower));
+            }
+        }
+        function getRand() {
+            input.value = Math.ceil(Math.random() * ceiling) + lower;
+        }
+        function createNode(data) {
+            let newNode = document.createElement('p');
+            newNode.innerText = data.toString();
+            newNode.style.height = `${data}px`;
+            return newNode;
+        }
+        function in_left() {
+            if (check('in')) return;
+            count++;
+            box.insertBefore(createNode(input.value), box.childNodes[0]);
+        }
+        function in_right() {
+            if (check('in')) return;
+            count++;
+            box.appendChild(createNode(input.value));
+        }
+        function out_left() {
+            if (check('out')) return;
+            count--;
+            alert(box.childNodes[0].innerText);
+            box.removeChild(box.childNodes[0]);
+        }
+        function out_right() {
+            if (check('out')) return;
+            count--;
+            let rm_node = box.childNodes;
+            alert(rm_node[rm_node.length - 1].innerText);
+            box.removeChild(rm_node[rm_node.length - 1]);
+        }
+        box.addEventListener('click', function (e) {
+            var event = e || window.event;
+            var target = event.target || event.srcElement;
+            if (target.matches('p')) {
+                box.removeChild(target);
+                count--;
+            }
+        })
+
+        function sort() {
+            let i, j, t;
+            let list = box.childNodes;
+            //console.log(list);
+            let len = list.length;
+            if(len < 2) {
+                alert('太少了!');
+                return;
+            }
+            let list_number = [];
+            for(i = 0;i < list.length; i++) {
+                let val = list[i].innerText;
+                list_number.push(parseInt(val));
+            }
+            // console.log(len);
+            
+            // console.log(list_number);
+            let count  = 1;
+            for (i = 1; i < len; i++) {
+                for (j = 0; j < len - i; j++) {
+                    
+                    if (list_number[j] > list_number[j + 1]) {
+                        count++;
+                        t = list_number[j];
+                        list_number[j] = list_number[j + 1];
+                        list_number[j + 1] = t;
+
+                        // 及时排序没有可视化效果
+
+                        // list[j].innerText = list_number[j];
+                        // list[j].style.height = `${list_number[j]}px`;
+                        // list[j + 1].innerText = list_number[j + 1];
+                        // list[j + 1].style.height = `${list_number[j + 1]}px`;
+                        
+
+                        // 加上延时将排序过程可视化
+
+                        setTimeout(function (j,x,y){
+                            list[j].innerText = x;
+                            list[j].style.height = `${x}px`;
+                            list[j + 1].innerText = y;
+                            list[j + 1].style.height = `${y}px`;
+                        }, count * 500,j, list_number[j], list_number[j + 1]); 
+                        // 位置交换前 变色突出显示要交换位置的两个
+
+                        setTimeout(function (j,x,y){
+                            list[j].style.background = '#456';
+                            list[j+1].style.background = '#456';
+                        }, count * 500 - 250 ,j); 
+
+                        // 交换位置后将颜色变回来
+                        setTimeout(function (j,x,y){
+                            list[j].style.background = '';
+                            list[j+1].style.background = '';
+                        }, count * 500 + 250 ,j); 
+                    }
+                    
+                }
+            }
+            // console.log(list_number);
+            
+        }
+    </script>
+</body>
+
+</html>
