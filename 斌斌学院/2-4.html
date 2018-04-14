@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>斌斌学院|2-4</title>
     <style>
-        #box p{
+        #box p {
             user-select: none;
             float: left;
             margin: 5px;
@@ -20,8 +21,9 @@
         }
     </style>
 </head>
+
 <body>
-    <input type="number" id="number" >
+    <input type="number" id="number">
     <button onclick="randCreate()">随机生成序列</button>
     <button onclick="getRand()">随机生成数</button>
     <button onclick="in_left()">左侧入</button>
@@ -34,12 +36,12 @@
         var input = document.getElementById('number');
         var box = document.getElementById('box');
         function randCreate() {
-            if(count >= 30) {
+            if (count >= 30) {
                 alert("太多啦!");
                 return;
             }
             count += 10;
-            for(let i=0;i<10;i++){
+            for (let i = 0; i < 10; i++) {
                 box.appendChild(createNode(Math.ceil(Math.random() * 90) + 10));
             }
         }
@@ -52,11 +54,11 @@
             return newNode;
         }
         function in_left() {
-            if(count >= 30) {
+            if (count >= 30) {
                 alert("太多啦!");
                 return;
             }
-            if(!input.value) {
+            if (!input.value) {
                 alert("不能为空!");
                 return;
             }
@@ -64,11 +66,11 @@
             box.insertBefore(createNode(input.value), box.childNodes[0]);
         }
         function in_right() {
-            if(count >= 30) {
+            if (count >= 30) {
                 alert("太多啦!");
                 return;
             }
-            if(!input.value) {
+            if (!input.value) {
                 alert("不能为空!");
                 return;
             }
@@ -76,17 +78,17 @@
             box.appendChild(createNode(input.value));
         }
         function out_left() {
-            if(count <= 0) alert("没有啦!");
+            if (count <= 0) alert("没有啦!");
             count--;
             alert(box.childNodes[0].innerText);
             box.removeChild(box.childNodes[0]);
         }
         function out_right() {
-            if(count <= 0) alert("没有啦!");
+            if (count <= 0) alert("没有啦!");
             count--;
             let rm_node = box.childNodes;
-            alert(rm_node[rm_node.length-1].innerText);
-            box.removeChild(rm_node[rm_node.length-1]);
+            alert(rm_node[rm_node.length - 1].innerText);
+            box.removeChild(rm_node[rm_node.length - 1]);
         }
         box.addEventListener('click', function (e) {
             var event = e || window.event;
@@ -98,4 +100,5 @@
         })
     </script>
 </body>
+
 </html>

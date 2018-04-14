@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>斌斌学院|2-8</title>
+    <style>
+        body {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .node {
+            display: flex;
+            /* flex-wrap: wrap; */
+            border: #aaa solid 2px;
+            border-radius: 5px;
+            margin: 15px;
+            padding: 10px;
+            color: #000;
+            background: #fff;
+        }
+
+        .activate {
+            color: #fff;
+            background: #00BBF0;
+        }
+
+        .select {
+            color: #00BBF0;
+            border: #00BBF0 solid 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="node" id="root">1
+        <div class="node">2
+            <div class="node">3
+                <div class="node">4</div>
+                <div class="node">5</div>
+            </div>
+            <div class="node">6
+                <div class="node">7</div>
+                <div class="node">8</div>
+                <div class="node">7</div>
+                <div class="node">8</div>
+            </div>
+            <div class="node">3
+                    <div class="node">4</div>
+                    <div class="node">5</div>
+            </div>
+        </div>
+        <div class="node">9
+            <div class="node">10
+                <div class="node">11</div>
+                <div class="node">12</div>
+            </div>
+            <div class="node">13
+                <div class="node">14</div>
+                <div class="node">15</div>
+            </div>
+            <div class="node">15</div>
+            <div class="node">15</div>
+        </div>
+    </div>
+    <div>
+        <input type="text" id="key">
+        <button onclick="preOrdergo()">先序遍历查找</button>
+        <button onclick="postOrdergo()">后序遍历查找</button>
+        <button onclick="cleargo()">清除选中</button>
+    </div>
+    <script>
+        var COUNT = 0;
+        var TREEHEIGHT = 4;
+        var FLAG = false;
+        var DELATE = 100;
+        var OFFSET = 50;
+        var PAIRING_NUMBER = 0;
+        var NODE_SIZE = (1 << TREEHEIGHT) - 1;
+        const key = document.getElementById('key');
+        const root = document.getElementById('root');
+        function init() {
+            if (FLAG) return false;
+            COUNT = 0;
+            PAIRING_NUMBER = 0;
+            FLAG = true;
+            clear(root);
+            return true;
+        }
+        function clear(node) {
+            if (!node) {
+                return;
+            }
+            node.classList.remove('select');
+            for(let i = 0; i < node.children.length; i++) {
+                clear(node.children[i]);
+            }
+        }
+        function activate(node) {
+            setTimeout((node) => {
+                node.classList.add('activate');
+            }, COUNT * DELATE, node);
+            setTimeout((node) => {
+                node.classList.remove('activate');
+            }, COUNT * DELATE + OFFSET, node);
+            
+            // if (node.childNodes[0].nodeValue.indexOf(key.value) !== -1) {
+            if (node.childNodes[0].nodeValue.trim() === key.value) {
+                PAIRING_NUMBER ++ ;
+                setTimeout((node) => {
+                    node.classList.add('select');
+                }, COUNT * DELATE + OFFSET + 1, node);
+            }
+            COUNT++;
+            if (COUNT == NODE_SIZE) {
+                setTimeout(() => {
+                    FLAG = false;
+                }, (COUNT + 1) * DELATE);
+            }
+        }
+        // 先序遍历
+        function preOrder(node) {
+            if (!node) {
+                return;
+            }
+            activate(node);
+            for(let i = 0; i < node.children.length; i++) {
+                preOrder(node.children[i]);
+            }
+        }
+        // 后序遍历
+        function postOrder(node) {
+            if (!node) {
+                return;
+            }
+            for(let i = 0; i < node.children.length; i++) {
+                postOrder(node.children[i]);
+            }
+            activate(node);
+        }
+        // 激活设置先序遍历
+        function preOrdergo(node) {
+            if(!init()) return ;
+            preOrder(root);
+            if(PAIRING_NUMBER === 0) {
+                setTimeout(() => {
+                    alert("没有找到完全匹配的内容！");
+                }, COUNT * DELATE);
+            }
+        }
+        // 激活设置后序遍历
+        function postOrdergo(node) {
+            if(!init()) return ;
+            postOrder(root);
+            if(PAIRING_NUMBER === 0) {
+                setTimeout(() => {
+                    alert("没有找到完全匹配的内容！");
+                }, COUNT * DELATE);
+            }
+        }
+        function cleargo() {
+            clear(root);
+        }
+    </script>
+</body>
+</html>
