@@ -58,14 +58,14 @@ function init() {
 
 
 YESSTU.addEventListener('click', function(){
-    STU.style.display = 'block';
+    STU.style.display = 'flex';
     FIRE.style.display = 'none';
 })
 
 
 NOSTU.addEventListener('click', function(){
     STU.style.display = 'none';
-    FIRE.style.display = 'block';
+    FIRE.style.display = 'flex';
 })
 
 REGION.addEventListener('change', function() {
