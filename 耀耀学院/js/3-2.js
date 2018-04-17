@@ -7,6 +7,7 @@ BOX.addEventListener('focusin', function (e) {
     var target = event.target || event.srcElement;
     if (target.matches('input')) {
         // console.log(target.getAttribute('vf-type'));
+        vf.hideError(target);
         vf.showHint(target);
     }
 }, false)
@@ -17,6 +18,20 @@ BOX.addEventListener('focusout', function (e) {
     var target = event.target || event.srcElement;
     if (target.matches('input')) {
         // console.log(target.getAttribute('vf-type'));
-        vf.hideHint(target);
+        if(vf.verifyOne(target)) {
+            vf.hideError(target);
+            vf.hideHint(target);
+        } else {
+            vf.showError(target);
+        }
     }
 }, false)
+
+document.getElementsByTagName('button')[0].addEventListener('click', function(){
+    let node = document.getElementsByClassName('box')[0];
+    if(vf.verifyAll(node)) {
+        alert('验证通过');
+    }else {
+        alert('验证失败');
+    }
+})
