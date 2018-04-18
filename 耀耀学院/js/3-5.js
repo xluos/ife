@@ -20,9 +20,9 @@ var block = {
         this.top_px = bounDing.top;
         this.left_px = bounDing.left;
     },
-    go: function () {
-        if (this.check()) {      //判断下一步是否越界
-            let n = this.oriented;
+    go: function (oriented) {
+        if (this.check(oriented)) {      //判断下一步是否越界
+            let n = typeof(oriented) === "undefined" ? this.oriented:oriented;
             this.x += this.dir[n][0];    // x,y 偏移值
             this.y += this.dir[n][1];
             BLOCK.style.top = this.top_px + this.x * this.excursion + 'px';  //计算偏移像素并重新赋值
@@ -33,18 +33,14 @@ var block = {
     },
     rotate: function (n) { //n的绝对值代表旋转的度数 1个刻度代表90度 正值顺时针，负值逆时针
         this.deg += n * 90;
-        this.oriented = this.mod(this.oriented + n);
+        this.oriented = this.mod(this.oriented + n, 4);
         BLOCK.style.transform = `rotate(${this.deg}deg)`;
     },
-    mod: function (n) {  // 对负方向取余相反
-        if (n > 0) {
-            return n % 4;
-        } else {
-            return (n + 4) % 4;
-        }
+    mod: function (n, mod) {  // 对负方向取余相反
+        return (n + mod) % mod;
     },
-    check: function () {
-        let n = this.oriented;
+    check: function (oriented) {
+        let n = typeof(oriented) === "undefined" ? this.oriented:oriented;
         if (this.x + this.dir[n][0] >= MIN && this.x + this.dir[n][0] <= MAX
             && this.y + this.dir[n][1] >= MIN && this.y + this.dir[n][1] <= MAX) {
             return true;
@@ -63,7 +59,35 @@ var instruction = {
     "GO": () => block.go(),
     "TUN LEF": () => block.rotate(-1),
     "TUN RIG": () => block.rotate(1),
-    "TUN BAC": () => block.rotate(2)
+    "TUN BAC": () => block.rotate(2),
+    "TRA LEF": ()=>{
+        block.go(3);
+    },
+    "TRA TOP": ()=>{
+        block.go(0);
+    },
+    "TRA RIG": ()=>{
+        block.go(1);
+    },
+    "TRA BOT": ()=>{
+        block.go(2);
+    },
+    "MOV LEF": ()=>{
+        block.rotate(3 - block.oriented);
+        block.go();
+    },
+    "MOV TOP": ()=>{
+        block.rotate(0 - block.oriented);
+        block.go();
+    },
+    "MOV RIG": ()=>{
+        block.rotate(1 - block.oriented);
+        block.go();
+    },
+    "MOV BOT": ()=>{
+        block.rotate(2 - block.oriented);
+        block.go();
+    }
 }
 
 function goInstruction() {
@@ -74,8 +98,8 @@ function goInstruction() {
         alert('非法指令！');
     }
 }
+setTimeout(block.init(),1000);
 
-block.init();
 
 // 函数节流  防止窗口改变事件触发太频繁
 var timer = false;

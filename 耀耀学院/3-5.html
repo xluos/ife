@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/3-5.css">
+    <title>耀耀学院|3-5</title>
+</head>
+
+<body>
+    <table>
+        <tbody>
+            <tr>
+                <td></td>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+                <td>7</td>
+                <td>8</td>
+                <td>9</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td id="sign"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="btnlist">
+        <div>
+            <input type="text" id='instruction'>
+            <button onclick="goInstruction()">执行指令</button>
+        </div>
+        <div>
+            <button onclick="instruction['GO']()">GO</button>
+            <button onclick="instruction['TUN LEF']()">TUN LEF</button>
+            <button onclick="instruction['TUN RIG']()">TUN RIG</button>
+            <button onclick="instruction['TUN BAC']()">TUN BAC</button>
+        </div>
+        <div>
+            <div class="row">
+                <button onclick="instruction['TRA TOP']()">TRA TOP</button>
+            </div>
+            <div class="row">
+                <button onclick="instruction['TRA LEF']()">TRA LEF</button>
+                <button onclick="instruction['TRA BOT']()">TRA BOT</button>
+                <button onclick="instruction['TRA RIG']()">TRA RIG</button>
+            </div>
+        </div>
+        <div>
+            <div class="row">
+                <button onclick="instruction['MOV TOP']()">MOV TOP</button>
+            </div>
+            <div class="row">
+                <button onclick="instruction['MOV LEF']()">MOV LEF</button>
+                <button onclick="instruction['MOV BOT']()">MOV BOT</button>
+                <button onclick="instruction['MOV RIG']()">MOV RIG</button>
+            </div>
+        </div>
+    </div>
+    <div id="block"></div>
+    <script src="./js/3-5.js"></script>
+</body>
+
+</html>
