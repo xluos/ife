@@ -1,0 +1,56 @@
+body {
+    display: flex;
+    justify-content: center;
+}
+table {
+    width: 500px;
+    border-collapse: collapse;
+    text-align: center;
+}
+td {
+    border: #aaa solid 1px;
+    height: 30px;
+}
+thead td {
+    background: cadetblue;
+    color: #fff;
+    position: relative;
+}
+
+thead td .order {
+    position: absolute;
+    bottom: 6px;
+    right: 10px;
+    display: block;
+     /* 内部大小 */
+     width: 0px;
+     height: 0px;
+     /* 边框大小 只设置三条边*/
+     border-top: #fff solid;
+     border-right: transparent solid;
+     border-left: transparent solid;
+     border-width: 8px; 
+}
+
+thead td .reverse {
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    display: block;
+     /* 内部大小 */
+     width: 0px;
+     height: 0px;
+     /* 边框大小 只设置三条边*/
+     border-bottom: #fff solid;
+     border-right: transparent solid;
+     border-left: transparent solid;
+     border-width: 8px; 
+}
+thead td .order:hover, thead td .reverse:hover {
+    cursor:pointer;
+    opacity: 0.8;
+}
+thead td .not-allowed:hover {
+    cursor:not-allowed;
+    opacity: 1;
+}
