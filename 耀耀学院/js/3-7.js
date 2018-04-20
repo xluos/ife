@@ -25,13 +25,15 @@
                     reverse: true,
                 }
             ],
+
             notAllowedCssname: 'not-allowed',  //不可用时的css样式名
-            orderSort: undefined,     //顺序排函数接口
+
+            orderSort: undefined,     //顺序排函数接口        暂时没用上。。。。。
             reverseSort: undefined,   //逆序排函数接口
-            order: -1,
-            reverse: 1,
+            order: -1,   //升序
+            reverse: 1,  //降序
         },
-        //表格数据，超过规定列数的将不显示
+        //表格数据，超过规定列数的将不显示，少于列数则为空
         TABLEDATA: {
             col: 4,
             thead: ["姓名", "语文", "数学", "英语"],
