@@ -1,0 +1,24 @@
+{
+  "name": "webpack",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "san": "^3.5.7",
+    "webpack": "^4.6.0",
+    "webpack-cli": "^2.0.15"
+  },
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack-dev-server --open"
+  },
+  "devDependencies": {
+    "css-loader": "^0.28.11",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "san-loader": "^0.0.7",
+    "san-router": "^1.2.0",
+    "style-loader": "^0.21.0",
+    "webpack-dev-server": "^3.1.3"
+  }
+}
