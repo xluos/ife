@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MVVM学院|2.3样式控制</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+        }
+        .box {
+            float: left;
+            margin: 50px;
+            width: 200px;
+            height: 200px;
+            color: #fff;
+            font-size: 30px;
+            text-align: center;
+            line-height: 200px;
+        }
+        .red {
+            background: #FF4D4D;
+        }
+        .blue {
+            background: #448EF6;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script src="https://unpkg.com/san@latest/dist/san.dev.js"></script>
+    <script>
+        var App = san.defineComponent({
+            template: `<template>
+                       <div class="box {{isRed ? 'red':'blue'}}" on-click="switch">Class控制</div> 
+                       <div class="box" style="background:{{isBlue ? '#448EF6':'#FF4D4D'}}" on-click="switch2">Style控制</div> 
+                       </template>`,
+            initData: function() {
+                return {
+                    isRed: true,
+                    isBlue: true
+                };
+            },
+            switch: function() {
+                let flag = this.data.get("isRed");
+                this.data.set("isRed",!flag);
+            },
+            switch2: function() {
+                console.log("a");
+                
+                let flag = this.data.get("isBlue");
+                this.data.set("isBlue",!flag);
+            }
+        });
+        var myapp = new App();
+        myapp.attach(document.getElementById("app"));
+    </script>
+</body>
+
+</html>
