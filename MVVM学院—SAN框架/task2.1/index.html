@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MVVM学院|2.1数据操作</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script src="https://unpkg.com/san@latest/dist/san.dev.js"></script>
+    <script>
+        var App = san.defineComponent({
+            template: '<template> \
+                            <input type="text" placeholder="姓名（string）" value="{= person.name =}">  \
+                            <input type="text" placeholder="年龄（number）" value="{= person.age =}">  \
+                            <input type="text" placeholder="简介（string）" value="{= person.introduce =}">  \
+                            <br> \
+                            <input type="button" on-click="clear" value="移出信息">  \
+                            <p>姓名：<span>{{person.name}}</span></p>  \
+                            <p>年龄：<span>{{person.age | number}}</span></p>  \
+                            <p>简介：<span>{{person.introduce}}</span></p> \
+                       </template>',
+            // 过滤器
+            filters: {
+                number: function(str) {
+                    if(typeof(str) === 'undefined') return '';//未定义时说明未初始化，过滤为空
+
+                    // 过滤年龄只能是0-100的整数数字，否则显示错误信息
+                    return (Math.floor(Number(str)) !== NaN) && (Number(str) <= 100 && Number(str) >= 0) ? str : "数据错误，只能输入0-100的整数数据";
+                }
+            },
+            // 初始化数据
+            initData: function () {
+                return {
+                    person: {
+                        name: '',
+                        age: undefined,
+                        introduce: ''
+                    }
+                }
+            },
+            // 清除信息
+            clear: function() {
+                this.data.set('person',{
+                        name: '',
+                        age: undefined,
+                        introduce: ''
+                    })  
+            }
+        });
+        var myapp = new App();
+        myapp.attach(document.getElementById("app"));
+    </script>
+</body>
+
+</html>
