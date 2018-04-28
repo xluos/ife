@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MVVM学院|2.2条件和循环</title>
+    <style>
+        table {
+            border-collapse:collapse;
+        }
+        td,th {
+            border: #aaa solid 1px;
+            text-align: center;
+            width: 150px;
+            padding: 10px 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script src="https://unpkg.com/san@latest/dist/san.dev.js"></script>
+    <script>
+        var App = san.defineComponent({
+            template: '<template> \
+                        <input on-click="add(name_value)" type="button" value="添加">\
+                        <lable>姓名：<input type="text" value="{= name_value =}"></lable> \
+                        <table>\
+                            <thead>\
+                                <tr><th>姓名</th><th>审核状态</th><th>操作</th></tr>\
+                            </thead>\
+                            <tbody>\
+                                <tr s-for="item,index in users">\
+                                    <td>{{item.name}}</td>\
+                                    <td>{{item.state | state_text}}</td>\
+                                    <td>\
+                                        <input s-if="!item.auditing" type="button" on-click="audit(index,item.state)" value="{{item.state | btn_text}}">\
+                                        <input s-if="item.auditing" type="button" on-click="change(index,1)" value="合格">\
+                                        <input s-if="item.auditing" type="button" on-click="change(index,2)" value="不合格">\
+                                    </td>\
+                                </tr>\
+                            </tbody>\
+                        </table>\
+                       </template>',
+            // 初始化数据
+            initData: function () {
+                return {
+                    name_value: "",
+                    users: [
+                        {
+                            name: "张三",
+                            state: 0,  //0,1,2分别代表待审核，合格，不合格
+                            auditing:false     //显示是否显示审核按钮
+                        }
+                    ]
+                }
+            },
+            //过滤器，通过状态获取相应的文字值
+            filters: {
+                state_text: function(state) {
+                    let list = ["待审核", "合格", "不合格"];
+                    return list[state];
+                },
+                btn_text: function(state) {
+                    let list = ["审核", "删除", "删除"];
+                    return list[state];
+                }
+            },
+            audit: function(index,rm) {
+                // 根据state状态，来判断是否审核过，审核过的删除
+                if(rm) {
+                    this.data.removeAt("users",index);
+                }else {
+                    // 未审核过的设置为开始审核
+                    this.data.set(`users[${index}].auditing`,true);
+                }
+            },
+            change: function(index,n) {
+                this.data.set(`users[${index}].state`,n);
+                this.data.set(`users[${index}].auditing`,false);
+            },
+            add: function(name_value) {
+                if(name_value.trim().length === 0) return ;  //过滤输入两端的空格。长度为0的不加入
+                this.data.push("users",{
+                    name: name_value,
+                    state: 0,  //0,1,2分别代表待审核，合格，不合格
+                    auditing:false     //显示是否显示审核按钮
+                })
+            }
+        });
+        var myapp = new App();
+        myapp.attach(document.getElementById("app"));
+    </script>
+</body>
+
+</html>

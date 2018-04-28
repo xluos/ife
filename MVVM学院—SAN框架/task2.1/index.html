@@ -15,7 +15,7 @@
         var App = san.defineComponent({
             template: '<template> \
                             <input type="text" placeholder="姓名（string）" value="{= person.name =}">  \
-                            <input type="text" placeholder="年龄（number）" value="{= person.age =}">  \
+                            <input type="number" placeholder="年龄（number）" value="{= person.age =}">  \
                             <input type="text" placeholder="简介（string）" value="{= person.introduce =}">  \
                             <br> \
                             <input type="button" on-click="clear" value="移出信息">  \
@@ -27,9 +27,10 @@
             filters: {
                 number: function(str) {
                     if(typeof(str) === 'undefined') return '';//未定义时说明未初始化，过滤为空
-
+                    console.log(str);
+                    
                     // 过滤年龄只能是0-100的整数数字，否则显示错误信息
-                    return (Math.floor(Number(str)) !== NaN) && (Number(str) <= 100 && Number(str) >= 0) ? str : "数据错误，只能输入0-100的整数数据";
+                    return (Math.floor(Number(str)) == str) && (Number(str) <= 100 && Number(str) >= 0) ? str : "数据错误，只能输入0-100的整数数据";
                 }
             },
             // 初始化数据
