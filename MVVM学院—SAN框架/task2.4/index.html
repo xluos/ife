@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MVVM学院|2.4事件处理</title>
+    <style>
+        body {
+            font-size: 25px;
+        }
+        input {
+            font-size: 25px;
+        }
+        .upper, .top {
+            border: none;
+        }
+        .upper {
+            color: rgb(62, 255, 127)
+        }
+        .top {
+            color: rgb(236, 89, 255);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script src="https://unpkg.com/san@latest/dist/san.dev.js"></script>
+    <script>
+        // 子组件
+        var input_component = san.defineComponent({
+            // 这里要利用双向数据绑定,否则就获取不到在子组件输入的值了
+            template: `<div>
+                            <label for="ic">子组件：<input type="text" id="ic" value="{= input =}"></label>
+                            <input type="button" value="通知父组件" on-click="message">
+                        </div>`,
+            // 初始化生命周期钩子,因为messagetext又改组件的上一级传递而来,所以自带的initData()不能初始化这个值,要用要利用set方法重新赋值
+            inited: function () {
+                this.data.set("input", "");
+            },
+            // button点击事件触发的函数,向父组件派发一个自定义事件,同时派发一个消息交给更高层组件处理
+            message: function () {
+                let value = this.data.get("input");
+                this.fire("customclick", value)
+                this.dispatch('UI:alerts', value);
+            }
+        });
+        // 子组件的直接父组件，子组件通过事件和他通信
+        var input_superior = san.defineComponent({
+            // 引入子组件
+            components: {
+                "ui-input": input_component
+            },
+            // 对父组件input中的数据进行双向绑定，达到修改父组件子组件的值也修改的效果
+            template: `<div>
+                            <ui-input on-customclick="submitClicker" input="{{ messagetext }}"></ui-input>
+                            <label for="is">父组件：<input class="upper" type="text" id="is" value="{= messagetext =}"></label>
+                        </div>`,
+            // 初始化生命周期钩子,因为messagetext又改组件的上一级传递而来,所以自带的initData()不能初始化这个值,要用要利用set方法重新赋值
+            inited: function () {
+                this.data.set("messagetext", "我静静的等待用户输入");
+            },
+            submitClicker: function (arg) {
+                this.data.set("messagetext", arg);
+            }
+        });
+        // 最上层的”祖宗“组件，子组件通过消息和他通信
+        var App = san.defineComponent({
+            // 引入父组件
+            components: {
+                "ui-input-superior": input_superior
+            },
+            // 因为没有要求所以祖宗组件就不进行双向绑定，只对父组件进行双向绑定
+            template: `<div>
+                            <ui-input-superior messagetext="{{ app_text }}"></ui-input-superior>
+                            <label for="app">更高层的父组件：<input class="top" type="text" id="app" value="{{ app_text }}"></label>
+                        </div>`,
+            // 初始化数据
+            initData: function () {
+                return {
+                    app_text: "我也静静的等待用户输入"
+                }
+            },
+            // 处理子组件派发的消息
+            messages: {
+                "UI:alerts": function (arg) {
+                    this.data.set("app_text", arg.value);
+                },
+            },
+        });
+        var myapp = new App();
+        myapp.attach(document.getElementById("app"));
+    </script>
+</body>
+
+</html>
