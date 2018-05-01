@@ -1,0 +1,35 @@
+<template>
+    <div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <san-input 
+            on-blur="log"
+            hintDirection="bottom"
+            popoverDirection="toppp"
+            type="name"
+            placeholder="姓名!"
+        ></san-input>
+    </div>
+</template>
+
+<script>
+    import uiInput from "./input.san";
+    export default {
+        components: {
+            "san-input": uiInput
+        },
+        log: function() {
+            console.log("blur log!");
+        }
+    }
+</script>
+<style>
+
+</style>

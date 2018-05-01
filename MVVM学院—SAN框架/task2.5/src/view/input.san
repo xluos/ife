@@ -1,0 +1,311 @@
+<template>
+    <div class="ui-input">
+        <input 
+            class="{{ isError ? 'error' : 'normal' }}"
+            type="text"
+            value="{= value =}"
+            placeholder="{{ placeholder }}"
+            disabled="{{ disabled }}"
+            readonly="{{ readonly }}"
+            on-input="handleInput($event)"
+            on-focus="handleFocus($event)"
+            on-blur="handleBlur($event)"
+        >
+        <p s-if="{{isError  && isFocus }}" class="popover {{ popoverDirection }}-popover">{{ popoverText | limit}}</p>
+        <p s-if="{{isError}}" class="hint {{ hintDirection }}-hint">{{ hintText | limit}}</p>
+    </div>
+</template>
+
+<script>
+
+export default {
+    initData: function() {
+        return {
+            value: "",
+            placeholder: "",
+            disabled: false,
+            readonly: false,
+            isError: false,
+            isFocus: false,
+            popoverText: "",
+            hintText: "",
+            hintDirection: "right",
+            popoverDirection: "bottom",
+            type: ""
+        }
+    },
+    // 过滤器
+    filters: {
+        // 过滤过长的提示字符串
+        limit: function(value) {
+            if(value.length>30) {
+                value = value.substr(0,30) + "...";
+            }
+            return value;
+        }
+    },
+    // 用于组价加载后的初始化，将错误的值改为默认值
+    inited: function() {
+        let TRBL = ["top","right","left","bottom"];
+        let hint = this.data.get("hintDirection").toLocaleLowerCase();
+        let popover = this.data.get("popoverDirection").toLocaleLowerCase()
+        if(TRBL.indexOf(hint) === -1) {
+            hint = "right";
+        }
+        if(TRBL.indexOf(popover) === -1) {
+            popover = "top";
+        }
+        this.data.set("hintDirection",hint);
+        this.data.set("popoverDirection",popover);
+
+        // 校验类型,未知类型设为空不校验
+        let TYPE = ["name", "password", "email", "mobile"];
+        let type = this.data.get("type");
+        if(TYPE.indexOf(type) === -1) {
+            this.data.set("type","");
+        }else {
+            // 类型存在,且没有提供默认信息时使用该类型的默认提示信息
+            let popoverText = this.data.get("popoverText");
+            let hintText = this.data.get("hintText");
+            if(popoverText.length === 0) {
+                this.data.set("popoverText",this.check.HINT[type].info);
+            }
+            if(hintText.length === 0) {
+                this.data.set("hintText",this.check.HINT[type].error);
+            }
+        }
+    },
+    // 清除所有节点文本前后空白字符
+    trimWhitespace: "all",
+    handleInput: function(event) {
+        this.fire("input",event);
+    },
+    handleFocus: function(event) {
+
+        this.data.set("isFocus",true);
+        // 重新派发focus事件给父元素
+        this.fire("focus",event);
+    },
+    handleBlur: function(event) {
+        // 失去焦点
+        this.data.set("isFocus",false);
+        // 去掉输入两端的空格
+        let value = this.trim(this.data.get("value"));
+        let type = this.data.get("type");
+        // 长度不为空才有校验的必要
+        if(value.length !== 0 && this.check[type](value)) {
+            this.data.set("isError",false);
+            this.data.set("value",value)
+        } else if(value.length !== 0) {
+            // 长度为空则说明校验失败,数据有错误
+            this.data.set("isError",true);
+        }
+        // 重新派发blur事件给父元素
+        this.fire("blur",event);
+    },
+    // 去除前后空白字符
+    trim: function (value) {
+        return value.replace(/(^\s*)|(\s*$)/g,"");
+    },
+    // 各种校验
+    check: {
+        // 计算长度(中文算两个字节)
+        getlength: function (str) {
+            var l = str.length;
+            var blen = 0;
+            for (let i = 0; i < l; i++) {
+                if ((str.charCodeAt(i) & 0xff00) != 0) {
+                    blen++;
+                }
+                blen++;
+            }
+            return blen;
+        },
+        // 校验长度
+        checkLength: function (MAX, MIN, str) {
+            if (this.getlength(str) > MAX || this.getlength(str) < MIN) {
+                return false;
+            }
+            return true;
+        },
+        // 用户名长度
+        name: function (str) {
+            // 过长或过短
+            return this.checkLength(16, 4, str);
+        },
+        // 密码
+        password: function (str) {
+            let regNumber = /\d+/;
+            let regString = /[a-zA-Z]+/;
+            return this.checkLength(16, 8, str) && regNumber.test(str) && regString.test(str);
+        },
+        // 确认密码是否重复还没有想到比较好的实现
+
+        // 邮箱
+        email: function (mail) {
+            let regEmail = /^[A-Za-zd]+([-_.][A-Za-zd]+)*@([A-Za-zd]+[-.])+[A-Za-zd]{2,5}$/g;
+            return regEmail.test(mail);
+        },
+        // 手机号
+        mobile: function (tel) {
+            let regMobile = /^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9])|(17[\d]))\d{8}$/g;
+
+            return regMobile.test(tel);
+        },
+        // 默认提示信息
+        HINT: {
+            name: {
+                info: "名称在4-16字符以内",
+                error: "名称不合法"
+            },
+            password: {
+                info: "密码在8-16位之间,包含英文和数字",
+                error: "密码不合法"
+            },
+            email: {
+                info: "合法邮箱",
+                error: "邮箱格式不合法"
+            },
+            mobile: {
+                info: "请输入11位手机号",
+                error: "手机号格式不合法"
+            }
+        }
+    }
+}
+</script>
+<style>
+    /* 输入框样式部分 */
+    .ui-input {
+        position: relative;
+    }
+    .ui-input input {
+        outline: none;
+        border: 1px solid #aaa;
+        color: #555;
+        font-size: 20px;
+        width: 250px;
+        height: 40px;
+        padding: 10px 10px;
+        box-sizing: border-box;
+        transition: all .3s;
+    }
+    .ui-input input::-webkit-input-placeholder,
+    .ui-input input::-moz-placeholder,
+    .ui-input input::-moz-input-placeholder,
+    .ui-input input::input-placeholder, {
+        color: #aaa;
+    }
+    .ui-input .normal:hover {
+        border: 1px solid #555;
+    }
+    .ui-input .normal:focus {
+        border: 1px solid #555;
+        color: #555;
+    }
+    .ui-input input:disabled {
+        cursor: not-allowed;
+        background: #f7f7f7;
+        color: #aaa;
+    }
+    .ui-input input:disabled:hover {
+        border: 1px solid #aaa;
+    }
+
+    .ui-input .error {
+        border: 1px solid #ff7275;
+    }
+
+    /* 提示框样式部分 */
+
+    /* 弹出框的样式部分 */
+    .ui-input p {
+        margin: 0;
+        padding: 0;
+        color: #ff7275;
+    }
+    .ui-input .popover {
+        position: absolute;
+        background: #FFF2F2;
+        text-align: center;
+        line-height: 30px;
+        font-size: 16px;
+        padding: 0 10px;
+        max-width: 200px;
+        min-width: 30px;
+    }
+    .ui-input .top-popover {
+        bottom: 50px;
+        left: 0;
+    }
+    .ui-input .right-popover {
+        top: 5px;
+        left: 260px;
+    }
+    .ui-input .bottom-popover {
+        top: 50px;
+        left: 0;
+    }
+    .ui-input .left-popover {
+        top: 5px;
+        right: 260px;
+    }
+    /* 四个方向的小三角 */
+    .ui-input .top-popover::after,
+    .ui-input .right-popover::after,
+    .ui-input .bottom-popover::after,
+    .ui-input .left-popover::after {
+        position: absolute;
+        content: "";
+        width: 0;
+        height: 0;
+        border: 10px solid transparent;
+    }
+    .ui-input .top-popover::after {
+        bottom: -20px;
+        left: 50%;
+        border-top-color: #FFF2F2;
+    }
+    .ui-input .right-popover::after {
+        left: -20px;
+        top: 15%;
+        border-right-color: #FFF2F2;
+    }
+    .ui-input .bottom-popover::after {
+        top: -20px;
+        left: 50%;
+        border-bottom-color: #FFF2F2;
+    }
+    .ui-input .left-popover::after {
+        right: -20px;
+        top: 15%;
+        border-left-color: #FFF2F2;
+    }
+    /* 提示文字样式部分 */
+    .ui-input .hint {
+        position: absolute;
+        text-align: center;
+        line-height: 40px;
+        font-size: 12px;
+        padding: 0 10px;
+        max-width: 200px;
+    }
+    .ui-input .top-hint {
+        bottom: 40px;
+        left: 0;
+    }
+    .ui-input .right-hint {
+        top: 0;
+        left: 250px;
+        font-size: 16px;
+    }
+    .ui-input .bottom-hint {
+        top: 40px;
+        left: 0;
+    }
+    .ui-input .left-hint {
+        top: 0;
+        right: 250px;
+        font-size: 16px;
+    }
+</style>
