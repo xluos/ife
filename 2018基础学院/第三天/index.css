@@ -1,0 +1,188 @@
+html,body,main {
+    width: 100%;
+    height: 100%;
+    background: #FAFAF6;    
+}
+
+#page-1{
+    display: flex;
+    /* #F5F5F5 */
+    width: 100%;
+    height: 100%;
+}
+
+#page-1 {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #00D1FF;
+    color: #FAFAF6;
+}
+.title {
+    font-size: 100px;
+    font-weight: 100;
+}
+.describe {
+    font-size: 30px;
+    font-weight: 100;
+}
+#page-2 {
+    color: #2C3E50;
+    display: flex;
+    min-height: 100%;
+}
+
+.info {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 100px;
+    background: #00D1FF;
+    color: #fff;
+    width: 40%;
+}
+.info a {
+    color: inherit;
+}
+.info .profile-photo {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+    border: rgba(255, 255, 255, 0.85) solid 5px;
+    border-radius: 50%;
+    align-self: center;
+}
+.info p {
+    font-size: 25px;
+    width: 300px;
+    height: 50px;
+    line-height: 50px;
+}
+.info p i {
+    padding-right: 8px;
+    font-size: 20px;
+}
+.info .name {
+    text-align: center;
+    margin-bottom: 50px;
+}
+.content {
+    box-sizing: border-box;
+    width: 60%;
+    padding: 40px;
+}
+
+.mini-title {
+    position: relative;
+    font-size: 30px;
+    text-align: center;
+    /* background: #FAFAF6; */
+    padding: 0 5px;
+    z-index: 1;
+}
+/* 不想再嵌套一层标签只能这样 */
+.mini-title::after, .mini-title::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    width: 42%;
+    height: 1px;
+    z-index: -1;
+    background: #aaa;
+}
+.mini-title::before {
+    right: 0;
+}
+.learning-list {
+    display: flex;
+    flex-direction: column;
+}
+.learning-item {
+    position: relative;
+    margin: 0;
+    padding-left: 50px;
+    padding-top: 27px;
+    background: #FAFAF6;
+}
+.learning-item::after, .learning-item::before{
+    content: "";
+    display: block;
+    position: absolute;
+}
+.learning-item::after {
+    top: 0;
+    width: 3px;
+    left: 30px;
+    height: 100%;
+    background: #aaa;
+    box-shadow: 0 0 5px 1px #ccc;
+}
+.learning-item::before {
+    width: 20px;
+    height: 20px;
+    top: 30px;
+    left: 22px;
+    border-radius: 50%;
+    background: #00D1FF;
+    box-shadow: 0 0 5px 1px #00D1FF;
+    z-index: 1;
+}
+.learning-item .time {
+    /* padding-top: 30px; */
+    font-size: 25px;
+}
+.learning-item dt, .learning-item dd{
+    font-size: 20px;
+    margin-left: 20px;
+}
+.learning-item dd {
+    color: #aaa;
+}
+
+@media(max-width: 600px) {
+    #page-2 {
+        display: flex;
+        flex-direction: column;
+    }
+    .title {
+        font-size: 30px;
+        font-weight: 100;
+    }
+    .describe {
+        font-size: 30px;
+        font-weight: 100;
+    }
+    .info {
+        width: 100%;
+    }
+    .info .name {
+        margin-bottom: 0;
+    }
+    .content {
+        width: 100%;
+        padding: 10px;
+    }
+    .info p {
+        font-size: 16px;
+        width: 200px;
+    }
+    .mini-title::after, .mini-title::before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 50%;
+        width: 23%;
+        height: 1px;
+        z-index: -1;
+        background: #aaa;
+    }
+    .learning-item .time {
+        font-size: 18px;
+    }
+    .learning-item dt,
+    .learning-item dd{
+        font-size: 14px;
+    }
+}
