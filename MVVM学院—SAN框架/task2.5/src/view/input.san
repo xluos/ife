@@ -2,7 +2,7 @@
     <div class="ui-input">
         <input 
             class="{{ isError ? 'error' : 'normal' }}"
-            type="text"
+            type="{{ inputType }}"
             value="{= value =}"
             placeholder="{{ placeholder }}"
             disabled="{{ disabled }}"
@@ -31,7 +31,8 @@ export default {
             hintText: "",
             hintDirection: "right",
             popoverDirection: "bottom",
-            type: ""
+            type: "",
+            inputType:"text"
         }
     },
     // 过滤器
@@ -73,6 +74,9 @@ export default {
             if(hintText.length === 0) {
                 this.data.set("hintText",this.check.HINT[type].error);
             }
+            if(type === 'password') {
+                this.data.set("inputType","password");
+            }
         }
     },
     // 清除所有节点文本前后空白字符
@@ -100,12 +104,14 @@ export default {
         let value = this.trim(this.data.get("value"));
         let type = this.data.get("type");
         // 长度不为空才有校验的必要
-        if(value.length !== 0 && this.check[type](value)) {
+        if(type && value.length !== 0 && this.check[type](value)) {
             this.data.set("isError",false);
             this.data.set("value",value)
-        } else if(value.length !== 0) {
+        } else if(type && value.length !== 0) {
             // 长度为空则说明校验失败,数据有错误
             this.data.set("isError",true);
+        }else {
+            this.data.set("isError",false);
         }
     },
     // 去除前后空白字符
@@ -168,7 +174,7 @@ export default {
                 error: "密码不合法"
             },
             email: {
-                info: "合法邮箱",
+                info: "合法邮箱格式的",
                 error: "邮箱格式不合法"
             },
             mobile: {
@@ -246,6 +252,7 @@ export default {
     .ui-input .right-popover {
         top: 5px;
         left: 260px;
+        min-width: 200px;
     }
     .ui-input .bottom-popover {
         top: 50px;
@@ -254,6 +261,7 @@ export default {
     .ui-input .left-popover {
         top: 5px;
         right: 260px;
+        min-width: 200px;
     }
     /* 四个方向的小三角 */
     .ui-input .top-popover::after,
@@ -294,6 +302,7 @@ export default {
         font-size: 12px;
         padding: 0 10px;
         max-width: 200px;
+        min-width: 200px;
     }
     .ui-input .top-hint {
         bottom: 40px;
@@ -303,6 +312,7 @@ export default {
         top: 0;
         left: 250px;
         font-size: 16px;
+        text-align: left;
     }
     .ui-input .bottom-hint {
         top: 40px;
@@ -312,5 +322,6 @@ export default {
         top: 0;
         right: 250px;
         font-size: 16px;
+        text-align: right;
     }
 </style>

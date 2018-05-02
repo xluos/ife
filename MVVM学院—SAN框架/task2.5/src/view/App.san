@@ -1,26 +1,102 @@
 <template>
     <div>
-        <!-- <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <san-input 
-            on-blur="log"
-            hintDirection="bottom"
-            popoverDirection="toppp"
-            type="name"
-            placeholder="姓名!"
-        ></san-input> -->
-        <san-checkbox>11111111</san-checkbox>
-        <san-checkbox>22222222</san-checkbox>
-        <san-checkbox>33333333</san-checkbox>
-        <san-checkbox>44444444</san-checkbox>
-        <san-checkbox>55555555</san-checkbox>
+        <article class="content">
+            <header class="input-head">
+                <div class="title">
+                    <h2 class="name">输入框</h2>
+                    <div class="info">
+                        <span class="type">控件</span>
+                        <span class="ename">input</span>
+                    </div>
+                </div>
+                <p class="info">
+                    各种输入框
+                </p>
+            </header>
+            <section>
+                
+                <san-input
+                    placeholder="用户名输入框"
+                    hintDirection="bottom"
+                    popoverDirection="top"
+                    type="name"
+                ></san-input>
+                <br>
+                <san-input
+                    placeholder="密码输入框"
+                    hintDirection="top"
+                    popoverDirection="bottom"
+                    type="password"
+                ></san-input>
+                <br>
+                <san-input
+                    placeholder="邮箱输入框"
+                    hintDirection="left"
+                    popoverDirection="right"
+                    type="email"
+                ></san-input>
+                <br>
+                <san-input
+                    placeholder="手机号输入框"
+                    hintDirection="right"
+                    popoverDirection="left"
+                    type="mobile"
+                ></san-input>
+            </section>
+        </article>
+        <article class="content">
+            <header class="input-head">
+                <div class="title">
+                    <h2 class="name">复选框</h2>
+                    <div class="info">
+                        <span class="type">控件</span>
+                        <span class="ename">Check Box</span>
+                    </div>
+                </div>
+                <p class="info">
+                    复选框
+                </p>
+            </header>
+            <section>
+                <san-checkbox
+                    class="san-checkbox"
+                    checked="false"
+                >两种可选</san-checkbox>
+                <san-checkbox
+                    class="san-checkbox"
+                    checked="false"
+                    canClickToSwitchToIndeterminate="true"
+                >不确定状态可选</san-checkbox>
+                <br>
+                <san-checkbox
+                    class="san-checkbox"
+                    checked="true"
+                >选中</san-checkbox>
+                <san-checkbox
+                    class="san-checkbox"
+                    checked="false"
+                    indeterminate="true"
+                >不确定</san-checkbox>
+                <br>
+                <san-checkbox
+                    class="san-checkbox"
+                    checked="false"
+                    disabled="true"
+                >禁用一</san-checkbox>
+                <san-checkbox
+                    class="san-checkbox"
+                    checked="false"
+                    indeterminate="true"
+                    disabled="true"
+                >禁用二</san-checkbox>
+                <san-checkbox
+                    class="san-checkbox"
+                    checked="true"
+                    disabled="true"
+                >禁用三</san-checkbox>
+            </section>
+        </article>
+        <footer>©️ CodeDeer</footer>
     </div>
 </template>
 
@@ -32,11 +108,68 @@
             "san-input": uiInput,
             "san-checkbox": uiCheckbox
         },
-        log: function() {
-            console.log("blur log!");
-        }
     }
 </script>
 <style>
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+    }
 
+    .content header {
+        padding: 50px;
+        padding-bottom: 10px;
+        background: #5B5B5B;
+    }
+
+    .content header .title {
+        display: flex;
+    }
+
+    .title .info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 16px 10px;
+        font-size: 14px;
+    }
+
+    .title .ename {
+        color: #848484;
+    }
+
+    .title .info .type {
+        background: #848484;
+        padding: 1px 5px;
+        color: #5B5B5B;
+        border-radius: 3px;
+        font-size: 12px;
+    }
+
+    header .name {
+        margin: 0;
+        font-size: 50px;
+        color: #fff;
+    }
+
+    header .info {
+        color: #848484;
+    }
+    .content section {
+        min-height: 400px;
+    }
+    .ui-input {
+        display: inline-block;
+        margin: 30px;
+        margin-left: 200px;
+    }
+    .san-checkbox {
+        width: 150px;
+        margin: 30px 50px;
+    }
+    footer {
+        text-align: center;
+    }
 </style>
