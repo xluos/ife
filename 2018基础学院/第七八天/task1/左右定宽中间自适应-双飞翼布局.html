@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>双飞翼</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .main {
+            width: 100%;
+            height: 100%;
+            background: #aaa;
+        }
+        .center {
+            margin: 0 300px 0 300px;
+        }
+        .left {
+            margin-left: -100%;
+            width: 300px;
+            height: 100%;
+            background: #448EF6;
+        }
+
+        .right {
+            margin-left: -300px;
+            width: 300px;
+            height: 100%;
+            background: #FFE981;
+        }
+
+        .left,
+        .right,
+        .main {
+            float: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="body">
+        <div class="main">
+            <div class="center">1</div>
+        </div>
+        <div class="left"></div>
+        <div class="right"></div>
+    </div>
+</body>
+
+</html>
