@@ -1,6 +1,6 @@
 <template>
     <div>
-        <br>
+        <!-- <br>
         <br>
         <br>
         <br>
@@ -15,15 +15,22 @@
             popoverDirection="toppp"
             type="name"
             placeholder="姓名!"
-        ></san-input>
+        ></san-input> -->
+        <san-checkbox>11111111</san-checkbox>
+        <san-checkbox>22222222</san-checkbox>
+        <san-checkbox>33333333</san-checkbox>
+        <san-checkbox>44444444</san-checkbox>
+        <san-checkbox>55555555</san-checkbox>
     </div>
 </template>
 
 <script>
     import uiInput from "./input.san";
+    import uiCheckbox from "./checkbox.san";
     export default {
         components: {
-            "san-input": uiInput
+            "san-input": uiInput,
+            "san-checkbox": uiCheckbox
         },
         log: function() {
             console.log("blur log!");

@@ -87,6 +87,13 @@ export default {
         this.fire("focus",event);
     },
     handleBlur: function(event) {
+        // 重新派发blur事件给父元素
+        this.fire("blur",event);
+        
+        // 只读属性不校验
+        if(this.data.get("readonly")) {
+            return ;
+        }
         // 失去焦点
         this.data.set("isFocus",false);
         // 去掉输入两端的空格
@@ -100,8 +107,6 @@ export default {
             // 长度为空则说明校验失败,数据有错误
             this.data.set("isError",true);
         }
-        // 重新派发blur事件给父元素
-        this.fire("blur",event);
     },
     // 去除前后空白字符
     trim: function (value) {

@@ -1,0 +1,116 @@
+<template>
+    <!-- WC 为什么有了value属性checked就不能双向绑定了啊！！！ -->
+    <label
+        for="id-{{ id }}">
+        <input 
+            type="checkbox" 
+            name="{{ name }}"
+            disabled="{{ disabled }}"
+            id="id-{{ id }}"
+            <!-- value="{{ value | custom_value }}" -->
+            on-change="handleChange($event)"
+            checked="{= checked =}"
+        >
+        <i class="{{ indeterminate ? 'indeterminate' : 'icon-checkbox'}} {{ disabled ? 'disabled' : ''}}"></i>
+        <span>
+            <slot></slot>
+        </span>
+    </label>
+</template>
+
+<script>
+    export default {
+        initData: function() {
+            return {
+                name: "",
+                disabled: false,
+                id: "",
+                checked: true,
+                trueValue: "",
+                falseValue: "",
+                indeterminate: false,
+                // 不确定状态是否参与点击
+                canClickToSwitchToIndeterminate: false
+            }
+        },
+        // 过滤器 使用自定义的value值（暂时凉了用不了）
+        filters: {
+            custom_value: function(value) {
+                let trueValue = this.data.get("trueValue");
+                let falseValue = this.data.get("falseValue");
+                let isChecked = this.data.get("checked");
+                if(isChecked && trueValue) {
+                    return trueValue;
+                }
+                if(!isChecked && falseValue) {
+                    return falseValue;
+                }
+                return isChecked;
+            }
+        },
+        inited: function() {
+            // 没有传入id时随机绑定一个id
+            if(!this.data.get("id")) {
+                this.data.set("id",Math.floor(Math.random()*10000));
+            }
+        },
+        handleChange: function (event) {
+            // 重新派发change事件
+            this.fire("change", event);
+
+            // 如果不确定状态参与点击，则判断状态（面条代码，这东西写的头疼也不想优化了面条就面条吧）
+            if (this.data.get("canClickToSwitchToIndeterminate")) {
+                let indeterminate = this.data.get("indeterminate");
+                let isChecked = !this.data.get("checked");
+                // 点击前未选中且不是不确定状态，改为不确定状态和未选中状态
+                if (!isChecked && !indeterminate) {
+                    this.data.set("indeterminate", true);
+                    this.data.set("checked", false);
+                    // 如果是未选中状态，点击后改为选中状态
+                }else if (this.data.get("indeterminate")) {
+                    this.data.set("indeterminate", false);
+                    this.data.set("checked", true);
+                    // 如果是选中状态改为未选中
+                }else if(isChecked) {
+                    this.data.set("checked", false);
+                }
+            }
+            
+        }
+    }
+</script>
+
+<style>
+    input[type="checkbox"] {
+        display: none;
+    }
+    label {
+        display: inline-flex;
+        justify-content: flex-start;
+        width: auto;
+        align-items: center;
+        font-size: 16px;
+    }
+    /* 不确定状态 */
+    .indeterminate {
+        display: inline-block;
+        background: url("./icon/indeterminate.svg");
+        background-size: contain;
+        width: 1.5em;
+        height: 1.5em;
+    }
+    .icon-checkbox {
+        display: inline-block;
+        background: url("./icon/uncheckbox.svg");
+        background-size: contain;
+        width: 1.5em;
+        height: 1.5em;
+    }
+    input[type="checkbox"]:checked + .icon-checkbox {
+        background: url("./icon/checkbox.svg");
+        background-size: contain;
+    }
+    .disabled {
+        opacity: 0.5;
+    }
+</style>

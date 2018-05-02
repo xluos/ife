@@ -23,9 +23,15 @@ module.exports = {
       },
       {
           test: /\.san$/,
-          use: [
-            {loader: 'san-loader'}
-          ]
+          use: ['san-loader']
+      },
+      {
+        test: /\.svg$/,
+        use: [
+          // {loader: 'svg-inline-loader'},
+          // {loader: 'file-loader'},
+          {loader: 'url-loader'}
+        ]
       }
   ]
   },
