@@ -1,0 +1,96 @@
+<template>
+    <template>
+        <h1>任务栏</h1>
+        <task-menu class="task-menu-content" datasource="{{ list }}" title="未定义的标题">
+            <u slot="content">{{menu.content}}</u>
+            <b slot="time">{{menu.content}}</b>
+        </task-menu>
+    </template>
+</template>
+
+<script>
+    import MENU from "./task-menu.san";
+    export default {
+        components: {
+            "task-menu": MENU
+        },
+        initData: function () {
+            return {
+                list: [
+                    {
+                        // title: "标题一",
+                        datasource: [
+                            { type: "content", name: "内容", content: "没有标题属性时使用传入的属性" },
+                            { type: "time", name: "事件", content: "2018-05-03" },
+                        ]
+
+                    },
+                    {
+                        title: "标题二",
+                        datasource: [
+                            { type: "content", name: "内容", content: "lalalalalalal" },
+                            { type: "time", name: "事件", content: "2018-05-03" },
+                        ]
+
+                    },
+                    {
+                        title: "标题三",
+                        datasource: [
+                            { type: "content", name: "内容", content: "lalalalalalal" },
+                            { type: "time", name: "事件", content: "2018-05-03" },
+                        ]
+
+                    },
+                    {
+                        title: "标题四",
+                        datasource: [
+                            { type: "content", name: "自定义1", content: "根据" },
+                            { type: "time", name: "根据", content: "2018-05-03" },
+                        ]
+
+                    },
+                    {
+                        title: "标题五",
+                        datasource: [
+                            { type: "content", name: "自定义2", content: "数据" },
+                            { type: "time", name: "数据", content: "2018-05-03" },
+                        ]
+
+                    },
+                    {
+                        title: "标题六",
+                        datasource: [
+                            { type: "content", name: "自定义3", content: "生成" },
+                            { type: "time", name: "生成", content: "2018-05-03" },
+                        ]
+
+                    },
+                    {
+                        title: "标题七",
+                        datasource: [
+                            { type: "content", name: "内容", content: "lalalalalalal" },
+                            { type: "time", name: "事件", content: "2018-05-03" },
+                        ]
+
+                    },
+                ]
+            }
+        }
+    }
+</script>
+
+<style>
+    h1 {
+        font-size: 50px;
+        text-align: center;
+        color: #fff;
+    }
+
+    .task-menu-content {
+        display: flex;
+        width: 960px;
+        margin: 0 auto;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+</style>

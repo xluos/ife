@@ -1,0 +1,73 @@
+<template>
+    <template>
+        <div class="task-menu" s-for="item,index in datasource" >
+            <div class="task-menu-body">
+                <h2 class="taskTitle">
+                    <slot name="taskTitle">{{ taskTitle + (index + 1) }}</slot>
+                </h2>
+                <div class="paster">
+                    <h2 class="paster-title"><slot name="paster-title-name">标题</slot>:<slot name="title" var-title="item.title">{{ title }}</slot></h2>
+                    <p s-for="menu in item.datasource" class="paster-{{ menu.type }}" ><slot name="paster-{{ menu.type }}-name" var-menu="menu">{{ menu.name }}</slot>：<slot name="{{ menu.type }}" var-menu="menu">{{ menu.content }}</slot></p>
+                </div>
+            </div>
+        </div>
+    </template>
+</template>
+
+<script>
+    export default {
+        initData: function () {
+            return {
+                taskTitle: "任务"
+            }
+        },
+        inited: function() {
+            console.log(this.data.get("datasource"));
+            
+        }
+    }
+</script>
+
+<style>
+    .task-menu {
+        width: 250px;
+        border: 1px solid #C6BEB3;
+        border-radius: 5px;
+        background: #FCF1E3;
+        padding: 10px;
+        margin: 20px;
+    }
+    .task-menu-body {
+        padding: 15px;
+        border: 1.5px solid rgb(255, 201, 139) 
+    }
+    .taskTitle {
+        max-width: 70%;
+        margin: 0 auto;
+        padding: 5px 10px;
+        font-size: 18px;
+        color: #DE302D;
+        text-align: center;
+        font-weight: lighter;
+        /* border: 1px solid #F2BA21; */
+        border-radius: 5px;
+        background-image: linear-gradient(to bottom, #F7CF10, #F2BA21);
+    }
+    .paster {
+        width: 70%;
+        padding: 20px;
+        margin: 30px auto;
+        margin-bottom: 0;
+        background: #FFEBA7;
+    }
+    .paster p {
+        margin: 0;
+    }
+    .paster-title {
+        margin: 0;
+        margin-bottom: 10px;
+        font-size: 16px;
+        font-weight: lighter;
+    }
+
+</style>
