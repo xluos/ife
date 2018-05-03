@@ -1,0 +1,132 @@
+html,body,ul {
+    margin: 0;
+    padding: 0;
+}
+li {
+    list-style-type: none;
+}
+
+header {
+    height: 80px;
+    background: #333333;
+}
+.header-content {
+    width: 960px;
+    margin: 0 auto;
+}
+.logo {
+    display: inline-block;
+    margin: 0;
+    line-height: 80px;
+    color: #fff;
+    font-size: 30px;
+}
+.header-nav {
+    float: right;
+}
+.header-nav li {
+    margin: 0 10px;
+    float: left;
+}
+.header-nav li a {
+    line-height: 80px;
+    color: #fff;
+}
+
+.banner {
+    position: relative;
+    height: 300px;
+    background: #66BB33;
+}
+.banner-list {
+    position: absolute;
+    display: flex;
+    align-items: flex-end;
+    right: 50px;
+    bottom: 20px;
+}
+.banner-list a {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+}
+.banner-list li {
+    display: flex;
+    align-items: flex-end;
+    width: 30px;
+    height: 30px;
+    border: #aaa solid 1px;
+    background: #fff;
+    opacity: 0.5;
+    transition: all 0.5s;
+}
+
+.banner-list .banner-activate,
+.banner-list li:hover {
+    height: 50px;
+    opacity: 0.9;
+}
+
+.main-nav {
+    height: 70px;
+    border-bottom: 1px solid #ccc;
+}
+.main-nav ul {
+    margin: 0 auto;
+    width: 960px;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+}
+.main-nav ul a {
+    display: inline-block;
+    width: 105px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    text-decoration:none;
+    color: #333333;
+    background: #eee;
+    border: 1px solid #ccc;
+    border-radius: 25px 25px 0 0;
+    position: relative;
+    bottom: -1px;
+}
+.main-nav ul .main-nav-activate {
+    background: #fff;
+    border-bottom: none;
+}
+.content {
+    margin: 0 auto;
+    width: 960px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.content .content-item {
+    border: #ccc solid 1px;
+    padding: 80px;
+    margin: 10px 10px 10px 0;
+}
+.content1,
+.content2,
+.content3,
+.content8,
+.content9,
+.content10 {
+    flex-grow: 1;
+}
+.content4,
+.content5,
+.content6,
+.content7 {
+    flex-flow: 1;
+    flex-grow: 1;
+}
+footer {
+    color: #fff;
+    text-align: center;
+    height: 120px;
+    background: #333333;
+    line-height: 50px;
+}
