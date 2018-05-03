@@ -1,0 +1,58 @@
+<template>
+    <div>
+        <button on-click="toggle">TOGGLE</button>
+        <span s-if="show" s-transition="hook">
+            Transition Layer
+        </span>
+    </div>
+</template>
+
+<script>
+    export default {
+        initData() {
+            return { show: true };
+        },
+        toggle() {
+            console.log('点击了');
+            this.data.set("show",!this.data.get('show'));
+        },
+        hook: {/* your answer */
+            enter: function (el, done) {
+                // console.log('enter');
+                el.classList.add("before-enter");
+                setTimeout(()=>{
+                    el.classList.add("enter");
+                    done();
+                },0)
+            },
+            leave: function (el, done) {
+                // console.log('leave');
+                el.className = "";
+                el.classList.add("before-leave");
+                el.className = "";
+                el.classList.add("leave");
+                console.log(done);
+                setTimeout(()=>{
+                    done();
+                },500)
+            }
+        }
+    }
+</script>
+
+<style>
+    .enter,
+    .leave {
+        transition: all .5s;
+    }
+
+    .before-enter,
+    .leave {
+        opacity: 0;
+    }
+
+    .enter,
+    .before-leave {
+        opacity: 1;
+    }
+</style>
