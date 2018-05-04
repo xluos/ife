@@ -1,0 +1,125 @@
+<template>
+    <template>
+        <button on-click="add">添加</button>
+        <button on-click="remove">删除</button>
+        <ul>
+            <li s-for="item in list" s-transition="hook('slide', 300)">列出具有过渡效果的元素 {{item}}.</li>
+        </ul>
+    </template>
+</template>
+
+<script>
+    import { transition } from 'san-transition';
+    export default {
+        initData: function () {
+            return {
+                index: 6,
+                list: [1, 2, 3, 4, 5]
+            }
+        },
+        hook: transition,
+        add: function () {
+            this.data.push("list", this.data.get("index"));
+            this.data.set("index", this.data.get("index") + 1);
+        },
+        remove: function () {
+            this.data.pop("list");
+            this.data.set("index", this.data.get("index") - 1);
+        }
+    }
+</script>
+
+<style>
+.slide-before-leave,
+.slide-before-enter {
+    opacity: 0;
+}
+
+/* 进入动画 */
+@keyframes bounceInRight {
+    from,
+    60%,
+    75%,
+    90%,
+    to {
+      -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+      animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+  
+    from {
+      opacity: 0;
+      -webkit-transform: translate3d(3000px, 0, 0);
+      transform: translate3d(3000px, 0, 0);
+    }
+  
+    60% {
+      opacity: 1;
+      -webkit-transform: translate3d(-25px, 0, 0);
+      transform: translate3d(-25px, 0, 0);
+    }
+  
+    75% {
+      -webkit-transform: translate3d(10px, 0, 0);
+      transform: translate3d(10px, 0, 0);
+    }
+  
+    90% {
+      -webkit-transform: translate3d(-5px, 0, 0);
+      transform: translate3d(-5px, 0, 0);
+    }
+  
+    to {
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  .slide-enter {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-name: bounceInRight;
+    animation-name: bounceInRight;
+  }
+  /* 删除动画 */
+  @keyframes hinge {
+    0% {
+      -webkit-transform-origin: top left;
+      transform-origin: top left;
+      -webkit-animation-timing-function: ease-in-out;
+      animation-timing-function: ease-in-out;
+    }
+  
+    20%,
+    60% {
+      -webkit-transform: rotate3d(0, 0, 1, 80deg);
+      transform: rotate3d(0, 0, 1, 80deg);
+      -webkit-transform-origin: top left;
+      transform-origin: top left;
+      -webkit-animation-timing-function: ease-in-out;
+      animation-timing-function: ease-in-out;
+    }
+  
+    40%,
+    80% {
+      -webkit-transform: rotate3d(0, 0, 1, 60deg);
+      transform: rotate3d(0, 0, 1, 60deg);
+      -webkit-transform-origin: top left;
+      transform-origin: top left;
+      -webkit-animation-timing-function: ease-in-out;
+      animation-timing-function: ease-in-out;
+      opacity: 1;
+    }
+  
+    to {
+      -webkit-transform: translate3d(0, 700px, 0);
+      transform: translate3d(0, 700px, 0);
+      opacity: 0;
+    }
+  }
+  
+  .slide-leave {
+    -webkit-animation-duration: 2s;
+    animation-duration: 2s;
+    -webkit-animation-name: hinge;
+    animation-name: hinge;
+  }
+</style>
