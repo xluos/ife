@@ -1,0 +1,145 @@
+<template>
+    <div class="modal">
+        <div class="modal-content">
+            <h4>{{ title }}</h4>
+            <div class="modal-body">
+                <slot name="content">{{ content }}</slot>
+                <slot/>
+            </div>
+            <footer class="modal-footer">
+                <button on-click="clicker(false)" class="cancel">取 消</button>
+                <button on-click="clicker(true)" class="sure">确 定</button>
+            </footer>
+        </div>
+    </div>
+</template>
+
+<script>
+    export default {
+        initData: function() {
+            return {
+                title: "标题",
+                content: ""
+            }
+        },
+        clicker: function(bool) {
+            this.fire("modalClick",{bool:bool,index:this.data.get("index")});
+        },
+
+    }
+
+</script>
+
+<style>
+    .modal-content h4 {
+        text-align: center;
+        color: #555;
+        font-size: 1.5rem;
+        padding: 1.5rem;
+        margin: 0;
+    }
+    .modal {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 10;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+        position: relative;
+        width: 50%;
+        max-width: 460px;
+        height: 250px;
+        margin: 3rem auto;
+        border-radius: 10px;
+        background-color: #fff;
+        -webkit-animation: zoom 0.3s;
+        animation: zoom 0.3s;
+    }
+
+    @-webkit-keyframes zoom {
+        0% {
+            -webkit-transform: scale(0.7);
+        }
+        45% {
+            -webkit-transform: scale(1.05);
+        }
+        80% {
+            -webkit-transform: scale(0.95);
+        }
+        100% {
+            -webkit-transform: scale(1);
+        }
+    }
+
+    @keyframes zoom {
+        0% {
+            transform: scale(0.7);
+        }
+        45% {
+            transform: scale(1.05);
+        }
+        80% {
+            transform: scale(0.95);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    .modal-body {
+        text-align: center;
+        padding: 20px 0;
+        font-size: 16px;
+    }
+
+    .modal-body input {
+        width: 15rem;
+        height: 2rem;
+        border: 1px solid #e7e7e7;
+        background: #fafafa;
+        outline: none;
+    }
+
+    .modal-footer {
+        position: absolute;
+        bottom: 0;
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        padding-bottom: 1rem;
+    }
+
+    .modal-footer button {
+        width: 6rem;
+        height: 3rem;
+        color: white;
+        margin: 0 1.5rem;
+        font-size: 1.2rem;
+        border-style: none;
+        border-radius: 0.3rem;
+        outline: none;
+    }
+
+    .cancel {
+        background-color: #dc3545;
+    }
+
+    .sure {
+        background-color: #28a745;
+    }
+
+    .modal-footer button:hover {
+        opacity: 0.85;
+        cursor: pointer;
+    }
+
+    @media only screen and (max-width: 700px) {
+        .modal-content {
+            width: 80%;
+        }
+    }
+</style>
