@@ -13,29 +13,81 @@
             return { show: true };
         },
         toggle() {
-            console.log('点击了');
-            this.data.set("show",!this.data.get('show'));
+            this.data.set("show", !this.data.get('show'));
         },
         hook: {/* your answer */
-            enter: function (el, done) {
-                // console.log('enter');
+
+            // // 第一次的实现方式
+            // enter: function (el, done) {
+            //     // console.log('enter');
+            //     el.classList.add("before-enter");
+            //     setTimeout(()=>{
+            //         el.classList.add("enter");
+            //         done();
+            //     },0)
+            // },
+            // leave: function (el, done) {
+            //     // console.log('leave');
+            //     el.className = "";
+            //     el.classList.add("before-leave");
+            //     el.className = "";
+            //     el.classList.add("leave");
+            //     console.log(done);
+            //     setTimeout(()=>{
+            //         done();
+            //     },500)
+            // }
+
+            //第二次参考san-transition后的实现
+
+            enter(el, done) {
                 el.classList.add("before-enter");
-                setTimeout(()=>{
+                setTimeout(() => {
+                    el.classList.remove("before-enter");
                     el.classList.add("enter");
-                    done();
-                },0)
+                    setTimeout(() => {
+                        el.classList.remove("enter");
+                        done();
+                    }, 500);
+                }, 0);
             },
-            leave: function (el, done) {
-                // console.log('leave');
-                el.className = "";
+            leave(el, done) {
                 el.classList.add("before-leave");
-                el.className = "";
-                el.classList.add("leave");
-                console.log(done);
-                setTimeout(()=>{
-                    done();
-                },500)
+                setTimeout(() => {
+                    el.classList.remove("before-leave");
+                    el.classList.add("leave");
+                    setTimeout(done, 500);
+                }, 0);
             }
+            // //其他人的实现方式
+            // enter(el, done) {
+            //     const listener = () => {
+            //         el.classList.remove('before-enter', 'enter');
+            //         el.removeEventListener('transitionend', listener);
+            //         done();
+            //     }
+            //     el.addEventListener("transitionend", listener);
+
+            //     el.classList.add('before-enter');
+            //     setTimeout(() => {
+            //         el.classList.add('enter');
+            //     }, 0);
+            // },
+
+            // leave(el, done) {
+            //     const listener = () => {
+            //         el.classList.remove('leave');
+            //         el.removeEventListener('transitionend', listener);
+            //         done();
+            //     }
+            //     el.addEventListener('transitionend', listener);
+            //     // el.classList.add('before-leave');
+            //     setTimeout(() => {
+            //         // el.classList.remove('before-leave');
+            //         el.classList.add('leave');
+            //     }, 0);
+
+            // }
         }
     }
 </script>
