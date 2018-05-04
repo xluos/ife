@@ -6,7 +6,7 @@
         <ul>
             <li s-for="item,index in list" s-transition="hook('slide')" on-click="remove(index)">列出具有过渡效果的元素 {{item}}.</li>
         </ul>
-        <ui-modal s-if="{{ modalShow }}" on-modalClick="modalclick" index="{{ itemIndex }}" content="{{ content }}"></ui-modal>
+        <ui-modal s-if="{{ modalShow }}" title="{{ title }}" on-modalClick="modalclick" index="{{ itemIndex }}" content="{{ content }}"></ui-modal>
     </template>
 </template>
 
@@ -20,6 +20,7 @@
 
         initData: function () {
             return {
+                title: "是否要删除",
                 modalShow: false,
                 index: 6,
                 list: [1, 2, 3, 4, 5]
@@ -44,7 +45,9 @@
         },
         modalclick: function (val) {
             this.data.set("modalShow", false);
-            this.data.removeAt("list", val.index);
+            if(val.bool) {
+                this.data.removeAt("list", val.index);
+            }
         }
     }
 </script>
