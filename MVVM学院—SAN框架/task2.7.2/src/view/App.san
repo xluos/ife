@@ -53,7 +53,9 @@
 </script>
 
 <style>
-    .slide-before-leave {}
+    .slide-before-leave {
+        
+    }
 
     .slide-before-enter {
         opacity: 0;
