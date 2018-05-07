@@ -1,0 +1,27 @@
+<template>
+    <template>
+        <ui-expansionpanel
+            class="expansionpanel"
+            title="TITLE"
+            description="描述">
+            <p>卢卡斯的借口拉萨的记录卡死的记录卡萨丁就老是卡等级卢卡斯的借口拉萨的记录卡死的记录卡萨丁就老是卡等级卢卡斯的借口拉萨的记录卡死的记录卡萨丁就老是卡等级卢卡斯的借口拉萨的记录卡死的记录卡萨丁就老是卡等级卢卡斯的借口拉萨的记录卡死的记录卡萨丁就老是卡等级卢卡斯的借口拉萨的记录卡死的记录卡萨丁就老是卡等级卢卡斯的借口拉萨的记录卡死的记录卡萨丁就老是卡等级卢卡斯的借口拉萨的记录卡死的记录卡萨丁就老是卡等级卢卡斯的借口拉萨的记录卡死的记录卡萨丁就老是卡等级卢卡斯的借口拉萨的记录卡死的记录卡萨丁就老是卡等级卢卡斯的借口拉萨的记录卡死的记录卡萨丁就老是卡等级卢卡斯的借口拉萨的记录卡死的记录卡萨丁就老是卡等级卢卡斯的借口拉萨的记录卡死的记录卡萨丁就老是卡等级卢卡斯的借口拉萨的记录卡死的记录卡萨丁就老是卡等级卢卡斯的借口拉萨的记录卡死的记录卡萨丁就老是卡等级</p>
+        </ui-expansionpanel>
+    </template>
+</template>
+
+<script>
+    import ExpansionPanel from "./ExpansionPanel.san";
+    export default {
+        components: {
+            "ui-expansionpanel": ExpansionPanel
+        },
+
+    }
+</script>
+
+<style>
+    .expansionpanel {
+        width: 600px;
+        margin: 0 auto;
+    }
+</style>
