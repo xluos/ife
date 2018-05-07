@@ -1,0 +1,117 @@
+<template>
+    <div class="expansion-panel">
+        <div class="expansion-panel-header">
+            <div class="expansion-panel-title">
+                <slot name="title">{{ title }}</slot>
+            </div>
+            <div class="expansion-panel-description">
+                <slot name="description">{{ description }}</slot>
+            </div>
+            <div class="expansion-panel-btn" on-click="toggle" style="{{ transitionBtn }}"></div>
+        </div>
+        <div class="expansion-panel-body" style="{{ transitionStyle }}">
+            <slot></slot>
+        </div>
+    </div>
+</template>
+
+<script>
+    export default {
+        initData: function () {
+            return {
+                title: "标题",
+                description: "",
+                open: false
+            }
+        },
+        computed: {
+            transitionStyle: function() {
+                return this.data.get("open") ? 'transform: scaleY(1);opacity: 1;max-height: auto;' : 'transform: scaleY(0) ;opacity: 0;max-height: 0px;';
+            },
+            transitionBtn: function() {
+                return this.data.get("open") ? 'transform: rotate(180deg)' : '';
+            }
+        },
+        toggle: function () {
+            this.data.set("open",!this.data.get("open"));
+        },
+        compiled: function () {
+            console.log(new Date() + "compiled");
+        },
+        inited: function () {
+            console.log(new Date() + "inited");
+        },
+        created: function () {
+            console.log(new Date() + "created");
+        },
+        attached: function () {
+            console.log(new Date() + "attached");
+        },
+        detached: function () {
+            console.log(new Date() + "detached");
+        }
+    }
+</script>
+
+<style>
+    .expansion-panel {
+      padding: 10px;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      border-radius: 2px;
+    }
+    .expansion-panel-header {
+      overflow: hidden;
+    }
+    .expansion-panel-title {
+      float: left;
+    }
+    .expansion-panel-description {
+      float: left;
+    }
+    .expansion-panel-btn {
+      position: relative;
+      float: right;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      transition: all 0.5s;
+    }
+    .expansion-panel-btn:hover {
+      background: #ebebeb;
+    }
+    .expansion-panel-btn:active {
+      background: #c4c4c4;
+    }
+    .expansion-panel-btn::after {
+      position: absolute;
+      top: 10px;
+      left: 12px;
+      content: "";
+      display: block;
+      width: 10px;
+      height: 10px;
+      border-left: 2px solid #333;
+      border-bottom: 2px solid #333;
+      transform: rotate(-45deg);
+    }
+    .expansion-panel-title {
+      line-height: 36px;
+      font-size: 20px;
+      font-weight: bolder;
+      padding: 0 10px;
+    }
+    .expansion-panel-description {
+      font-size: 14px;
+      line-height: 36px;
+      color: #aaa;
+      padding: 0 10px;
+    }
+    .expansion-panel-body {
+        transition: all 0.5s;
+        overflow-y: hidden;
+        transform-origin: top left;
+    }
+    p{
+        margin: 0;
+    }
+</style>
