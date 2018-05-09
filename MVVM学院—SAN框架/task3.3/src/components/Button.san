@@ -1,0 +1,46 @@
+<template>
+    <button
+        type="button"
+        class="ui-button"
+        on-input="handleInput($event)"
+        on-focus="handleFocus($event)"
+        on-blur="handleBlur($event)"
+        on-click="handleClick($event)">
+        <slot></slot>
+    </button>
+</template>
+    
+<script>
+    export default {
+        handleInput: function(event) {
+            this.fire("input",event);
+        },
+        handleFocus: function(event) {
+            // 重新派发focus事件给父元素
+            this.fire("focus",event);
+        },
+        handleBlur: function(event) {
+            // 重新派发blur事件给父元素
+            this.fire("blur",event);
+        },
+        handleClick: function(event) {
+            // 重新派发blur事件给父元素
+            this.fire("click",event);
+        },
+    }
+</script>
+    
+<style>
+    .ui-button{
+        outline: none;
+        border: none;
+        background: #65AEFA;
+        color: #fff;
+        width: 40px;
+        height: 30px;
+        transition: background-color .3s;
+    }
+    .ui-button:active {
+        background: #4590FA;
+    }
+</style>

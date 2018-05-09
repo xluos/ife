@@ -1,0 +1,147 @@
+<template>
+    <div class="ui-form-item {{ position }}">
+        <label for="{{ labelFor }}" class="item-lable {{ require ? 'require':''}}">
+            <slot name="label">{{ lable }}</slot>
+        </label>
+        <div class="item-content">
+            <div class="item-input">
+                <slot></slot>
+            </div>
+            <div class="item-message">{{ Message }}</div>
+        </div>
+    </div>
+</template>
+
+<script>
+    import AsyncValidator from 'async-validator';
+    export default {
+        initData: function () {
+            let o = new Object();
+            o.labelWidth = this.parentComponent.data.get("labelWidth");
+            o.rules = this.parentComponent.data.get("rules");
+            o.labelPosition = this.parentComponent.data.get("labelPosition");
+            return {
+                require: false,
+                lable: "",
+                labelWidth: "100px",
+                prop: "",
+                rules: [],
+                error: "",
+                helpText: "",
+                labelPosition: "right",
+                form: o,
+                isError: false,
+                messagePrefix: "☹"
+            }
+        },
+        //过滤器
+        filters: {
+
+        },
+        //计算属性
+        computed: {
+            labelFor: function() {
+                
+            },
+            form: function(){
+                return this.data.get("form");
+            },
+            Message: function() {
+                if(this.data.get("isError")) {
+                    return this.data.get("messagePrefix") + this.data.get("helpText");
+                }else {
+                    return "";
+                }
+                    
+            },
+            position: function() {
+                let Position = this.data.get("labelPosition");
+                
+                // 检验有效性
+                if( Position === "left"
+                  ||Position === "right"
+                  ||Position === "top") {
+                      return `item-lable-${Position}`;
+                  }else {
+                    //   console.log('else');
+                      
+                      return "item-lable-left"
+                  }
+            }
+        },
+        // 接收消息
+        validate: function() {
+            const descriptor = {};
+            let prop = this.data.get("prop");
+            let rules = this.data.get("rules");
+            if(!rules || rules.length === 0) {
+                return true;
+            }
+            let value = this.parentComponent.data.get("formModel")[prop];
+            descriptor[prop] = rules;
+            const validator = new AsyncValidator(descriptor);
+            const model = {};
+            model[prop] = value;
+            validator.validate(model, { firstFields: true }, (errors, invalidFields) => {
+                // 设置错误信息
+                if(errors) {
+                    this.data.set("isError", true);
+                    this.data.set("helpText",errors[0].message);
+                    console.log(errors[0].message);
+                    return false;
+                }
+                // 验证通过
+                this.data.set("isError", false);
+                return true;
+            });
+            
+        },
+        messages: {
+            "UI:input-blur": function() {
+                this.validate();
+            }
+        },
+        trimWhitespace: "all",
+    }
+</script>
+
+<style>
+    .ui-form-item {
+        display: flex;
+    }
+    .item-lable-left,
+    .item-lable-right {
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+    .item-lable-left .item-lable,
+    .item-lable-right .item-lable {
+        padding-top: 10px;
+    }
+    .item-lable-right .item-lable {
+        text-align: right;
+    }
+    .item-lable {
+        line-height: 40px;
+        width: 100px;
+    }
+    .require::before {
+        margin-left: -10px;
+        content: "*";
+        color: #f00;
+    }
+    .item-input {
+        margin-top: 10px;
+        margin-left: 10px;
+    }
+    .error {
+        border: 1px solid #ff7275;
+    }
+    .item-message {
+        padding-left: 10px;
+        font-size: 14px;
+        color: #ff7275;
+        line-height: 25px;
+        height: 25px;
+    }
+</style>

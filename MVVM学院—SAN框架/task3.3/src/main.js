@@ -1,6 +1,6 @@
 import san from "san";
 import { router } from "san-router";
-import App from "./view/App.san";
+import App from "./components/App.san";
 
 router.add({ rule: '/', Component: App, target: '#app' });
 router.start();

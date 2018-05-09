@@ -1,10 +1,35 @@
 <template>
-    
+    <form
+        class="ui-form"
+        style="{{ formstyle }}"
+        formModel="{= formModel =}"
+        s-ref="form">
+        <slot></slot>
+    </form>
 </template>
     
 <script>
     export default {
-        
+        initData: function () {
+            return {
+                labelWidth: "100px",
+                rules: [],
+                labelPosition: "left",  //可选值为top,right,left。
+                formModel:{}
+            }
+        },
+        // 对表单执行验证
+        validate: function () {
+
+        },
+        // 对单一的表单控件执行验证
+        validateField: function () {
+
+        },
+        // 重置所有表单
+        resetFields: function() {
+
+        }
     }
 </script>
     

@@ -1,21 +1,125 @@
 <template>
-    <template>
-        <ui-expansionpanel
-            class="expansionpanel"
-            title="TITLE"
-            description="描述">
-            <p>卢卡斯的借口拉萨的记录卡死的记录卡萨丁就老是卡等级卢卡斯的借口拉萨的记录卡死的记录卡萨丁就老是卡等级卢卡斯的借口拉萨的记录卡死的记录卡萨丁就老是卡等级卢卡斯的借口拉萨的记录卡死的记录卡萨丁就老是卡等级卢卡斯的借口拉萨的记录卡死的记录卡萨丁就老是卡等级卢卡斯的借口拉萨的记录卡死的记录卡萨丁就老是卡等级卢卡斯的借口拉萨的记录卡死的记录卡萨丁就老是卡等级卢卡斯的借口拉萨的记录卡死的记录卡萨丁就老是卡等级卢卡斯的借口拉萨的记录卡死的记录卡萨丁就老是卡等级卢卡斯的借口拉萨的记录卡死的记录卡萨丁就老是卡等级卢卡斯的借口拉萨的记录卡死的记录卡萨丁就老是卡等级卢卡斯的借口拉萨的记录卡死的记录卡萨丁就老是卡等级卢卡斯的借口拉萨的记录卡死的记录卡萨丁就老是卡等级卢卡斯的借口拉萨的记录卡死的记录卡萨丁就老是卡等级卢卡斯的借口拉萨的记录卡死的记录卡萨丁就老是卡等级</p>
-        </ui-expansionpanel>
-    </template>
+    <div>
+        <ui-form
+            formModel="{= formModel =}"
+            san-ref="formModel">
+            <!-- <ui-form-item lable="111">
+                <ui-input></ui-input>
+            </ui-form-item>
+            <ui-form-item lable="222">
+                <ui-input></ui-input>
+            </ui-form-item> -->
+            <ui-form-item
+                lable="姓名"
+                require="true"
+                prop="userName"
+                rules="{{ruleAddress}}">
+                <ui-input isError="{{ isError }}" value="{= formModel.userName =}"></ui-input>
+            </ui-form-item>
+            <ui-form-item>
+                <ui-button on-click="submit">提交</ui-button>
+                <ui-button>重置</ui-button>
+            </ui-form-item>
+        </ui-form>
+    </div>
 </template>
 
 <script>
-    import ExpansionPanel from "./ExpansionPanel.san";
+    import Form from './Form.san';
+    import FormItem from './FormItem.san';
+    import Input from './Input.san';
+    import Button from './Button.san';
     export default {
-        components: {
-            "ui-expansionpanel": ExpansionPanel
-        },
+        initData() {
+        const idCardValidate = (rule, value, callback) => {
+            if (value) {
+                // 异步、远程验证
+                let userName = this.data.get('formModel.userName');
+                console.log({
+                    userName,
+                    idCard: value
+                });
+                // 将用户名和身份证号码作为参数发送异步请求，到服务端验证
+                setTimeout(function() {
+                    callback([new Error('您输入的身份信息不匹配')]);
+                }, 1000);
+            }
+            else {
+                setTimeout(function() {
+                    callback(['请输入身份证号码']);
+                }, 1000);
+            }
+        };
 
+        return {
+            formModel: {
+                mobile: '',
+                userName: '',
+                idCard: '',
+                address: ''
+            },
+            ruleMobile: [
+                {
+                    type: 'string',
+                    required: true,
+                    message: '请输入手机号码'
+                },
+                {
+                    validator(rule, value, callback) {
+                        if (value) {
+                            if (!/^[1][3,4,5,7,8][0-9]{9}$/.test(value)) {
+                                callback([new Error('请输入正确的手机号码!')]);
+                            }
+                            else {
+                                callback([]);
+                            }
+                        }
+                        else {
+                            callback([new Error('请输入手机号码!')]);
+                        }
+                    }
+                }
+            ],
+            ruleAddress: [
+                {
+                    required: true,
+                    message: '必选',
+                    type: 'string'
+                },
+                {
+
+                    min: 6,
+                    message: '用户名需不少于6个字符'
+                },
+                                {
+                    max: 20,
+                    message: '用户名需不超过20个字符'
+                }
+            ],
+            ruleIdCard: [
+                {
+                    type: 'string',
+                    require: true
+                },
+                {
+                    validator: idCardValidate
+                }
+            ]
+        };
+        },
+        components: {
+            'ui-button': Button,
+            'ui-form': Form,
+            'ui-form-item': FormItem,
+            'ui-input': Input
+        },
+        submit: function(params) {
+            console.log('submit');
+        },
+        blurrr: function() {
+            console.log('aaa');
+            
+        }
     }
 </script>
 
