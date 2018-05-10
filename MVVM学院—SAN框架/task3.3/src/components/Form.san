@@ -19,16 +19,28 @@
             }
         },
         // 对表单执行验证
-        validate: function () {
-
+        validate: function (callback) {
+            let error = [];
+            let form = this.data.get("formModel");
+            for (const key in form) {
+                if (form.hasOwnProperty(key)) {
+                    console.log(this.ref(key));
+                    this.parentComponent.ref(key).validate();
+                }
+            }
         },
         // 对单一的表单控件执行验证
-        validateField: function () {
-
+        validateField: function (formName) {
+            this.ref(formName).validate();
         },
         // 重置所有表单
         resetFields: function() {
-
+            let form = this.data.get("formModel");
+            for (const key in form) {
+                if (form.hasOwnProperty(key)) {
+                    this.parentComponent.ref(key).resetFields();
+                }
+            }
         }
     }
 </script>

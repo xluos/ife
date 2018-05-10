@@ -1,24 +1,57 @@
 <template>
-    <div>
+    <div class="box">
         <ui-form
             formModel="{= formModel =}"
             san-ref="formModel">
-            <!-- <ui-form-item lable="111">
-                <ui-input></ui-input>
-            </ui-form-item>
-            <ui-form-item lable="222">
-                <ui-input></ui-input>
-            </ui-form-item> -->
             <ui-form-item
-                lable="姓名"
-                require="true"
+                rules="{{ ruleMobile }}"
+                prop="mobile"
+                san-ref="mobile"
+                helpText="请输入手机号码"
+                label="手机号码"
+                require="{{ false }}">
+                <ui-input
+                    isError="{{ isError }}"
+                    value="{= formModel.mobile =}"
+                ></ui-input>
+            </ui-form-item>
+            <ui-form-item
+                rules="{{ ruleAddress }}"
+                prop="address"
+                san-ref="address"
+                helpText="请输入地址"
+                label="地址"
+                require="{{ false }}">
+                <ui-input
+                    isError="{{ isError }}"
+                    value="{= formModel.address =}"
+                ></ui-input>
+            </ui-form-item>
+            <ui-form-item
                 prop="userName"
-                rules="{{ruleAddress}}">
-                <ui-input isError="{{ isError }}" value="{= formModel.userName =}"></ui-input>
+                san-ref="userName"
+                require="{{true}}"
+                helpText="输入姓名与身份证保持一致"
+                label="姓名">
+                <ui-input
+                    isError="{{ isError }}"
+                    value="{= formModel.userName =}"
+                ></ui-input>
+            </ui-form-item>
+            <ui-form-item
+                rules="{{ruleIdCard}}"
+                prop="idCard"
+                san-ref="idCard"
+                helpText="根据国家相关规定，需要您输入身份证号码"
+                label="身份证号码">
+                <ui-input
+                    isError="{{ isError }}"
+                    value="{= formModel.idCard =}"
+                ></ui-input>
             </ui-form-item>
             <ui-form-item>
-                <ui-button on-click="submit">提交</ui-button>
-                <ui-button>重置</ui-button>
+                <ui-button on-click="submitForm('formModel')">提交</ui-button>
+                <ui-button on-click="resetForm('formModel')">重置</ui-button>
             </ui-form-item>
         </ui-form>
     </div>
@@ -47,7 +80,7 @@
             else {
                 setTimeout(function() {
                     callback(['请输入身份证号码']);
-                }, 1000);
+                }, 100);
             }
         };
 
@@ -113,19 +146,36 @@
             'ui-form-item': FormItem,
             'ui-input': Input
         },
-        submit: function(params) {
+        submitForm: function(formName) {
             console.log('submit');
+            this.ref(formName).validate();
+
+            // let error = [];
+            // let form = this.data.get("formModel");
+            // for (const key in form) {
+            //     if (form.hasOwnProperty(key)) {
+            //         console.log(key);
+            //         this.ref(key).validate();
+            //     }
+            // }
         },
-        blurrr: function() {
-            console.log('aaa');
-            
+        resetForm: function(formName) {
+            console.log('reset');
+            this.ref(formName).resetFields();
+            // let form = this.data.get("formModel");
+            // for (const key in form) {
+            //     if (form.hasOwnProperty(key)) {
+            //         // this.ref(key).resetFields();
+            //         this.ref(key)
+            //     }
+            // }
         }
     }
 </script>
 
 <style>
-    .expansionpanel {
-        width: 600px;
+    .box {
+        width: 400px;
         margin: 0 auto;
     }
 </style>

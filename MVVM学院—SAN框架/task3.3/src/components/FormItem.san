@@ -1,7 +1,7 @@
 <template>
     <div class="ui-form-item {{ position }}">
-        <label for="{{ labelFor }}" class="item-lable {{ require ? 'require':''}}">
-            <slot name="label">{{ lable }}</slot>
+        <label for="{{ labelFor }}" class="item-label {{ require ? 'require':''}}">
+            <slot name="label">{{ label }}</slot>
         </label>
         <div class="item-content">
             <div class="item-input">
@@ -22,7 +22,7 @@
             o.labelPosition = this.parentComponent.data.get("labelPosition");
             return {
                 require: false,
-                lable: "",
+                label: "",
                 labelWidth: "100px",
                 prop: "",
                 rules: [],
@@ -34,6 +34,10 @@
                 messagePrefix: "☹"
             }
         },
+        inited: function() {
+            // console.log(this.data.get("require"),this.data.get("prop"));
+            console.log(this.data.get("label"))
+        },
         //过滤器
         filters: {
 
@@ -41,7 +45,7 @@
         //计算属性
         computed: {
             labelFor: function() {
-                
+                return this.data.get("prop");
             },
             form: function(){
                 return this.data.get("form");
@@ -61,24 +65,35 @@
                 if( Position === "left"
                   ||Position === "right"
                   ||Position === "top") {
-                      return `item-lable-${Position}`;
+                      return `item-label-${Position}`;
                   }else {
                     //   console.log('else');
                       
-                      return "item-lable-left"
+                      return "item-label-left"
                   }
             }
         },
-        // 接收消息
+        // 验证函数
         validate: function() {
             const descriptor = {};
             let prop = this.data.get("prop");
             let rules = this.data.get("rules");
-            if(!rules || rules.length === 0) {
+            if((!rules || rules.length === 0) && !this.data.get("require")) {
                 return true;
+            }
+            if(this.data.get("require")) {
+
             }
             let value = this.parentComponent.data.get("formModel")[prop];
             descriptor[prop] = rules;
+            // 如果没有验证规则，且必选的选项，添加必选验证
+            if(rules.length === 0 && this.data.get("require")) {
+                descriptor[prop].push({
+                    required: true,
+                    message: '必选',
+                    type: 'string'
+                })
+            }
             const validator = new AsyncValidator(descriptor);
             const model = {};
             model[prop] = value;
@@ -86,8 +101,10 @@
                 // 设置错误信息
                 if(errors) {
                     this.data.set("isError", true);
-                    this.data.set("helpText",errors[0].message);
-                    console.log(errors[0].message);
+                    if(errors[0].message && errors[0].message.length > 0) {
+                        this.data.set("helpText",errors[0].message);
+                    }
+                    console.log(errors[0].message,errors[0].message.length,errors[0].message && errors[0].message.length > 0);
                     return false;
                 }
                 // 验证通过
@@ -96,10 +113,16 @@
             });
             
         },
+        // 接收消息
         messages: {
             "UI:input-blur": function() {
                 this.validate();
             }
+        },
+        // 重置error状态
+        resetFields: function () {
+            console.log("rrr");
+            this.data.set("isError",false);
         },
         trimWhitespace: "all",
     }
@@ -109,26 +132,26 @@
     .ui-form-item {
         display: flex;
     }
-    .item-lable-left,
-    .item-lable-right {
+    .item-label-left,
+    .item-label-right {
         justify-content: flex-start;
         align-items: flex-start;
     }
-    .item-lable-left .item-lable,
-    .item-lable-right .item-lable {
+    .item-label-left .item-label,
+    .item-label-right .item-label {
         padding-top: 10px;
     }
-    .item-lable-right .item-lable {
+    .item-label-right .item-label {
         text-align: right;
     }
-    .item-lable {
+    .item-label {
         line-height: 40px;
         width: 100px;
     }
     .require::before {
         margin-left: -10px;
         content: "*";
-        color: #f00;
+        color: #ff7275;
     }
     .item-input {
         margin-top: 10px;
