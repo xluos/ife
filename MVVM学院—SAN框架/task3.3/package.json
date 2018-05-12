@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "webpack --mode development",
+    "build": "webpack --mode=production --config=webpack.config.build.js",
     "dev": "webpack-dev-server --mode=development --open --hotOnly",
     "start": "webpack-dev-server --mode=development --open"
   },

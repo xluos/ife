@@ -18,17 +18,24 @@
 
 export default {
     initData: function() {
-        var error = this.parentComponent.data.get("isError");
         return {
             value: "",
             placeholder: "",
             disabled: false,
             readonly: false,
-            isError: error,
+            isError: false,
             inputType:"text"
         }
     },
+    // 创建删除时分别派发消息
+    created: function() {
+        this.dispatch("UI:input-add",this);
+    },
+    disposed: function() {
+        this.dispatch('UI:input-remove', this);
+    },
     trimWhitespace: "all",
+    // 重新派发事件和消息
     handleInput: function(event) {
         this.fire("input",event);
     },
@@ -37,13 +44,9 @@ export default {
         this.fire("focus",event);
     },
     handleBlur: function(event) {
-        // 父元素收到消息验证后更新数据，，写的好丑。。但我真的想不到别的办法了好无力。。
-        this.nextTick(() => {
-            this.data.set("isError", this.parentComponent.data.get("isError"));
-        });
-        this.dispatch('UI:input-blur');
-        // 重新派发blur事件给父元素
+        // 重新派发blur事件和消息给父元素
         this.fire("blur",event);
+        this.dispatch("UI:input-blur",event);
     }
 }
 </script>
@@ -57,18 +60,12 @@ export default {
         border: 1px solid #aaa;
         border-radius: 5px;
         color: #555;
-        font-size: 20px;
+        font-size: 16px;
         width: 250px;
         height: 40px;
         padding: 10px 10px;
         box-sizing: border-box;
         transition: all .3s;
-    }
-    .ui-input input::-webkit-input-placeholder,
-    .ui-input input::-moz-placeholder,
-    .ui-input input::-moz-input-placeholder,
-    .ui-input input::input-placeholder, {
-        color: #aaa;
     }
     .ui-input .normal:hover {
         border: 1px solid #555;

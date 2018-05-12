@@ -31,12 +31,17 @@
                 labelPosition: "right",
                 form: o,
                 isError: false,
-                messagePrefix: "☹"
+                messagePrefix: "☹",
+                uiInput: {}
             }
         },
-        inited: function() {
-            // console.log(this.data.get("require"),this.data.get("prop"));
-            console.log(this.data.get("label"))
+        // 创建完成派发创建消息和组件给父组件
+        created: function() {
+            this.dispatch('UI:form-item-add', this);
+        },
+        // 删除时派发删除消息
+        disposed: function() {
+            this.dispatch('UI:form-item-remove', this);
         },
         //过滤器
         filters: {
@@ -52,7 +57,7 @@
             },
             Message: function() {
                 if(this.data.get("isError")) {
-                    return this.data.get("messagePrefix") + this.data.get("helpText");
+                    return this.data.get("messagePrefix") + this.data.get("error");
                 }else {
                     return "";
                 }
@@ -73,8 +78,15 @@
                   }
             }
         },
+        setError: function(bool) {
+            // 存在input框
+            this.data.set("isError", bool);
+            if(this.data.get("uiInput").data) {
+                this.data.get("uiInput").data.set("isError", bool);
+            }
+        },
         // 验证函数
-        validate: function() {
+        validate: function(ERRORS = []) {
             const descriptor = {};
             let prop = this.data.get("prop");
             let rules = this.data.get("rules");
@@ -100,29 +112,35 @@
             validator.validate(model, { firstFields: true }, (errors, invalidFields) => {
                 // 设置错误信息
                 if(errors) {
-                    this.data.set("isError", true);
+                    this.setError(true);
+                    ERRORS.push(errors[0].field);
                     if(errors[0].message && errors[0].message.length > 0) {
-                        this.data.set("helpText",errors[0].message);
+                        this.data.set("error",errors[0].message);
                     }
-                    console.log(errors[0].message,errors[0].message.length,errors[0].message && errors[0].message.length > 0);
                     return false;
                 }
                 // 验证通过
-                this.data.set("isError", false);
+                this.setError(false);
                 return true;
             });
             
         },
         // 接收消息
         messages: {
+            "UI:input-add": function(value) {
+                this.data.set("uiInput",value.target);
+                let input = value.target;
+                if(input.data) {
+                    input.data.set("placeholder", this.data.get("helpText"));
+                }
+            },
             "UI:input-blur": function() {
                 this.validate();
             }
         },
         // 重置error状态
         resetFields: function () {
-            console.log("rrr");
-            this.data.set("isError",false);
+            this.setError(false);
         },
         trimWhitespace: "all",
     }

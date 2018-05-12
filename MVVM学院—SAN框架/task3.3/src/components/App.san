@@ -6,46 +6,38 @@
             <ui-form-item
                 rules="{{ ruleMobile }}"
                 prop="mobile"
-                san-ref="mobile"
                 helpText="请输入手机号码"
                 label="手机号码"
                 require="{{ false }}">
                 <ui-input
-                    isError="{{ isError }}"
                     value="{= formModel.mobile =}"
                 ></ui-input>
             </ui-form-item>
             <ui-form-item
                 rules="{{ ruleAddress }}"
                 prop="address"
-                san-ref="address"
                 helpText="请输入地址"
                 label="地址"
                 require="{{ false }}">
                 <ui-input
-                    isError="{{ isError }}"
                     value="{= formModel.address =}"
                 ></ui-input>
             </ui-form-item>
             <ui-form-item
                 prop="userName"
-                san-ref="userName"
                 require="{{true}}"
                 helpText="输入姓名与身份证保持一致"
                 label="姓名">
                 <ui-input
-                    isError="{{ isError }}"
                     value="{= formModel.userName =}"
                 ></ui-input>
             </ui-form-item>
             <ui-form-item
                 rules="{{ruleIdCard}}"
                 prop="idCard"
-                san-ref="idCard"
                 helpText="根据国家相关规定，需要您输入身份证号码"
                 label="身份证号码">
                 <ui-input
-                    isError="{{ isError }}"
                     value="{= formModel.idCard =}"
                 ></ui-input>
             </ui-form-item>
@@ -91,6 +83,7 @@
                 idCard: '',
                 address: ''
             },
+            formStatus: "",
             ruleMobile: [
                 {
                     type: 'string',
@@ -148,27 +141,24 @@
         },
         submitForm: function(formName) {
             console.log('submit');
-            this.ref(formName).validate();
-
-            // let error = [];
-            // let form = this.data.get("formModel");
-            // for (const key in form) {
-            //     if (form.hasOwnProperty(key)) {
-            //         console.log(key);
-            //         this.ref(key).validate();
-            //     }
-            // }
+            let formModel = this.data.get(formName);
+            if (formName === 'formModel') {
+                this.data.set('formStatus', 'validating');
+            }
+            this.ref(formName).validate((valid) => {
+                this.data.set('formStatus', 'validateEnd');
+                if (!valid) {
+                    // 验证成功 do someThing
+                    console.log(formModel);
+                } else {
+                    // 验证失败 do someThing
+                    console.log(valid)
+                }
+            });
         },
         resetForm: function(formName) {
             console.log('reset');
             this.ref(formName).resetFields();
-            // let form = this.data.get("formModel");
-            // for (const key in form) {
-            //     if (form.hasOwnProperty(key)) {
-            //         // this.ref(key).resetFields();
-            //         this.ref(key)
-            //     }
-            // }
         }
     }
 </script>
