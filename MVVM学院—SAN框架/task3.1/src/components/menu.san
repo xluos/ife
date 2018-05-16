@@ -1,0 +1,57 @@
+<template>
+    <div>
+        <ul>
+            <li s-for="item,index in data" on-click="hasClick(item)">{{item.label}}</li>
+        </ul>
+        <ui-menu s-if="isChildren" data="{{ childrenData }}" value="{{ values }}" label="{{ labels }}"></ui-menu>
+    </div>
+</template>
+
+<script>
+    import Input from "./Input.san";
+    export default {
+        initData: function() {
+            return {
+                mydata:[],
+                isChildren: false,
+                childrenData: [],
+                values: [],
+                labels: []
+            }
+        },
+        created: function() {
+            console.log("chuangjian");
+            this.data.set("values",this.data.get("value"));
+            this.data.set("labels",this.data.get("label"));
+        },
+        components: {
+            "ui-menu": 'self'
+        },
+        hasClick: function(data) {
+            this.data.push("values", data.value);
+            this.data.push("labels", data.label);
+            this.data.set("isChildren",!!data.children);
+            this.data.set("childrenData",data.children||[]);
+            if(!data.children) {
+                let value = {};
+                value.value = this.data.get("values");
+                value.label = this.data.get("labels");
+                this.dispatch("UI:cascader-menu-ok",value);
+            }
+        },
+        updated: function(){
+            // console.log('刷新',this.data.get("data"));
+            // this.data.set("isChildren",false);
+            // this.data.set("childrenData",[]);
+            this.watch('data', function () {
+                this.data.set("isChildren",false);
+                this.data.set("childrenData",[]);
+            });
+        }
+
+    }
+</script>
+
+<style>
+
+</style>
