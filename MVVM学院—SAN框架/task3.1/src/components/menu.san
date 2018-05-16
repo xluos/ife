@@ -1,7 +1,7 @@
 <template>
-    <div>
-        <ul>
-            <li s-for="item,index in data" on-click="hasClick(item)">{{item.label}}</li>
+    <div class="menu-box">
+        <ul class="menu-list">
+            <li s-for="item,index in data" on-click="hasClick(item)" class="{{ item.children ? 'liIcon' : '' }}">{{item.label}}</li>
         </ul>
         <ui-menu s-if="isChildren" data="{{ childrenData }}" value="{{ values }}" label="{{ labels }}"></ui-menu>
     </div>
@@ -28,6 +28,7 @@
             "ui-menu": 'self'
         },
         hasClick: function(data) {
+            console.log(data);
             this.data.push("values", data.value);
             this.data.push("labels", data.label);
             this.data.set("isChildren",!!data.children);
@@ -53,5 +54,43 @@
 </script>
 
 <style>
-
+    .menu-box {
+        float: right;
+    }
+    .menu-list{
+        margin: 0;
+        padding: 0;
+        padding-top: 10px;
+        border-right: 1px solid #ddd;
+        display: inline-block;
+        min-width: 100px;
+        max-width: 200px;
+        height: 200px;
+        overflow-y: auto;
+        list-style-type: none;
+    }
+    .menu-list li {
+        cursor: pointer;
+        padding: 10px;
+        padding-right: 30px;
+    }
+    .menu-list li:hover {
+        background: rgb(223, 251, 255);
+    }
+    .liIcon {
+        position: relative;
+    }
+    .liIcon::after {
+        display: block;
+        content: "";
+        position: absolute;
+        top:15px;
+        right: 10px;
+        width: 7px;
+        height: 7px;
+        border: 1px solid transparent;
+        border-top-color: #ccc;
+        border-left-color: #ccc;
+        transform: rotate(135deg);
+    }
 </style>

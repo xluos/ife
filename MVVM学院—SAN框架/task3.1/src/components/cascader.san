@@ -1,11 +1,6 @@
 <template>
     <div>
-        <ui-input
-            on-click="click"
-            readonly="{{ true }}"
-            value="{{ menuValue }}"
-            ></ui-input>
-        <div class="input" on-click="click">{{ menulable }}</div>
+        <div class="input" on-click="click">{{ menuLabel }}</div>
         <input class="input-hide" value="{{ menuValue }}">
         <div s-if="isFocus" class="san-menu">
             <ui-menu data="{{ data }}" value="{{ values }}" label="{{ labels }}"></ui-menu>
@@ -33,7 +28,7 @@
         computed: {
             menuLabel: function() {
                 let arr = this.data.get("menuData.label")||[];
-                return arr.join(this.data.get("Delimiter"));
+                return arr.join(" " + this.data.get("Delimiter") + " ");
             },
             menuValue: function() {
                 let arr = this.data.get("menuData.value")||[];
@@ -44,23 +39,49 @@
             "UI:cascader-menu-ok": function(data) {
                 this.data.set("isFocus", false)
                 this.data.set("menuData", data.value);
-                console.log(data,"消息获得");
             }
         },
         click: function() {
             this.data.set("isFocus",!this.data.get("isFocus"));
         }
-        // hasFocus: function() {
-        //     console.log('f');
-        //     this.data.set("isFocus",true);
-        // },
-        // hasBlur: function() {
-        //     console.log('b');
-        //     this.data.set("isFocus",false);
-        // }
     }
 </script>
 
 <style>
-
+    .input {
+        border: 1px solid #aaa;
+        border-radius: 5px;
+        color: #555;
+        font-size: 16px;
+        width: 250px;
+        height: 40px;
+        padding: 10px 10px;
+        box-sizing: border-box;
+        transition: all .3s;
+    }
+    .input-hide {
+        display: none;
+    }
+    .san-menu {
+        margin-top: 8px;
+        display: inline-block;
+        position: relative;
+        border: 1px solid #ddd;
+        background: #fff;
+        border-radius: 5px;
+    }
+    .san-menu:after {
+        display: block;
+        content: "";
+        position: absolute;
+        top:-5px;
+        left: 25px;
+        width: 10px;
+        height: 10px;
+        border: 1px solid transparent;
+        border-top-color: #ddd;
+        border-left-color: #ddd;
+        background: #fff;
+        transform: rotate(45deg);
+    }
 </style>
