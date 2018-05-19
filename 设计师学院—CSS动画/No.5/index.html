@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>No.5 | 立方体</title>
+    <style>
+        body {
+            background: #000;
+            perspective: 800px;
+        }
+        .box {
+            position: relative;
+            margin: 100px auto;
+            width: 300px;
+            height: 300px;
+            transform-style: preserve-3d;
+            transition: all 2s;
+            animation: move 6s linear infinite;
+        }
+        .cover {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border: 2px solid #0099ff;
+            background: #0099ff81;
+            font-size: 150px;
+            color: #fff;
+            text-align: center;
+            line-height: 300px;
+        }
+        .cover1 {
+            transform: rotateY(0deg) translateZ(150px);
+        }
+        .cover2 {
+            transform: rotateY(90deg) translateZ(150px);
+        }
+        .cover3 {
+            transform: rotateY(180deg) translateZ(150px);
+        }
+        .cover4 {
+            transform: rotateY(270deg) translateZ(150px);
+        }
+        .cover5 {
+            transform: rotateX(90deg) translateZ(150px);
+        }
+        .cover6 {
+            transform: rotateX(-90deg) translateZ(150px);
+        }
+        .box:hover {
+            transform: rotateY(270deg);
+        }
+        @keyframes move { /*设置动画关键帧*/
+            0% {
+                transform: rotateX(0deg);
+            }
+            25% {
+                transform: rotateX(180deg);
+            }
+            50% {
+                transform: rotateX(360deg) rotateY(0deg);
+            }
+            75% {
+                transform: rotateX(180deg) rotateY(180deg);
+            }       
+            100% {
+                transform: rotateX(0deg) rotateY(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="cover cover6">6</div>
+        <div class="cover cover5">5</div>
+        <div class="cover cover4">4</div>
+        <div class="cover cover3">3</div>
+        <div class="cover cover2">2</div>
+        <div class="cover cover1">1</div>
+    </div>
+</body>
+</html>
