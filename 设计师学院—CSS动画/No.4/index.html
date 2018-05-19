@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>No.5|卡片翻转</title>
+    <style>
+        body {
+            perspective: 1280px;
+        }
+        .box {
+            margin-top: 200px;
+            transform-style: preserve-3d; 
+            margin: 100px auto;
+            width: 250px;
+            height: 350px;
+            transition: transform 1s;
+        }
+        img{
+            position: absolute;
+        }
+        .front {
+            z-index: 1;
+            transform: translateZ(00px);
+        }
+        .reverse {
+            z-index: 0;
+            transform: rotateY(180deg);
+            
+        }
+        .box:hover {
+            transform: rotateY(180deg);
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="box">
+        <img src="./正面.jpg" alt="正面图" class="front">
+        <img src="./反面.jpg" alt="反面图" class="reverse">
+    </div>
+</body>
+</html>
