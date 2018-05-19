@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>No.2</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: space-around;
+            width: 70%;
+            margin: 200px auto;
+        }
+        .box {
+            width: 70px;
+            height: 70px;
+            line-height: 70px;
+            text-align: center;
+            background: #eee;
+            border: 1px solid #aaa;
+        }
+        .box1 {
+            transform: skewX(30deg);
+        }
+        .box2 {
+            transform: scale(0.5,1);
+        }
+        .box3 {
+            transform: rotate(45deg);
+        }
+        .box4 {
+            transform: translate(10px, 20px);
+        }
+        .box5 {
+            transform: skewX(30deg) scale(0.5,1) rotate(45deg) translate(10px, 20px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box">box0</div>
+        <div class="box box1">box1</div>
+        <div class="box box2">box2</div>
+        <div class="box box3">box3</div>
+        <div class="box box4">box4</div>
+        <div class="box box5">box5</div>
+    </div>
+</body>
+</html>
