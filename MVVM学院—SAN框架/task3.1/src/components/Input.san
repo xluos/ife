@@ -1,0 +1,94 @@
+<template>
+    <div class="ui-input">
+        <input 
+            class="{{ isError ? 'error' : 'normal' }}"
+            type="{{ inputType }}"
+            value="{= value =}"
+            placeholder="{{ placeholder }}"
+            disabled="{{ disabled }}"
+            readonly="{{ readonly }}"
+            on-input="handleInput($event)"
+            on-focus="handleFocus($event)"
+            on-blur="handleBlur($event)"
+            on-click="handleClick($event)"
+        >
+        <solt/>
+    </div>
+</template>
+
+<script>
+
+export default {
+    initData: function() {
+        return {
+            value: "",
+            placeholder: "",
+            disabled: false,
+            readonly: false,
+            isError: false,
+            inputType:"text"
+        }
+    },
+    // 创建删除时分别派发消息
+    created: function() {
+        this.dispatch("UI:input-add",this);
+    },
+    disposed: function() {
+        this.dispatch('UI:input-remove', this);
+    },
+    trimWhitespace: "all",
+    // 重新派发事件和消息
+    handleClick: function(event) {
+        this.fire("click",event);
+    },
+    handleInput: function(event) {
+        this.fire("input",event);
+    },
+    handleFocus: function(event) {
+        // 重新派发focus事件给父元素
+        this.fire("focus",event);
+    },
+    handleBlur: function(event) {
+        // 重新派发blur事件和消息给父元素
+        this.fire("blur",event);
+        this.dispatch("UI:input-blur",event);
+    }
+}
+</script>
+<style>
+    /* 输入框样式部分 */
+    .ui-input {
+        position: relative;
+    }
+    .ui-input input {
+        outline: none;
+        border: 1px solid #aaa;
+        border-radius: 5px;
+        color: #555;
+        font-size: 16px;
+        width: 250px;
+        height: 40px;
+        padding: 10px 10px;
+        box-sizing: border-box;
+        transition: all .3s;
+    }
+    .ui-input .normal:hover {
+        border: 1px solid #555;
+    }
+    .ui-input .normal:focus {
+        border: 1px solid #555;
+        color: #555;
+    }
+    .ui-input input:disabled {
+        cursor: not-allowed;
+        background: #f7f7f7;
+        color: #aaa;
+    }
+    .ui-input input:disabled:hover {
+        border: 1px solid #aaa;
+    }
+
+    .ui-input .error {
+        border: 1px solid #ff7275;
+    }
+</style>

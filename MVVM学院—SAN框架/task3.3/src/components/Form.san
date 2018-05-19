@@ -15,32 +15,47 @@
                 labelWidth: "100px",
                 rules: [],
                 labelPosition: "left",  //可选值为top,right,left。
-                formModel:{}
+                formModel:{},
+                fields: []   //保存子组件
+            }
+        },
+        messages: {
+            "UI:form-item-add": function(value) {
+                if(value) {
+                    this.data.push("fields", value.target);
+                }
+            },
+            "UI:form-item-remove": function(value) {
+                if(value) {
+                    this.data.remove("fields", value.target);
+                }
             }
         },
         // 对表单执行验证
-        validate: function (callback) {
-            let error = [];
-            let form = this.data.get("formModel");
-            for (const key in form) {
-                if (form.hasOwnProperty(key)) {
-                    console.log(this.ref(key));
-                    this.parentComponent.ref(key).validate();
-                }
-            }
+        validate: async function (callback) {
+            let error = []; //储存错误的组
+            let fields = this.data.get("fields");
+            await fields.forEach(async ele =>{
+                await ele.validate(error);
+            })
+            callback(error);
         },
         // 对单一的表单控件执行验证
         validateField: function (formName) {
-            this.ref(formName).validate();
+            let fields = this.data.get("fields");
+            for(let i = 0; i < fields.length; i++) {
+                if(fields[i].data.get("prop") === formName) {
+                    return fields[i].validate();
+                }
+            }
+            return false;
         },
         // 重置所有表单
         resetFields: function() {
-            let form = this.data.get("formModel");
-            for (const key in form) {
-                if (form.hasOwnProperty(key)) {
-                    this.parentComponent.ref(key).resetFields();
-                }
-            }
+            let fields = this.data.get("fields");
+            fields.forEach(ele =>{
+                ele.resetFields();
+            })
         }
     }
 </script>

@@ -1,0 +1,87 @@
+<template>
+    <div>
+        <div class="input" on-click="click">{{ menuLabel }}</div>
+        <input class="input-hide" value="{{ menuValue }}">
+        <div s-if="isFocus" class="san-menu">
+            <ui-menu data="{{ data }}" value="{{ values }}" label="{{ labels }}"></ui-menu>
+        </div>
+    </div>
+</template>
+
+<script>
+    import Input from "./Input.san";
+    import Menu from "./menu.san";
+    export default {
+        initData: function() {
+            return {
+                isFocus: false,
+                Delimiter: "/",
+                menuData: {},
+                labels: [],
+                values: []
+            }
+        },
+        components: {
+            "ui-input": Input,
+            "ui-menu": Menu
+        },
+        computed: {
+            menuLabel: function() {
+                let arr = this.data.get("menuData.label")||[];
+                return arr.join(" " + this.data.get("Delimiter") + " ");
+            },
+            menuValue: function() {
+                let arr = this.data.get("menuData.value")||[];
+                return arr;
+            }
+        },
+        messages: {
+            "UI:cascader-menu-ok": function(data) {
+                this.data.set("isFocus", false)
+                this.data.set("menuData", data.value);
+            }
+        },
+        click: function() {
+            this.data.set("isFocus",!this.data.get("isFocus"));
+        }
+    }
+</script>
+
+<style>
+    .input {
+        border: 1px solid #aaa;
+        border-radius: 5px;
+        color: #555;
+        font-size: 16px;
+        width: 250px;
+        height: 40px;
+        padding: 10px 10px;
+        box-sizing: border-box;
+        transition: all .3s;
+    }
+    .input-hide {
+        display: none;
+    }
+    .san-menu {
+        margin-top: 8px;
+        display: inline-block;
+        position: relative;
+        border: 1px solid #ddd;
+        background: #fff;
+        border-radius: 5px;
+    }
+    .san-menu:after {
+        display: block;
+        content: "";
+        position: absolute;
+        top:-5px;
+        left: 25px;
+        width: 10px;
+        height: 10px;
+        border: 1px solid transparent;
+        border-top-color: #ddd;
+        border-left-color: #ddd;
+        background: #fff;
+        transform: rotate(45deg);
+    }
+</style>
