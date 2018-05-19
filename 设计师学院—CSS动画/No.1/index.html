@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>No.1</title>
+    <style>
+        .box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .text {
+            font-size: 50px;
+            color: #444;
+            transition: all .3s;
+        }
+        .text::after {
+            display: block;
+            content: '';
+            height: 4px;
+            width: 0%;
+            margin: 0 auto;
+            background: #00a2ff;
+            transition: width .3s;
+        }
+        .blue {
+            color: #00a2ff;
+        }
+        .blue::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <p id="text" class="text">前端学院</p>
+        <button id="btn">切换样式</button>
+    </div>
+    <script>
+        var p = document.getElementById("text");
+        var btn = document.getElementById("btn");
+        btn.addEventListener("click", function(){
+            p.classList.toggle("blue");
+        }, false)
+    </script>
+</body>
+</html>
