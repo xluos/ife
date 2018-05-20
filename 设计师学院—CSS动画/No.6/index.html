@@ -23,7 +23,7 @@
         var list = document.getElementsByClassName("img-list")[0];
         var bg = document.getElementsByClassName("bg-img")[0];
         var bgImg = document.getElementsByClassName("js-bg-animation")[0];
-        var src,animation;
+        var src, animation, oldAnimation;
 
         bgImg.addEventListener('animationend', function(){
             bg.src = src;
@@ -36,9 +36,14 @@
             if(target && target.nodeName === "IMG") {
                 animation = target.dataset.animation;
                 src = bgImg.src = target.src;
+                bgImg.classList.remove(oldAnimation);
                 bgImg.classList.add(animation);
+                oldAnimation = animation;
             }
         }, false);
+        // 禁止图片拖拉
+        function imgdragstart(){return false;}
+        for(i in document.images)document.images[i].ondragstart=imgdragstart;
     </script>
 </body>
 </html>
