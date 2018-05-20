@@ -8,6 +8,14 @@
     <link rel="stylesheet" href="./index.css">
 </head>
 <body>
+    <div class="loading">
+        <div class="box">
+            <div class="qiu"></div>
+            <div class="qiu"></div>
+            <div class="qiu"></div>
+            <div class="qiu"></div>
+        </div>
+    </div>
     <div class="bg">
         <img src="./images/tony.jpeg" alt="bg" class="bg-img">
         <img src="./images/tony.jpeg" alt="bg-animation" class="bg-img js-bg-animation">
@@ -20,6 +28,9 @@
         <li class="img-item"><img data-animation="animation5" src="./images/wxst.jpeg" alt="tony" class="thumbnail"></li>
     </ui>
     <script>
+        window.onload = function() {
+            document.body.removeChild(document.getElementsByClassName("loading")[0]);
+        }
         var list = document.getElementsByClassName("img-list")[0];
         var bg = document.getElementsByClassName("bg-img")[0];
         var bgImg = document.getElementsByClassName("js-bg-animation")[0];
@@ -41,6 +52,7 @@
                 oldAnimation = animation;
             }
         }, false);
+
         // 禁止图片拖拉
         function imgdragstart(){return false;}
         for(i in document.images)document.images[i].ondragstart=imgdragstart;
