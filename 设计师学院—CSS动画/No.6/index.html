@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>No.6 | Slider</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+    <div class="bg">
+        <img src="./images/tony.jpeg" alt="bg" class="bg-img">
+        <img src="./images/tony.jpeg" alt="bg-animation" class="bg-img js-bg-animation">
+    </div>
+    <ui class="img-list">
+        <li class="img-item"><img data-animation="animation1" src="./images/tony.jpeg" alt="tony" class="thumbnail"></li>
+        <li class="img-item"><img data-animation="animation2" src="./images/bs.jpg" alt="tony" class="thumbnail"></li>
+        <li class="img-item"><img data-animation="animation3" src="./images/zzx.jpg" alt="tony" class="thumbnail"></li>
+        <li class="img-item"><img data-animation="animation4" src="./images/hk.jpeg" alt="tony" class="thumbnail"></li>
+        <li class="img-item"><img data-animation="animation5" src="./images/wxst.jpeg" alt="tony" class="thumbnail"></li>
+    </ui>
+    <script>
+        var list = document.getElementsByClassName("img-list")[0];
+        var bg = document.getElementsByClassName("bg-img")[0];
+        var bgImg = document.getElementsByClassName("js-bg-animation")[0];
+        var src,animation;
+
+        bgImg.addEventListener('animationend', function(){
+            bg.src = src;
+            bgImg.classList.remove(animation);
+        }, false);
+
+        list.addEventListener("click", function(e){
+            var event = e || window.event;
+            var target = event.target || event.srcElement;
+            if(target && target.nodeName === "IMG") {
+                animation = target.dataset.animation;
+                src = bgImg.src = target.src;
+                bgImg.classList.add(animation);
+            }
+        }, false);
+    </script>
+</body>
+</html>
