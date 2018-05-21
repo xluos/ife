@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8">
+        <title>使用 animate.css 制作流畅交互动效</title>
+        <link rel="stylesheet" href="./animate.css">
+        <style type="text/css">
+            html {
+                font-size: 62.5%;
+                font-family: 'Open Sans', 'Helvetica Neue', Arial, 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            }
+            body {
+                font-size: 1.8em;
+                line-height: 3;
+                background-color: #eeeeee;
+            }
+            h3 {
+                font-size: 1.8em;
+                margin-bottom: 3rem;
+                line-height: 1.5;
+                font-weight: 800;
+            }
+            p {
+                margin-bottom: 1.5rem;
+            }
+            .site-container {
+                max-width: 320px;
+                margin: 10px auto;
+                padding-left: 0.6em;
+                padding-right: 0.6em;
+                padding-top: 3%;
+                padding-bottom: 3%;
+            }
+            @media screen and (min-width: 60.063em) {
+                .site-container {
+                    max-width: 400px;
+                }
+            }
+            .card {
+                position: relative;
+                overflow: hidden;
+                background-color: white;
+                box-shadow: 0 1px 3px 0 rgba(0,0,0,0.24), 0 1px 18px 0 rgba(0,0,0,0.12);
+                border-radius: 2px;
+                padding: 1em 1.5em;
+            }
+            .form__wrapper {
+                overflow: hidden;
+                position: relative;
+                z-index: 1;
+                display: inline-block;
+                margin-bottom: 1.6rem;
+                width: 100%;
+                vertical-align: top;
+            }
+            .form__wrapper__submit {
+                padding: 1.6rem 0;
+            }
+            .form__input {
+                display: block;
+                position: relative;
+                margin-top: 1em;
+                padding: 0.84em 0;
+                width: 100%;
+                box-sizing: border-box;
+                color: #444;
+                font-size: 1.6rem;
+                outline: 0;
+                border: none;
+                border-bottom: solid 1px #ddd;
+            }
+            .form__input:focus {
+                background-position: 0 0;
+                color: #444;
+            }
+            .form__label {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                padding: 0;
+                width: 0%;
+                height: calc(99%);
+                text-align: left;
+                pointer-events: none;
+                color: #999;
+                /* 新增的 */
+                transition: width .5s;
+                border-bottom: 2px solid #2196f3;
+                /* END */
+            }
+            /* 新增的 */
+            .form__input:focus ~ .form__label {
+                width: 100%;
+            }
+            /* END */
+            .form__label__content {
+                position: absolute;
+                /* 新增 */
+                transition: all .5s;
+                top: 0;
+                /* END */
+            }
+            .form__input:focus ~ .form__label .form__label__content,
+            .form--filled .form__label__content {
+                /* 新增 */
+                top: -8px;
+                font-size: 14px;
+                /* END */
+            }
+            .btn {
+                width: 100%;
+                display: inline-block;
+                padding: 0.7em 1.5em;
+                border-radius: 2px;
+                background-color: #2196f3;
+                color: #fff;
+                border: 0;
+                outline: none;
+                cursor: pointer;
+                font-family: inherit;
+                font-weight: 400;
+                font-size: 1.6rem;
+                box-shadow: 0 1px 3px 0 rgba(3,30,51,0.24), 0 1px 2px 0 rgba(3,30,51,0.12);
+                transition: all 0.2s ease;
+            }
+            .btn:focus,
+            .btn:hover {
+                background-color: #0d8aee;
+            }
+        </style>
+    </head>
+    <body>
+        <section class="site-container">
+            <section class="card">
+                <h3>Login</h3>
+                <form>
+                    <div class="form__wrapper" data-wow-delay="0.5s">
+                        <input type="email" class="form__input" id="email" name="email">
+                        <label class="form__label" for="email">
+                        <span class="form__label__content">Email</span>
+                        </label>
+                    </div>
+                    <div class="form__wrapper" data-wow-delay="0.6s">
+                        <input type="password" class="form__input" id="password" name="password">
+                        <label class="form__label" for="password">
+                        <span class="form__label__content">Password</span>
+                        </label>
+                    </div>
+                    <div class="form__wrapper__submit pulse infinite" data-wow-delay="0.7s">
+                        <div class="form__input__submit">
+                            <button type="submit" name="submit" class="btn">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </section>
+    </body>
+    <!-- <script src="https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/static/protocol/https/jquery/jquery-1.10.2.min_65682a2.js"></script> -->
+    <script>
+        var inputs = document.getElementsByClassName("form__input");
+        var btn = document.getElementsByClassName("form__wrapper__submit")[0];
+        var isPulse = {};
+        for(let i = 0; i < inputs.length; i++) {
+            inputs[i].addEventListener("blur",function(e){
+                var ele = e.target;
+                ele.value = ele.value.replace(/(^\s*)|(\s*$)/g, "");
+                if(ele.value.length > 0) {
+                    ele.parentNode.classList.add("form--filled");
+                    isPulse[ele.type] = true;
+                } else {
+                    ele.parentNode.classList.remove("form--filled");
+                    isPulse[ele.type] = false;
+                }
+                pulse();
+            }, false);
+        }
+        function pulse() {
+            if(isPulse.email&&isPulse.password) {
+                btn.classList.add("animated");
+            }else {
+                btn.classList.remove("animated");
+            }
+        }
+    </script>
+</html>
