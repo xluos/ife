@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>No.8</title>
+    <style>
+        #app {
+            width: 50%;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="./lottie.js"></script>
+    <script>
+        lottie.loadAnimation({
+            container: document.getElementById("app"), // the dom element that will contain the animation
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: './data.json' // the path to the animation json
+        });
+    </script>
+</body>
+</html>
