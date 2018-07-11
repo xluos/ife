@@ -1,4 +1,4 @@
-html, body, ul, li {
+html, body, ul, li, p{
     margin: 0;
     padding: 0;
     font-size: 14px;
@@ -46,7 +46,11 @@ body {
     box-sizing: border-box;
     width: 250px;
     padding: 0 30px 23px 30px;
-	background-color: #222c3c;
+    background-color: #222c3c;
+    overflow: auto;
+}
+.menu-secondary::-webkit-scrollbar {
+    display:none
 }
 .child-menu {
     padding: 18px 0;
@@ -101,5 +105,152 @@ body {
 .server-capacity {
     align-self: center;
 	width: 190px;
-	height: 31px;
+    height: 31px;
+    color: #fff;
+}
+.server-capacity .text {
+    display: flex;
+    justify-content: space-between;
+}
+.server-capacity .bar {
+    margin-top: 15px;
+    width: 190px;
+	height: 4px;
+	background-color: rgba(71, 83, 100, 0.3);
+	border-radius: 2px;
+}
+.server-capacity .bar-fill {
+    width: 40px;
+	height: 4px;
+	background-image: linear-gradient(0deg, 
+		#7f5be6 1%, 
+		#9d8fe3 100%);
+	border-radius: 2px;
+}
+main {
+    flex-grow: 1;
+}
+main .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    height: 80px;
+	background-color: #ffffff;
+	box-shadow: 0px 1px 1px 0px 
+		rgba(0, 0, 0, 0.05);
+}
+main .header .title{
+    font-size: 24px;
+	line-height: 50px;
+	color: #354052;
+}
+main .header .user-info {
+    display: flex;
+}
+.header .user-info .img {
+    position: relative;
+    margin-right: 15px;
+}
+.header .user-info .state {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+.user-info .info {
+    margin-right: 15px;
+}
+.user-info .info .name{
+	font-size: 16px;
+	color: #2399f1;
+}
+.user-info .info .admin{
+	color: #b5b5b5;
+}
+.user-info .btn {
+    display: flex;
+    align-items: center;
+}
+main .content {
+    display: flex;
+    height: calc(100% - 80px);
+}
+.pal {
+    width: 400px;
+    border-right: 1px solid #e6e9ec;
+}
+.pal .seek {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+    border-bottom: 1px solid #e6e9ec;
+}
+.pal input {
+	width: 340px;
+	height: 36px;
+	border-radius: 4px;
+	border: solid 1px #e5e8ee;
+}
+.pal .input {
+    position: relative;
+}
+.pal .input i {
+    position: absolute;
+    right: 14px;
+    bottom: 10px;
+}
+.pal .pal-list {
+    overflow: auto;
+}
+.pal-list .pal-item {
+    box-sizing: border-box;
+    padding: 15px 20px 20px 30px;
+}
+.pal-list::-webkit-scrollbar {
+    display:none
+}
+.pal-item .info .name {
+    color: #585d68;
+}
+.option .info .name {
+    color: #2399f1;
+}
+.option {
+    border-left: #2399f1 solid 3px;
+}
+.pal-item .user {
+    display: flex;
+    justify-content: space-between;
+}
+.pal-item .user-info {
+    display: flex;
+}
+.pal-item .user-info .img {
+    margin-right: 15px;
+}
+.pal-item .way {
+    color: #7f8fa4;
+}
+.pal-item .summ {
+    display: flex;
+    margin-top: 14px;
+}
+.pal-item .summ-text {
+	height: 32px;
+    font-size: 14px;
+    overflow: hidden;
+	color: #585d68;
+}
+.pal-item .summ .tag {
+    min-width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    color: #fff;
+	background-image: linear-gradient(0deg, 
+		#1991eb 0%, 
+		#2ea1f8 100%);
+    border-radius: 12px;
+    margin-left: 15px;
 }
