@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>IFE ECMAScript</title>
+  <style>
+    .palette {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .palette li {
+      width: 40px;
+      height: 40px;
+      border: 1px solid #000;
+      cursor: pointer;
+    }
+
+    #sprite {
+      background-image: url('http://ife.baidu.com/2016/static/img/erik_ce204002.jpg');
+      background-repeat: no-repeat;
+      width: 480px;
+      height: 480px;
+    }
+  </style>
+</head>
+
+<body>
+  <input id="name" type="text">
+  <button id="submit-btn">Submit</button>
+  <hr>
+  <label>
+    <input id="school" name="status" type="radio"> School
+  </label>
+  <label>
+    <input id="company" name="status" type="radio"> Company
+  </label>
+
+  <select id="school-select">
+    <option>北京邮电大学</option>
+    <option>黑龙江大学</option>
+    <option>华中科技大学</option>
+  </select>
+
+  <select id="company-select">
+    <option>百度</option>
+    <option>爱奇艺</option>
+  </select>
+  <hr>
+  <ul class="palette" id="palette">
+    <li style="background-color:crimson"></li>
+    <li style="background-color:bisque"></li>
+    <li style="background-color:blueviolet"></li>
+    <li style="background-color:coral"></li>
+    <li style="background-color:chartreuse"></li>
+    <li style="background-color:darkolivegreen"></li>
+    <li style="background-color:cyan"></li>
+    <li style="background-color:#194738"></li>
+  </ul>
+
+  <p class="color-picker"></p>
+  <hr>
+  <div id="fade-obj" style="width:300px;height:300px;background:#000;opacity:1;"></div>
+  <button id="fade-btn">淡出</button>
+  <hr>
+  <div id="sprite"></div>
+  <script>
+    function $(id) {
+      return document.getElementById(id);
+    }
+    // 编码任务1
+    function logName() {
+      console.log($('name').value);
+    }
+    $('submit-btn').addEventListener('click', logName);
+    window.onkeydown = function (e) {
+      if (e.keyCode === 13) {
+        logName();
+      } else if (e.keyCode === 27) {
+        $('name').value = '';
+      }
+    }
+    // 任务二
+    $('company-select').style.display = 'none';
+    $('school-select').style.display = 'none';
+    $('school').addEventListener('change', (e) => {
+      $('school-select').style.cssText = '';
+      $('company-select').style.display = 'none';
+    })
+    $('company').addEventListener('change', (e) => {
+      $('school-select').style.display = 'none';
+      $('company-select').style.cssText = '';
+    })
+    // 编码三
+    $('palette').addEventListener('click', (e) => {
+      if (e.target.tagName === 'LI') {
+        var t = e.target;
+        var c = t.style.backgroundColor;
+        var p = document.getElementsByClassName("color-picker")[0]
+        p.innerHTML = c;
+        p.style.color = c;
+      }
+    })
+    // 编码四
+    function showNode(node) {
+
+      if (node.style.opacity >= 1) {
+        $('fade-btn').innerHTML = '淡出'
+        $('fade-btn').disabled = null
+      } else {
+        node.style.opacity = parseFloat(node.style.opacity) + 0.05;
+        setTimeout(() => {
+          showNode(node);
+        }, 1000 / 60);
+      }
+    }
+    function hideNode(node) {
+      if (node.style.opacity <= 0) {
+        $('fade-btn').innerHTML = '淡入'
+        $('fade-btn').disabled = null
+      } else {
+        node.style.opacity -= 0.05;
+        setTimeout(() => {
+          hideNode(node);
+        }, 1000 / 60);
+      }
+    }
+    $('fade-btn').addEventListener('click', function (e) {
+      $('fade-btn').disabled = true;
+      if (e.target.innerText === '淡出') {
+        hideNode($('fade-obj'))
+      } else {
+        showNode($('fade-obj'))
+      }
+    })
+    let spriteBg = $('sprite');
+    spriteBg.style.backgroundPositionY = 0;
+    function spriteAnim(flag) {
+      let py = parseInt(spriteBg.style.backgroundPositionY);
+      if(flag&&py === -7680 || !flag&&py === 0) flag = !flag;      
+      if (flag) {
+        spriteBg.style.backgroundPositionY = py - 480 + 'px';
+      } else {
+        spriteBg.style.backgroundPositionY = py + 480 + 'px';
+      }
+      // requestAnimationFrame(() => spriteAnim(flag))
+      setTimeout(() => {
+        spriteAnim(flag)
+      }, 1000/24);
+    }
+    spriteAnim(true);
+  </script>
+</body>
+
+</html>
