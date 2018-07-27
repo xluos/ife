@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">    
+    <title>IFE ECMAScript</title>
+</head>
+<body>        
+    <input id="first-number" type="number" value="0" placeholder="第一个数字">
+    <input id="second-number" type="number" value="0" placeholder="第二个数字">
+    <button id="add-btn">加</button>
+    <button id="minus-btn">减</button>
+    <button id="times-btn">乘</button>
+    <button id="divide-btn">除</button>
+    <p id="result">运算结果</p>
+    <hr>
+    <input id="dec-number" type="number" placeholder="输入一个十进制非负整数">
+    <input id="bin-bit" type="number" placeholder="输入转化后二进制数字位数">
+    <button id="trans-btn">转化为二进制</button>
+    <p id="result2">运算结果</p>
+    <hr>
+    <table border=1>
+      <caption>乘法表</caption>
+      <tbody id='tbody'>
+      </tbody>
+    </table>
+    <script>
+      function $(id) {
+        return document.getElementById(id);
+      }
+    </script>
+    <script src="./code1.js"></script>
+    <script src="./code2.js"></script>
+    <script src="./code3.js"></script>
+    <script src="./code4.js"></script>
+    <script src="./code5.js"></script>
+</body>
+</html>

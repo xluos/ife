@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">    
+    <title>IFE ECMAScript</title>
+</head>
+<body>        
+    <input id="first-number" type="number" value="0" placeholder="第一个数字">
+    <input id="second-number" type="number" value="0" placeholder="第二个数字">
+    <button id="add-btn">加</button>
+    <button id="minus-btn">减</button>
+    <button id="times-btn">乘</button>
+    <button id="divide-btn">除</button>
+    <p id="result">运算结果</p>
+    <script>
+      function $(id) {
+        return document.getElementById(id);
+      }
+
+      function Calculate (func) {
+        return () =>
+          $('result').innerText = ('运算结果:' + func(parseFloat(num1.value), parseFloat(num2.value)))
+      }
+      let num1 = $('first-number');
+      let num2 = $('second-number');
+      $('add-btn').addEventListener('click',Calculate((a,b) => a+b))
+      $('minus-btn').addEventListener('click',Calculate((a,b) => a-b))
+      $('times-btn').addEventListener('click',Calculate((a,b) => a*b))
+      $('divide-btn').addEventListener('click',Calculate((a,b) => a/b))
+    </script>
+</body>
+</html>
