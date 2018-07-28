@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>IFE ECMAScript</title>
+</head>
+
+<body>
+  <div>
+    <label>Number A:
+      <input id="radio-a" type="radio" name="math-obj" value="a">
+    </label>
+    <input id="num-a" type="text">
+    <label>Number B:
+      <input id="radio-b" type="radio" name="math-obj" value="b">
+    </label>
+    <input id="num-b" type="text">
+  </div>
+  <div>
+    <button id="btn1">判断当前选中的输入框输入内容是否为数字</button>
+    <button id="btn2">把 A 四舍五入为 B 个小数位数的数字</button>
+    <button id="btn3">当前选中数字的绝对值</button>
+    <button id="btn4">对当前选中的数字进行上舍入</button>
+    <button id="btn5">对当前选中的数字进行下舍入</button>
+    <button id="btn6">把当前选中的数字四舍五入为最接近的整数</button>
+    <button id="btn7">返回 A 和 B 中的最高值</button>
+    <button id="btn8">返回 A 和 B 中的最低值</button>
+  </div>
+  <hr>
+  <div>
+    <label>String A:
+      <input id="radio-a" type="radio" checked="true" name="str-obj" value="a">
+    </label>
+    <textarea id="str-a"></textarea>
+    <label>String B:
+      <input id="radio-b" type="radio" name="str-obj" value="b">
+    </label>
+    <textarea id="str-b"></textarea>
+    <label>Num A：
+      <input id="num-a2" type="number" value="0">
+    </label>
+    <label>Num B：
+      <input id="num-b2" type="number" value="1">
+    </label>
+  </div>
+  <div>
+    <button id='btn2-1'>获取当前选中输入的内容长度</button>
+    <button id='btn2-2'>当前选中输入中的第3个字符</button>
+    <button id='btn2-3'>把两个输入框的文字连接在一起输出（concat）</button>
+    <button id='btn2-4'>输入B中的内容，在输入A的内容中第一次出现的位置（indexOf）</button>
+    <button id='btn2-5'>输入A中的内容，在输入B的内容中最后一次出现的位置（lastIndexOf）</button>
+    <button id='btn2-6'>使用slice获取选中输入框内容的部分内容，参数为num-a及num-b</button>
+    <button id='btn2-7'>当前选中输入框的行数</button>
+    <button id='btn2-8'>使用substr获取选中输入框内容的子字符串，参数为num-a及num-b</button>
+    <button id='btn2-9'>把所选输入框中的内容全部转为大写</button>
+    <button id='btn2-10'>把所选输入框中的内容全部转为小写</button>
+    <button id='btn2-11'>把所选输入框中内容的半角空格全部去除</button>
+    <button id='btn2-12'>把所选输入框中内容的a全部替换成另外一个输入框中的内容</button>
+  </div>
+  <p id="result"></p>
+  <script>
+    function $(id) {
+      return document.getElementById(id);
+    }
+    function diyTrim(str) {
+      let l = 0, r = str.length - 1;
+      while (l <= r && (str[l] === ' ' || str[l] === '　')) l++;
+      while (r > 0 && (str[r] === ' ' || str[r] === '　')) r--;
+      if (l > r) return '';
+      return str.slice(l, r + 1);
+    }
+    function removeRepetition(str) {
+      if(str === '') return '';
+      let result = str[0];
+      let len = str.length;
+      for(let i=1;i<len;i++) {
+        if(str[i] !== str[i-1]) {
+          result += str[i];
+        }
+      }
+      return result;
+    }
+  </script>
+  <script src="./code1.js"></script>
+  <script src="./code2.js"></script>
+  <script src="./code3.js"></script>
+  <!-- <script src="./test.js"></script> -->
+</body>
+
+</html>
