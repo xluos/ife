@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>IFE ECMAScript</title>
+  <style>
+    #wrapper {
+      position: relative;
+      margin: 0 auto;
+      width: 250px;
+      height: 30px;
+    }
+    #email-input {
+      box-sizing: border-box;
+      width: 250px;
+      height: 30px;
+      padding: 2px 10px;
+    }
+    #email-sug-wrapper {
+      position: absolute;
+      margin: 0;
+      top: 31px;
+      background: #f4f4f4;
+      list-style-type: none;
+      padding: 0;
+    }
+    #email-sug-wrapper li {
+      box-sizing: border-box;
+      cursor: pointer;
+      user-select: none;
+      padding: 0 10px;
+      width: 250px;
+      height: 30px;
+      line-height: 30px;
+      color: #777;
+    }
+    #email-sug-wrapper li:hover {
+      background: rgb(154, 235, 255);
+    }
+    .select {
+      background: rgb(255, 127, 127);
+    }
+  </style>
+</head>
+
+<body>
+  <div id="wrapper">
+    <input id="email-input" type="text">
+    <ul id="email-sug-wrapper" class="email-sug"></ul>
+  </div>
+  <script src="./index.js"></script>
+</body>
+
+</html>
