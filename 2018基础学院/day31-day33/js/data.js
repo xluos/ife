@@ -70,6 +70,7 @@ function getFilterData(data) {
     , productCheckedList = getCheckBox(PRODUCT, "input[type='checkbox']:checked")
     , productCount = PRODUCT.getElementsByTagName('input').length
     , filterData = data
+    , title = []
   // console.log(regionCheckedList);
   // console.log(productCheckedList);
   if (regionCheckedList.length < regionCount - 1) {
@@ -82,6 +83,39 @@ function getFilterData(data) {
     // console.log(regionCheckedList);    
     filterData = filterData.filter(x =>productCheckedList.indexOf(x.product)!==-1);
   }
-
-  return filterData;
+  if(regionCheckedList.length === 1) {
+    filterData = filterData.map(x=>{
+      title = ["地区", "分类"]
+      let arr = [...x.sale];
+      arr.unshift(x.region,x.product);
+      return arr;
+    })
+  } else {
+    filterData = filterData.map(x=>{
+      title = ["分类", "地区"]
+      let arr = [...x.sale];
+      arr.unshift(x.product, x.region);
+      return arr;
+    })
+  }
+  // 重新排序结果更整齐
+  filterData.sort((a,b)=>{
+    if(a[0]>b[0]) {
+      return -1;
+    } else if(a[0]<b[0]) {
+      return 1;
+    } else {
+      if(a[1]>=b[1]) {
+        return -1;
+      } else {
+        return 1;
+      }
+    }
+  })
+  // 处理数据渲染时合并单元格
+  return {
+    head: title,
+    data: filterData
+  };
 }
+

@@ -44,7 +44,9 @@ function createCheckBox(Node, checkBoxTextList) {
           }
         }
       }
-      insertTable(TABLEBOX,getFilterData(sourceData));
+      console.log(getFilterData(sourceData));
+      
+      insertTable(TABLE,getFilterData(sourceData));
     }
   })
 }
@@ -52,4 +54,4 @@ function createCheckBox(Node, checkBoxTextList) {
 createCheckBox(REGION, getRegion(sourceData))
 createCheckBox(PRODUCT, getProduct(sourceData))
 
-insertTable(TABLEBOX,getFilterData(sourceData));
+insertTable(TABLE,getFilterData(sourceData));

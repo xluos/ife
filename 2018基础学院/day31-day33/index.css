@@ -14,7 +14,7 @@ table {
   border-collapse: collapse; padding: 0;
   margin: 10px auto;
 }
-td {
+td,th {
   border: 1px solid #aaa;
   text-align: center;
   padding: 2px 10px;

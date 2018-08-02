@@ -7,15 +7,29 @@
 function createTbody(data) {
   let tableHtml = ''
     , tableRow = ''
+    , indexText = -1
+    , indexCount = 1
     , len = data.length;
   for(let i = 0; i < len; i++) {
-    tableRow = `<td>${data[i].region}</td><td>${data[i].product}</td>`
-    for(let j = 0; j < 12; j++) {
-      tableRow += `<td>${data[i].sale[j]}</td>`
+    tableRow = ``
+    for(let j = 0; j < 14; j++) {
+      if(j === 0) {
+        if(indexText===-1||data[i][j] !== data[indexText][0]) {
+          tableHtml = tableHtml.replace(`rowspan${indexText}`,indexCount);
+          indexText = i;
+          indexCount = 1;
+          tableRow += `<td rowspan=rowspan${indexText}>${data[i][j]}</td>`
+        } else {
+          indexCount ++
+        }
+      } else {
+        tableRow += `<td>${data[i][j]}</td>`
+      }
     }
     tableHtml += `<tr>${tableRow}</tr>`
   }
-  return `<caption>数据表</caption><tbody>${tableHtml}</tbody>`
+  tableHtml = tableHtml.replace(`rowspan${indexText}`,indexCount);
+  return `<tbody>${tableHtml}</tbody>`
 }
 
 /**
@@ -25,5 +39,5 @@ function createTbody(data) {
  * @param {*} data 数据
  */
 function insertTable(node,data) {
-  node.innerHTML = `<table><thead><td>地区</td><td>分类</td><td colspan=12>12月数据</td></thead>${createTbody(data)}</table>`
+  node.innerHTML = `<table><thead><th>${data.head[0]}</th><th>${data.head[1]}</th><th colspan=12>12月数据</th></thead>${createTbody(data.data)}</table>`
 }
