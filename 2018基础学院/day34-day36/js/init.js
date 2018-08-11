@@ -1,3 +1,7 @@
+function chartDrow(data) {
+  bar.drow(data)
+  line.drow(data)
+}
 /**
  *创建checkbox列表
  *
@@ -6,9 +10,10 @@
  */
 function createCheckBox(Node, checkBoxTextList) {
   let listHtml = `<label for="all-${Node.id}"><input type="checkbox" all=true id="all-${Node.id}">全选</label>`
-  checkBoxTextList.forEach((element,index) => {
-    listHtml += `<label for="${element}"><input type="checkbox" ${index===0?'checked':''} id="${element}" value="${element}">${element}</label>`
+  checkBoxTextList.forEach((element, index) => {
+    listHtml += `<label for="${element}"><input type="checkbox" ${index === 0 ? 'checked' : ''} id="${element}" value="${element}">${element}</label>`
   });
+
   Node.innerHTML = listHtml;
 
   Node.addEventListener('change', (e) => {
@@ -44,14 +49,39 @@ function createCheckBox(Node, checkBoxTextList) {
           }
         }
       }
-      console.log(getFilterData(sourceData));
-      
-      insertTable(TABLE,getFilterData(sourceData));
+      insertTable(TABLE, getFilterData(sourceData));
+      chartDrow(getChartData(sourceData))
     }
   })
 }
 
+var trCache = null
+// 鼠标移入事件设置单行图表
+TABLE.addEventListener('mouseover', (e)=>{
+  
+  if(e.target.tagName === 'TD') {
+    let parentNode = e.target.parentNode;
+    if(trCache === parentNode) {
+      return false;
+    } else {
+      trCache = parentNode;
+      let data = Array.from(parentNode.children).map(x=>parseInt(x.innerText)).slice(-12);
+      // console.log(data);
+      
+      chartDrow({
+        text: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+        data: data});
+    }
+    
+  }
+},false)
+TABLE.addEventListener('mouseleave', (e)=>{
+  chartDrow(getChartData(sourceData))
+},false)
+
+
 createCheckBox(REGION, getRegion(sourceData))
 createCheckBox(PRODUCT, getProduct(sourceData))
 
-insertTable(TABLE,getFilterData(sourceData));
+insertTable(TABLE, getFilterData(sourceData));
+chartDrow(getChartData(sourceData))

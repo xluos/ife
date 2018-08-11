@@ -11,7 +11,8 @@ label {
   user-select: none;
 }
 table {
-  border-collapse: collapse; padding: 0;
+  border-collapse: collapse;
+  padding: 0;
   margin: 10px auto;
 }
 td,th {
@@ -42,10 +43,16 @@ td,th {
 }
 .chart {
   display: flex;
+  width: 100%;
   justify-content: center;
 }
 #bar-box, #line-box {
   margin: 15px;
   padding: 15px;
   border: 1px solid #aaa;
+}
+#line-box {
+  width: 530px;
+  height: 280px;
+  padding: 0;
 }

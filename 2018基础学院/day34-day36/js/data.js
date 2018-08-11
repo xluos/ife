@@ -119,3 +119,18 @@ function getFilterData(data) {
   };
 }
 
+/**
+ * 获取图表所用的数据
+ *
+ * @returns 处理好的数据
+ */
+function getChartData(sourceData) {
+  let data = getFilterData(sourceData).data;
+  // console.log(data);
+  
+  return {
+    text: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+    data: data.map(val=>val.slice(2))
+  }
+}
+
