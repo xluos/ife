@@ -116,6 +116,7 @@ Edit.prototype = {
       // 检查输入合法性
       if (val && isNaN(val)) {
         alert("输入非法！")
+        return
       }
       let value = val || this.oldValue;
       this.eparent.setAttribute('edit', true);
