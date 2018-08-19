@@ -1,0 +1,83 @@
+body {
+  background: #fcfcfc;
+}
+h1 {
+  text-align: center;
+}
+h5 {
+  margin: 0 0 10px 0;
+}
+label {
+  user-select: none;
+}
+table {
+  border-collapse: collapse;
+  padding: 0;
+  margin: 10px auto;
+}
+td,th {
+  border: 1px solid #aaa;
+  text-align: center;
+  padding: 5px 26px;
+  margin: 0;
+  user-select: none;
+}
+td {
+  position: relative;
+}
+td i {
+  display: none;
+}
+tr td:hover[edit=true] i {
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 3px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 22px;
+  color: #3fb1e3;
+}
+td input {
+  width: 68px;
+}
+td button {
+  background: #fff;
+  border: #3fb1e3 1px solid;
+  font-size: 10px;
+}
+.card {
+  width: 80%;
+  /* max-width: 1250px; */
+  /* height: 500px;; */
+  margin: 0 auto;
+  border: 1px solid #aaa;
+  border-radius: 10px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.card .card-head {
+  padding: 10px 20px;
+  border-bottom: 1px solid #aaa;
+  background: #f7f7f7;
+}
+
+#card-main {
+  padding-bottom: 50px; 
+}
+.chart {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+#bar-box, #line-box {
+  margin: 15px;
+  padding: 15px;
+  border: 1px solid #aaa;
+}
+#line-box {
+  width: 530px;
+  height: 280px;
+  padding: 0;
+}
