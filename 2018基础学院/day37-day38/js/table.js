@@ -90,6 +90,20 @@ Edit.prototype = {
       setData(this.eparent.dataset.x, this.eparent.dataset.y, this.input.value);
       this.del();
     })
+    document.addEventListener('keydown',(e)=>{
+      console.log(e.keyCode);
+      // Enter键
+      if(e.keyCode === 13) {
+        this.reset(this.input.value);
+        setData(this.eparent.dataset.x, this.eparent.dataset.y, this.input.value);
+        this.del();
+        // ESC按键
+      } else if(e.keyCode === 27) {
+        this.reset();
+        this.del();
+      }
+      
+    })
   },
 
   /**
