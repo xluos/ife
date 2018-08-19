@@ -165,3 +165,11 @@ function getChartData(sourceData) {
   }
 }
 
+function saveLocal() {
+  localStorage.setItem('ife37-38',JSON.stringify(sourceData));
+}
+
+function setData(x,y,value) {
+  sourceData[x].sale[y] = value;
+  saveLocal();
+}

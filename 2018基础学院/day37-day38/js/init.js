@@ -82,28 +82,15 @@ TABLE.addEventListener('mouseleave', (e)=>{
 
 document.addEventListener('click', (e)=>{
   // console.log(e.target.tagName);
-
-  let eparent = EDITBOX.parentNode
+  
   if(e.target.tagName === 'I') {
     let parent = e.target.parentNode
     // 恢复上一个表格的状态
-    if(eparent && eparent.tagName === 'TD') {
-      eparent.setAttribute('edit',true);
-      eparent.insertBefore(document.createTextNode(EDITINPUT.getAttribute('oldValue')), eparent.firstChild);
-    }
-    parent.setAttribute('edit',false);
-    let textNode = parent.childNodes[0];
-    EDITINPUT.setAttribute('oldValue',textNode.nodeValue);
-    EDITINPUT.value = textNode.nodeValue;
-    textNode.nodeValue = '';
-    parent.appendChild(EDITBOX);
-    EDITBOX.getElementsByTagName('input')[0].focus();
+    EDIT.reset();
+    EDIT.setEdit(parent);
   } else if(e.target.tagName.search(/INPUT|BUTTON/) === -1) {
-    if(eparent && eparent.tagName === 'TD') {
-      eparent.setAttribute('edit',true);
-      eparent.insertBefore(document.createTextNode(EDITINPUT.getAttribute('oldValue')), eparent.firstChild);
-      eparent.removeChild(EDITBOX);
-    }
+    EDIT.reset();
+    EDIT.del();
   }
 })
 

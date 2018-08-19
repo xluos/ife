@@ -8,8 +8,8 @@ const TABLE = $('table')
 const TABLEBOX = $('card-main')
 const BARBOX = $('bar-box')
 const LINEBOX = $('line-box')
-const EDITBOX = $('edit')
-const EDITINPUT = EDITBOX.getElementsByTagName('input')[0]
+// const EDITBOX = $('edit')
+// const EDITINPUT = EDITBOX.getElementsByTagName('input')[0]
 
 function getCheckBox(e, query) {
   return e.querySelectorAll(query);
