@@ -91,7 +91,7 @@ Edit.prototype = {
       this.del();
     })
     document.addEventListener('keydown',(e)=>{
-      console.log(e.keyCode);
+      // console.log(e.keyCode);
       // Enter键
       if(e.keyCode === 13) {
         this.reset(this.input.value);

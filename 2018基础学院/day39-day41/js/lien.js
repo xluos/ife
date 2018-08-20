@@ -124,6 +124,7 @@ Line.prototype = {
    * @param {*} data 折线图数据
    */
   drow: function (data) {
+   
     this.CTX.clearRect(0,0,this.width,this.height);
     this.valueMax = this.getMax(data.data);
     this.fillColor = this.colors[0];

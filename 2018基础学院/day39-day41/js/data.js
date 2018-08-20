@@ -72,9 +72,10 @@ function getProduct(data) {
  * @returns 过滤后的数据
  */
 function getFilterData(data) {
-  let regionCheckedList = getCheckBox(REGION, "input[type='checkbox']:checked")
+  let query = ROUTER.getQuery()
+    , regionCheckedList = query.region
     , regionCount = REGION.getElementsByTagName('input').length
-    , productCheckedList = getCheckBox(PRODUCT, "input[type='checkbox']:checked")
+    , productCheckedList = query.product
     , productCount = PRODUCT.getElementsByTagName('input').length
     , filterData = JSON.parse(JSON.stringify(data))
     , title = []
@@ -92,13 +93,15 @@ function getFilterData(data) {
   })
   // console.log(regionCheckedList);
   // console.log(productCheckedList);
+  
   if (regionCheckedList.length < regionCount - 1) {
-    regionCheckedList = Array.from(regionCheckedList).map(x=>x.value)
+    // regionCheckedList = Array.from(regionCheckedList).map(x=>x.value)
     // console.log(regionCheckedList);    
     filterData = filterData.filter(x =>regionCheckedList.indexOf(x.region)!==-1);
   }
+  // console.log(filterData);
   if (productCheckedList.length < productCount - 1) {
-    productCheckedList = Array.from(productCheckedList).map(x=>x.value)
+    // productCheckedList = Array.from(productCheckedList).map(x=>x.value)
     // console.log(regionCheckedList);    
     filterData = filterData.filter(x =>productCheckedList.indexOf(x.product)!==-1);
   }
