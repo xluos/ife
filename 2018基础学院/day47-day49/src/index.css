@@ -1,0 +1,16 @@
+html, body{
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  background:rgb(255, 252, 220);
+}
+
+h1 {
+  color: rgb(255, 196, 0);
+  margin: 20px 0;
+  font-size: 50px;
+}
+
+#canvas-box {
+  position: relative;
+}
