@@ -26,6 +26,15 @@ class Staff {
     this.id = uuid;
   }
   /**
+   * 设置工作人员对应的餐厅
+   *
+   * @param {*} rest 餐厅实例
+   * @memberof Staff
+   */
+  setRestaurant(rest) {
+    this.restaurant = rest;
+  }
+  /**
    * 完成工作
    *
    * @memberof Staff

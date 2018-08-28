@@ -15,6 +15,7 @@ class Cook extends Staff {
   constructor(name,wage) {
     super(name,wage);
   }
+  profession = "Cook"
   /**
    * 完成工作
    *

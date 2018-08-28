@@ -12,25 +12,33 @@ import Staff from './staff.js'
 class Waiter extends Staff {
   constructor(name,wage) {
     super(name,wage);
+    this.Dishs = []
+  }
+  profession = 'Waiter'
+  /**
+   * 点餐方法，从顾客对象获取顾客的点餐
+   * @argument {Constructor} constructor 顾客
+   * @memberof Waiter
+   */
+  orderDishes(constructor) {
+    this.Dishs = constructor.orderDishes();
   }
   /**
-   * 完成工作
+   * 将顾客点的菜单送到餐厅点餐板
    *
    * @memberof Waiter
    */
-  finishWork() {
-    if(Array.isArray(arguments[0])) {
-      console.log('点菜',JSON.stringify(arguments[0]));
-      
-      this.menu = arguments[0];
-    } else {
-      console.log(`给${arguments[0]}顾客送菜`);
-    }
+  setDishes() {
+    this.restaurant.addDishes(this.Dishs);
   }
-  toCook(cook) {
-    console.log('交给厨师', cook);
+
+  /**
+   * 送餐方法，得到做好的菜品数组，送到相应顾客手里
+   *
+   * @memberof Waiter
+   */
+  sendDishes(dishes) {
     
-    cook.finishWork(this.menu);
   }
 }
 

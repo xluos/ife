@@ -6,10 +6,19 @@
  * @class Dish
  */
 class Dish {
-  constructor({name, cost, price}) {
+  constructor({name, cost, price, time}) {
     this.name = name;
     this.cost = cost;
     this.price = price;
+    this.time = time;
+  }
+  /**
+   * 设置当前这道菜所属的顾客
+   *
+   * @memberof Dish
+   */
+  setCustomer(id) {
+    this.customerId = id;
   }
 }
 

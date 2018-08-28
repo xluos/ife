@@ -11,7 +11,32 @@ let ifeRestaurant = new Restaurant({
     {
       name: '菜品1',
       cost: 5,
-      price: 10
+      price: 10,
+      time: 6
+    },
+    {
+      name: '菜品2',
+      cost: 5,
+      price: 10,
+      time: 6
+    },
+    {
+      name: '菜品3',
+      cost: 5,
+      price: 10,
+      time: 6
+    },
+    {
+      name: '菜品4',
+      cost: 5,
+      price: 10,
+      time: 6
+    },
+    {
+      name: '菜品5',
+      cost: 5,
+      price: 10,
+      time: 6
     }
   ]
 })
@@ -24,4 +49,6 @@ ifeRestaurant.hire(newWaiter);
 
 let newcustomer = new Customer()
 
-ifeRestaurant.customersComing(newcustomer);
+// ifeRestaurant.customersComing(newcustomer);
+
+
