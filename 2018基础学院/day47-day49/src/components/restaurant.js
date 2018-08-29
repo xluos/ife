@@ -1,5 +1,6 @@
 // 餐厅类
-
+import Delay from './delay'
+import Chain from './chain'
 
 /**
  * 餐厅类
@@ -22,6 +23,9 @@ class Restaurant {
       // 餐厅座位
       this.seats = seats;
       
+      // 餐厅是否正在运行
+      this.isRun = false;
+
       // 空闲队列
       this.waiterQueue = waiterQueue;
       this.cookQueue = cookQueue;
@@ -41,6 +45,16 @@ class Restaurant {
       // 静态变量，判断是否创建过餐厅
       Restaurant.created = true;
       Restaurant.instance = this;
+
+      // 设置责任链
+
+      this.chainHead = (new Chain(this.waiterToCust))
+                .setNextSuccessor(new Chain(this.waiterToDishs))
+                .setNextSuccessor(new Chain(this.cookToDishs))
+                .setNextSuccessor(new Chain(this.cookToWaiter))
+                .setNextSuccessor(new Chain(this.waiterSendCustDishs))
+                .setNextSuccessor(new Chain(this.custToWaiter))
+
       return this;
     } else {
 
@@ -129,7 +143,29 @@ class Restaurant {
     // 餐厅运行
     this.run();
   }
-
+  /**
+   * 餐厅运行，使用责任链模式 分为：
+   * + [x] 服务员为顾客点菜      waiterToCust
+   * + [x] 服务员把菜添加到点菜板 waiterToDishs
+   * + [ ] 厨师从点菜版取菜单    cookToDishs
+   * + [ ] 做菜完成通知服务员    cookToWaiter
+   * + [ ] 服务员送菜           waiterSendCustDishs
+   * + [ ] 顾客吃完服务员结账    custToWaiter
+   * 
+   * 以下情况触发餐厅运行：
+   * + [ ] 顾客到来触发
+   * + [ ] 服务员变为空闲状态触发
+   * + [ ] 厨师完成工作触发
+   * + [ ] 顾客吃完触发
+   * + [ ] 结账完成触发
+   *
+   * @memberof Restaurant
+   */
+  run() {
+    
+    this.chainHead.passRequest();
+    
+  }
   /**
    * 添加菜品到点菜板
    *  
@@ -153,26 +189,54 @@ class Restaurant {
     }
   }
   /**
-   * 餐厅运行，使用责任链模式 分为：
-   *    [x] 服务员为顾客点菜  
-   *    [x] 服务员把菜添加到点菜板
-   *    [ ] 厨师从点菜版取菜单
-   *    [ ] 做菜完成通知服务员
-   *    [-] 服务员送菜
-   *    [ ] 顾客吃完服务员结账
-   * 以下情况触发餐厅运行：
-   *    [ ] 顾客到来触发
-   *    [ ] 服务员变为空闲状态触发
-   *    [ ] 厨师完成工作触发
-   *    [ ] 顾客吃完触发
-   *    [ ] 结账完成触发
+   * 服务员为顾客点菜
    *
    * @memberof Restaurant
    */
-  run() {
+  waiterToCust() {
 
-    
   }
+  /**
+   * 服务员把菜添加到点菜板
+   *
+   * @memberof Restaurant
+   */
+  waiterToDishs() {
+
+  }
+  /**
+   * 服务员送菜
+   *
+   * @memberof Restaurant
+   */
+  waiterSendCustDishs() {
+
+  }
+  /**
+   * 厨师从点菜版取菜单
+   *
+   * @memberof Restaurant
+   */
+  cookToDishs() {
+
+  }
+  /**
+   * 做菜完成通知服务员
+   *
+   * @memberof Restaurant
+   */
+  cookToWaiter() {
+
+  }
+  /**
+   * 顾客吃完服务员结账
+   *
+   * @memberof Restaurant
+   */
+  custToWaiter() {
+
+  }
+
 }
 
 export default Restaurant

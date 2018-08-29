@@ -1,7 +1,8 @@
 // 厨师类
 // 继承自员工
 
-import Staff from './staff.js'
+import Staff from './staff'
+import Delay from './delay'
 
 /**
  * 厨师类
@@ -21,8 +22,9 @@ class Cook extends Staff {
    *
    * @memberof Waiter
    */
-  finishWork(dish) {
-    console.log(`完成${JSON.stringify(dish)}`);
+  getDishes() {
+    let dish = this.restaurant.Dishes.pop();
+
     
   }
 }

@@ -1,8 +1,9 @@
-import Dish from './dish.js'                //菜品
-import Cook from './cook.js'                //厨师
-import Waiter from './waiter.js'            //服务员
-import Customer from './customer.js'        //顾客
-import Restaurant from './restaurant.js'    //餐厅
+import Dish from './dish'                //菜品
+import Cook from './cook'                //厨师
+import Waiter from './waiter'            //服务员
+import Customer from './customer'        //顾客
+import Restaurant from './restaurant'    //餐厅
+import Delay from './delay'
 
 let ifeRestaurant = new Restaurant({
   cash: 10000,

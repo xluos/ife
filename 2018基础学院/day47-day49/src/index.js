@@ -1,5 +1,5 @@
 import './index.css'
-import main from './components/main.js'
+import main from './components/main'
 
 let DF = document.createDocumentFragment()
 

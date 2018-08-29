@@ -1,5 +1,6 @@
 // 顾客类
 import UUID from 'uuid/v4'
+import Delay from './delay'
 /**
  * 顾客类
  *

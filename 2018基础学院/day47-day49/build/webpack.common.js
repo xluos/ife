@@ -23,6 +23,9 @@ module.exports = {
     filename: 'js/[name].[hash].js',
     path: path.resolve(__dirname, '../dist')
   },
+  resolve: {
+    extensions: ['.js', '.json','.css']
+  },
   module: {
     /*
     配置各种类型文件的加载器，称之为 loader

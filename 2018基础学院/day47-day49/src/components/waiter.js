@@ -1,8 +1,8 @@
 // 服务员 类
 // 继承自员工
 
-import Staff from './staff.js'
-
+import Staff from './staff'
+import Delay from './delay'
 /**
  * 服务员类
  *
@@ -38,7 +38,9 @@ class Waiter extends Staff {
    * @memberof Waiter
    */
   sendDishes(dishes) {
-    
+    dishes.forEach(element => {
+
+    });
   }
 }
 

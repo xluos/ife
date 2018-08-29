@@ -1,5 +1,5 @@
 // 菜品类
-
+import Delay from './delay'
 /**
  * 菜品类
  *
