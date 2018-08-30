@@ -1,7 +1,8 @@
 // 职责链包装节点类
 
 class Chain {
-  constructor(fn) {
+  constructor(fn,self) {
+    this.self = self
     this.fn = fn;
     this.successor = null;
   }
@@ -9,7 +10,7 @@ class Chain {
     return this.successor = successor;
   }
   passRequest() {
-    let ret = this.fn.apply(this, arguments);
+    let ret = this.fn.apply(this.self, arguments);
     if (ret === 'nextSuccessor') {
       return this.successor
           && this.successor.passRequest.apply(this.successor, arguments);
@@ -21,3 +22,5 @@ class Chain {
         && this.successor.passRequest.apply(this.successor, arguments);
   }
 }
+
+export default Chain

@@ -10,8 +10,8 @@ import Delay from './delay'
  * @extends {Staff} 继承员工类
  */
 class Waiter extends Staff {
-  constructor(name,wage) {
-    super(name,wage);
+  constructor(name, wage) {
+    super(name, wage);
     this.Dishs = []
   }
   profession = 'Waiter'
@@ -22,6 +22,7 @@ class Waiter extends Staff {
    */
   orderDishes(constructor) {
     this.Dishs = constructor.orderDishes();
+    this.status = 'orderDishes'
   }
   /**
    * 将顾客点的菜单送到餐厅点餐板
@@ -30,6 +31,8 @@ class Waiter extends Staff {
    */
   setDishes() {
     this.restaurant.addDishes(this.Dishs);
+    this.Dishs = [];
+    this.status = 'free'
   }
 
   /**
@@ -38,9 +41,23 @@ class Waiter extends Staff {
    * @memberof Waiter
    */
   sendDishes(dishes) {
-    dishes.forEach(element => {
+    dishes = dishes.dishes
+    dishes.forEach(ele => {
+      let id = ele.customerId
+        , index = this.restaurant.customerWaitQueue.findIndex(cust => cust.id === id)
+        , cust = this.restaurant.customerWaitQueue[index]
+      if (index > 0) {
 
-    });
+
+        // console.log(cust);
+
+        cust.eatDishes.push(ele)
+        if (cust.eatDishes.length === cust.Dishes.length) {
+          this.restaurant.customerEatQueue.push(cust);
+          this.restaurant.customerWaitQueue.splice(index, 1)
+        }
+      }
+    })
   }
 }
 

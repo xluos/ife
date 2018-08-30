@@ -43,13 +43,25 @@ let ifeRestaurant = new Restaurant({
 })
 
 
-let newCook = new Cook("Tony", 10000);
+let newCook = new Cook("Cook", 10000);
 ifeRestaurant.hire(newCook);
-let newWaiter = new Waiter("Tony2", 10000);
+let newWaiter = new Waiter("Tony1", 10000);
+ifeRestaurant.hire(newWaiter);
+newCook = new Cook("Cook2", 10000);
+ifeRestaurant.hire(newCook);
+newWaiter = new Waiter("Tony2", 10000);
+ifeRestaurant.hire(newWaiter);
+newCook = new Cook("Cook3", 10000);
+ifeRestaurant.hire(newCook);
+newWaiter = new Waiter("Tony3", 10000);
 ifeRestaurant.hire(newWaiter);
 
-let newcustomer = new Customer()
 
-// ifeRestaurant.customersComing(newcustomer);
+// ifeRestaurant.run();
+
+export default function() {
+  let newcustomer = new Customer()
+  ifeRestaurant.customersComing(newcustomer);
+}
 
 

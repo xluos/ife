@@ -15,6 +15,7 @@ class Staff {
   constructor(name,wage) {
     this.name = name;
     this.wage = wage;
+    this.status = 'free'
   }
   /**
    * 设置员工id

@@ -22,10 +22,8 @@ class Cook extends Staff {
    *
    * @memberof Waiter
    */
-  getDishes() {
-    let dish = this.restaurant.Dishes.pop();
-
-    
+  setDishesOk(dishe) {
+    this.restaurant.DishesOK.push(dishe)
   }
 }
 
