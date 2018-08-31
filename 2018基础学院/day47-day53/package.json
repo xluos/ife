@@ -10,6 +10,7 @@
     "build": "webpack --config ./build/webpack.prod.js"
   },
   "dependencies": {
+    "spritejs": "^2.12.2",
     "uuid": "^3.3.2"
   },
   "devDependencies": {

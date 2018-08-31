@@ -22,7 +22,7 @@ class Restaurant {
 
       // 餐厅座位
       this.seats = seats;
-      
+
       // 餐厅是否正在运行
       this.isRun = false;
 
@@ -30,16 +30,16 @@ class Restaurant {
       this.waiterQueue = waiterQueue;
       this.cookQueue = cookQueue;
       this.customerQueue = customerQueue;
-      
+
       // 工作队列
       this.waiterWorkQueue = [];
       this.cookWorkQueue = [];
       this.customerEatQueue = [];
       this.customerWaitQueue = [];
-      
+
       // 菜单
       this.menu = menu
-      
+
       // 点菜板
       this.Dishes = []
       this.DishesOK = []
@@ -50,13 +50,14 @@ class Restaurant {
 
       // 设置责任链
 
-      this.chainHead = new Chain(this.waiterToCust, this)
-      this.chainHead.setNextSuccessor(new Chain(this.waiterToDishs, this))
-                    .setNextSuccessor(new Chain(this.cookToDishs, this))
-                    .setNextSuccessor(new Chain(this.cookToWaiter, this))
-                    .setNextSuccessor(new Chain(this.waiterSendCustDishs, this))
-                    .setNextSuccessor(new Chain(this.custToWaiter, this))
-                    // .setNextSuccessor(new Chain(function(){this.isRun = false}, this))
+      // this.chainHead = new Chain(this.waiterToCust, this)
+      this.chainHead = new Chain(this.custOrderDishes, this)
+      this.chainHead
+        // .setNextSuccessor(new Chain(this.waiterToDishs, this))
+        .setNextSuccessor(new Chain(this.cookToDishs, this))
+        .setNextSuccessor(new Chain(this.waiterSendCustDishs, this))
+        .setNextSuccessor(new Chain(this.custToWaiter, this))
+      // .setNextSuccessor(new Chain(function(){this.isRun = false}, this))
 
       return this;
     } else {
@@ -74,7 +75,7 @@ class Restaurant {
    * @param {*} data 菜单数据
    * @memberof Restaurant
    */
-  setMenu (data) {
+  setMenu(data) {
     this.menu = data;
   }
   /**
@@ -83,7 +84,7 @@ class Restaurant {
    * @param {Object} data 菜品对象
    * @memberof Restaurant
    */
-  addMenu (data) {
+  addMenu(data) {
     this.menu.push(data)
   }
   /**
@@ -92,7 +93,7 @@ class Restaurant {
    * @returns 菜单，是一个对象数组
    * @memberof Restaurant
    */
-  getMenu () {
+  getMenu() {
     return this.menu
   }
   /**
@@ -139,12 +140,16 @@ class Restaurant {
    * @memberof Restaurant
    */
   customersComing(cust) {
+    if (this.customerQueue.length > 5) {
+      return false
+    }
     // 设置顾客所在餐厅
     cust.setRestaurant(this);
     // 加入顾客等待队列
     this.customerQueue.push(cust);
     // 餐厅运行
     this.run();
+    return true;
   }
   /**
    * 餐厅运行，使用责任链模式 分为：
@@ -165,12 +170,12 @@ class Restaurant {
    * @memberof Restaurant
    */
   run() {
-    if(!this.isRun) {
+    if (!this.isRun) {
       this.isRun = true;
       this.chainHead.passRequest();
       this.isRun = false;
     }
-    
+
   }
   /**
    * 添加菜品到点菜板
@@ -180,20 +185,46 @@ class Restaurant {
    */
   addDishes(dishes) {
     let Dishes = this.Dishes;
-    let index = Dishes.find(x=>{
-      x.name = dishes.name;
-    })
-    if(index>=0) {
-      Dishes[index].dishes.push(dishes);
-      Dishes[index].time += dishes.time;
-    } else {
-      Dishes.push({
-        name: dishes.name,
-        time: dishes.time,
-        dishes: [dishes]
-      })
-    }
+    dishes.forEach(element => {
+      let index = Dishes.find(x => x.name === element.name)
+      // console.log(dishes);
+
+      if (index >= 0) {
+        Dishes[index].dishes.push(element);
+        Dishes[index].time += element.time;
+      } else {
+        Dishes.push({
+          name: element.name,
+          time: element.time,
+          dishes: [element]
+        })
+      }
+    });
+
   }
+
+  /**
+   * 顾客自己点餐
+   *
+   * @memberof Restaurant
+   */
+  custOrderDishes() {
+    if (this.customerQueue.length > 0) {
+      let cust
+      while (this.customerQueue.length > 0) {
+        cust = this.customerQueue.pop();
+        console.log(`顾客`, cust, `正在通过app点菜`);
+        Delay(3).then(() => {
+          console.log(`顾客`, cust, `点餐完成`);
+          cust.sendDishes();
+          this.customerWaitQueue.push(cust);
+          this.run()
+        })
+      }
+    }
+    return 'nextSuccessor'
+  }
+
   /**
    * 服务员为顾客点菜
    *
@@ -201,20 +232,18 @@ class Restaurant {
    */
   waiterToCust() {
     // 用空闲服务员和顾客的时候
-    console.log(this.waiterQueue.length > 0 
-      && this.customerQueue.length > 0,this.waiterQueue, this.customerQueue );
-    
-    if(this.waiterQueue.length > 0 
-    && this.customerQueue.length > 0) {
+
+    if (this.waiterQueue.length > 0
+      && this.customerQueue.length > 0) {
       console.log('服务员为顾客点菜');
       let waiter, cust
-      while(this.waiterQueue.length > 0 
-         && this.customerQueue.length > 0) {
-          waiter = this.waiterQueue.pop();
-          cust = this.customerQueue.pop();
-          waiter.orderDishes(cust);
-          this.waiterWorkQueue.push(waiter);
-          this.customerWaitQueue.push(cust);
+      while (this.waiterQueue.length > 0
+        && this.customerQueue.length > 0) {
+        waiter = this.waiterQueue.pop();
+        cust = this.customerQueue.pop();
+        waiter.orderDishes(cust);
+        this.waiterWorkQueue.push(waiter);
+        this.customerWaitQueue.push(cust);
       }
     }
     return 'nextSuccessor'
@@ -225,15 +254,15 @@ class Restaurant {
    * @memberof Restaurant
    */
   waiterToDishs() {
-    if(this.waiterWorkQueue.length > 0) {
-        console.log('服务员把菜添加到点菜板');
-        let waiter, len = this.waiterWorkQueue.length
-        while(len > 0 && this.waiterWorkQueue[len - 1].status === 'orderDishes') {
-            waiter = this.waiterWorkQueue.pop();
-            waiter.setDishes();
-            this.waiterWorkQueue.length = --len;
-        }
+    if (this.waiterWorkQueue.length > 0) {
+      console.log('服务员把菜添加到点菜板');
+      let waiter, len = this.waiterWorkQueue.length
+      while (len > 0 && this.waiterWorkQueue[len - 1].status === 'orderDishes') {
+        waiter = this.waiterWorkQueue.pop();
+        waiter.setDishes();
+        this.waiterWorkQueue.length = --len;
       }
+    }
     return 'nextSuccessor'
   }
   /**
@@ -243,18 +272,25 @@ class Restaurant {
    */
   waiterSendCustDishs() {
 
-    if(this.waiterQueue.length > 0 
+    if (this.waiterQueue.length > 0
       && this.DishesOK.length > 0) {
-        console.log('服务员送菜');
-        let waiter, dishes
-        while(this.waiterQueue.length > 0 
-           && this.customerQueue.length > 0) {
-            waiter = this.waiterQueue.pop();
-            dishes = this.DishesOK.pop();
-            waiter.sendDishes(dishes);
-            this.waiterWorkQueue.push(waiter);
-        }
+      let waiter, dishes
+      while (this.waiterQueue.length > 0
+        && this.DishesOK.length > 0) {
+        waiter = this.waiterQueue.pop();
+        dishes = this.DishesOK.pop();
+        console.log(`服务员`, waiter, `开始送菜`, dishes);
+        this.waiterWorkQueue.push(waiter);
+        Delay(0.5).then(() => {
+          waiter.sendDishes(dishes);
+          console.log(`服务员`, waiter, `送菜完成`);
+          let index = this.waiterWorkQueue.indexOf(waiter)
+          this.waiterQueue.push(waiter)
+          this.waiterWorkQueue.splice(index, 1)
+          this.run()
+        })
       }
+    }
     return 'nextSuccessor'
   }
   /**
@@ -263,60 +299,62 @@ class Restaurant {
    * @memberof Restaurant
    */
   cookToDishs() {
-    if(this.cookQueue.length > 0 
+    if (this.cookQueue.length > 0
       && this.Dishes.length > 0) {
-        console.log('厨师从点菜版取菜单');
-        let cook, dishes
-        while(this.cookQueue.length > 0 
-           && this.Dishes.length > 0) {
-            cook = this.cookQueue.pop();
-            dishes = this.Dishes.pop();
+      console.log('厨师从点菜版取菜单');
+      console.log([...this.Dishes]);
+
+      let cook, dishes
+      while (this.cookQueue.length > 0
+        && this.Dishes.length > 0) {
+        cook = this.cookQueue.pop();
+        dishes = this.Dishes.pop();
+        this.cookWorkQueue.push(cook);
+        console.log('厨师', cook, '正在做菜', dishes);
+        (function (cook,time, self) {
+          Delay(time).then(() => {
             cook.setDishesOk(dishes);
-            this.cookWorkQueue.push(cook);
-        }
+            console.log('厨师', cook, '烹饪完成', dishes);
+            let index = self.cookWorkQueue.indexOf(cook)
+            self.cookQueue.push(cook)
+            self.cookWorkQueue.splice(index, 1)
+            self.run()
+          })
+        })(cook,dishes.time, this)
       }
+    }
     return 'nextSuccessor'
   }
-  /**
-   * 做菜完成通知服务员
-   *
-   * @memberof Restaurant
-   */
-  cookToWaiter() {
-    
-    if(this.waiterQueue.length > 0 
-      && this.DishesOK.length > 0) {
-        console.log('做菜完成通知服务员');
-        let waiter, dishes
-        while(this.waiterQueue.length > 0 
-           && this.DishesOK.length > 0) {
-            waiter = this.waiterQueue.pop();
-            dishes = this.DishesOK.pop();
-            waiter.sendDishes(dishes);
-            this.waiterQueue.push(waiter);
-        }
-      }
-    return 'nextSuccessor'
-  }
+
   /**
    * 顾客吃完服务员结账
    *
    * @memberof Restaurant
    */
   custToWaiter() {
-    console.log('顾客吃完服务员结账-未实现');
-    if(this.waiterQueue.length > 0 
+    console.log(this.waiterQueue,this.customerEatQueue);
+    
+    if (this.waiterQueue.length > 0
       && this.customerEatQueue.length > 0) {
-        let waiter, cust
-        while(this.waiterQueue.length > 0 
-           && this.customerEatQueue.length > 0) {
-            waiter = this.waiterQueue.pop();
-            cust = this.customerEatQueue.pop();
-            waiter.orderDishes(cust);
-            this.waiterWorkQueue.push(waiter);
-            this.customerWaitQueue.push(cust);
+      let waiter, cust
+      while (this.waiterQueue.length > 0
+        && this.customerEatQueue.length > 0) {
+        cust = this.customerEatQueue[this.customerEatQueue.length - 1];
+        if (cust.okDishes.length === cust.Dishes.length) {
+          console.log('顾客吃完服务员结账');
+          this.customerEatQueue.pop();
+          waiter = this.waiterQueue.pop();
+          this.waiterWorkQueue.push(waiter);
+          Delay(0.5).then(() => {
+            waiter.pay(cust);
+            let index = this.waiterWorkQueue.indexOf(waiter)
+            this.waiterQueue.push(waiter)
+            this.waiterWorkQueue.splice(index, 1)
+            this.run()
+          })
         }
       }
+    }
     return 'nextSuccessor'
   }
 

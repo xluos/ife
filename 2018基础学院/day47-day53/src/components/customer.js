@@ -1,6 +1,7 @@
 // 顾客类
 import UUID from 'uuid/v4'
 import Dish from './dish'
+import Delay from './delay'
 /**
  * 顾客类
  *
@@ -11,7 +12,9 @@ class Customer {
     // 生成每个顾客独一无二的UUID
     this.id = UUID();
     this.eatDishes = []
+    this.okDishes = []
     this.Dishes = []
+    this.states = true
   }
   setRestaurant(rest) {
     this.restaurant = rest;
@@ -40,12 +43,43 @@ class Customer {
     return dishes
   }
   /**
+   * 顾客通过app自己点餐
+   *
+   * @memberof Customer
+   */
+  sendDishes() {
+
+    this.restaurant.addDishes(this.orderDishes())
+  }
+  /**
    * 吃菜
    *
    * @memberof Customer
    */
   eat() {
-
+    if(this.states && this.eatDishes.length > 0) {
+      this.states = false
+      let eatDishe = this.eatDishes.pop()
+      console.log(this,'正在吃',eatDishe);
+      
+      Delay(3).then(()=>{
+        this.okDishes.push(eatDishe)
+        this.states = true
+        console.log(this,'吃完了',eatDishe);        
+        this.restaurant.run();
+        this.eat()
+      })
+    }
+  }
+  /**
+   * 付款
+   *
+   * @memberof Customer
+   */
+  pay() {
+    let sum = 0
+    this.Dishes.forEach(x=>sum += x.price);
+    return sum;
   }
 }
 

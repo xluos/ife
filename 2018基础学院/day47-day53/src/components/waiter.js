@@ -42,22 +42,47 @@ class Waiter extends Staff {
    */
   sendDishes(dishes) {
     dishes = dishes.dishes
+    // console.log('TCL: -------------------------------------------');
+    // console.log('TCL: Waiter -> sendDishes -> dishes', dishes);
+    // console.log('TCL: -------------------------------------------');
+    
     dishes.forEach(ele => {
       let id = ele.customerId
         , index = this.restaurant.customerWaitQueue.findIndex(cust => cust.id === id)
         , cust = this.restaurant.customerWaitQueue[index]
-      if (index > 0) {
+      if (index >= 0) {
 
 
         // console.log(cust);
 
         cust.eatDishes.push(ele)
-        if (cust.eatDishes.length === cust.Dishes.length) {
+        console.log(`菜品`,ele,`送到顾客`,cust,`手中`);
+        console.log(cust.okDishes.length + cust.eatDishes.length , cust.Dishes.length);
+        console.log('TCL: -----------------------------------------------------------------------------------------------------------------------------------------------------------------');
+        console.log('TCL: Waiter -> sendDishes -> cust.okDishes.length + cust.eatDishes.length , cust.Dishes.length', cust.okDishes.length + cust.eatDishes.length , cust.Dishes.length);
+        console.log('TCL: -----------------------------------------------------------------------------------------------------------------------------------------------------------------');
+        
+        if (cust.okDishes.length + cust.eatDishes.length === cust.Dishes.length) {
+          console.log(`顾客`,cust,`所点菜品全部送完`);
+          
           this.restaurant.customerEatQueue.push(cust);
           this.restaurant.customerWaitQueue.splice(index, 1)
         }
+        cust.eat()
       }
     })
+  }
+  /**
+   * 结账，从顾客哪里获取价钱
+   * 
+   * @argument {*} cust 顾客
+   * @memberof Waiter
+   */
+  pay(cust) {
+    this.restaurant.cash += cust.pay()
+    let index = this.restaurant.customerEatQueue.indexOf(cust)
+    this.restaurant.customerEatQueue.splice(index,1)
+    this.restaurant.seats ++;
   }
 }
 

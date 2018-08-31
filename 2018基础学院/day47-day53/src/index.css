@@ -13,4 +13,7 @@ h1 {
 
 #canvas-box {
   position: relative;
+  margin: 0 auto;
+  width: 960px;
+  height: 640px;
 }

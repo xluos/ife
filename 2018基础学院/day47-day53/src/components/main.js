@@ -13,31 +13,31 @@ let ifeRestaurant = new Restaurant({
       name: '菜品1',
       cost: 5,
       price: 10,
-      time: 6
+      time: 1
     },
     {
       name: '菜品2',
       cost: 5,
       price: 10,
-      time: 6
+      time: 1.5
     },
     {
       name: '菜品3',
       cost: 5,
       price: 10,
-      time: 6
+      time: 2
     },
     {
       name: '菜品4',
       cost: 5,
       price: 10,
-      time: 6
+      time: 2.5
     },
     {
       name: '菜品5',
       cost: 5,
       price: 10,
-      time: 6
+      time: 1.2
     }
   ]
 })
